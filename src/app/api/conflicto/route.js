@@ -22,11 +22,11 @@ export async function GET() {
 
 export async function POST(request) {
     try {
-        const { ano_fiscal, fecha, evento, lugar, riesgo, factor, pathName } = await request.json();
+        const { ano_fiscal, fecha, evento, lugar, riesgo, factor, tipo_conflicto_social } = await request.json();
 
         const result = await executeQuery(
-            "INSERT INTO tbl_2023_conflictos (ano_fiscal, fecha, evento, lugar, riesgo, factor) VALUES (?, ?, ?, ?, ?, ?)",
-            [ano_fiscal, fecha, evento, lugar, riesgo, factor]
+            "INSERT INTO tbl_2023_conflictos (ano_fiscal, fecha, evento, lugar, riesgo, factor, tipo_conflicto_social) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            [ano_fiscal, fecha, evento, lugar, riesgo, factor, tipo_conflicto_social]
         );
 
         return NextResponse.json({
