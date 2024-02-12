@@ -8,7 +8,7 @@ const ConflictoTable = async () => {
 
         <div className="relative px-6">
             <h1 className='text-center font-bold text-2xl pb-6'> Conflicto Social</h1>
-            <button className="bg-kaitoke-green-400 hover:bg-kaitoke-green-600 py-2 px-3 rounded-md text-white font-bold mb-4">Agregar</button>
+            <button className="bg-kaitoke-green-400 hover:bg-kaitoke-green-600 py-2 px-3 rounded-md text-white font-bold mb-4 ml-6">Agregar</button>
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -41,7 +41,7 @@ const ConflictoTable = async () => {
                                 <td scope="row" className="text-center px-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-xs">
                                     {conflicto.id}
                                 </td>
-                                <td className="px-2 py-4 text-xs">
+                                <td className="px-2 py-4 text-center text-xs">
                                     {conflicto.fecha}
                                 </td>
                                 <td className="py-4 text-justify text-xs">

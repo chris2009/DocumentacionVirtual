@@ -5,7 +5,7 @@ export async function GET() {
 
 
     try {
-        const result = await executeQuery("SELECT * FROM tbl_escalafon");
+        const result = await executeQuery("SELECT * FROM tbl_2023_conflictos");
         return NextResponse.json(result);
     } catch (error) {
         return NextResponse.json(
@@ -25,8 +25,8 @@ export async function POST(request) {
         const { ano_fiscal, fecha, evento, lugar, riesgo, factor, pathName } = await request.json();
 
         const result = await executeQuery(
-            "INSERT INTO tbl_escalafon (ano_fiscal, fecha, evento, lugar, riesgo, factor, pathName) VALUES (?, ?, ?, ?, ?, ?, ?)",
-            [ano_fiscal, fecha, evento, lugar, riesgo, factor, pathName]
+            "INSERT INTO tbl_2023_conflictos (ano_fiscal, fecha, evento, lugar, riesgo, factor) VALUES (?, ?, ?, ?, ?, ?)",
+            [ano_fiscal, fecha, evento, lugar, riesgo, factor]
         );
 
         return NextResponse.json({
@@ -36,8 +36,7 @@ export async function POST(request) {
             evento,
             lugar,
             riesgo,
-            factor,
-            pathName
+            factor
         });
     } catch (error) {
         console.log(error);
