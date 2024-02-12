@@ -7,10 +7,21 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      colors:
+      {
+        'kaitoke-green': {
+          '50': '#f0fdf5',
+          '100': '#dcfce9',
+          '200': '#bbf7d3',
+          '300': '#86efb0',
+          '400': '#4ade85',
+          '500': '#22c563',
+          '600': '#16a34e',
+          '700': '#15803f',
+          '800': '#166535',
+          '900': '#14532d',
+          '950': '#052e15',
+        },
       },
     },
   },

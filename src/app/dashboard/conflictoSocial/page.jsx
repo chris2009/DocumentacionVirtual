@@ -1,12 +1,12 @@
 import React from 'react'
-import RinfaTable from '@/components/RinfaTable'
+import ConflictoTable from '@/components/ConflictoTable';
 
 
 const rinfaPage = async () => {
-    
+
     return (
         <div className='pl-60 pt-24'>
-            <RinfaTable />
+            <ConflictoTable />
         </div>
     )
 }
