@@ -1,8 +1,12 @@
 'use client';
 import axios from "axios";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 
 function ConflictoForm() {
+
+    const router = useRouter()
+
     const [conflicto, setConflicto] = useState({
         ano_fiscal: "",
         fecha: "",
@@ -12,6 +16,8 @@ function ConflictoForm() {
         factor: "",
         tipo_conflicto_social: ""
     });
+
+    const form = useRef(null)
 
     const handleChange = (e) => {
         setConflicto({
@@ -25,16 +31,20 @@ function ConflictoForm() {
 
         const res = await axios.post('/api/conflicto', conflicto)
         console.log(res)
+        form.current.reset()
+        router.push('/dashboard/conflictoSocial')
     }
 
     return (
         <form
             className="max-w-sm mx-auto"
             onSubmit={handleSubmit}
+            ref={form}
         >
             <div className="mb-5">
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Año fiscal</label>
                 <input
+                    autoFocus
                     type="text"
                     name="ano_fiscal"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"

@@ -1,16 +1,23 @@
 import React from 'react'
 import Link from 'next/link'
-import executeQuery from '@/libs/mysql'
+import axios from 'axios'
 
-const ConflictoTable = async () => {
-    const result = await executeQuery("SELECT * FROM tbl_2023_conflictos", [])
+async function LoadConflicto() {
+    const { data } = await axios.get('http://localhost:3000/api/conflicto')
+    return data;
+}
+
+async function ConflictoTable() {
+    const conflictos = await LoadConflicto();
+    console.log(conflictos)
+    // const result = await executeQuery("SELECT * FROM tbl_2023_conflictos", [])
     return (
 
         <div className="relative px-6">
             <h1 className='text-center font-bold text-2xl pb-6'> Conflicto Social</h1>
-            {/* <Link href="/dashboard/conflictoSocial/new">
+            <Link href="/dashboard/conflictoSocial/new">
                 <button className="bg-kaitoke-green-400 hover:bg-kaitoke-green-600 py-2 px-3 rounded-md text-white font-bold mb-4 ml-6">Agregar</button>
-            </Link> */}
+            </Link>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -38,7 +45,7 @@ const ConflictoTable = async () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {result.map((conflicto) => (
+                        {conflictos.map((conflicto) => (
                             <tr key={conflicto.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <td scope="row" className="text-center px-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-xs">
                                     {conflicto.id}
