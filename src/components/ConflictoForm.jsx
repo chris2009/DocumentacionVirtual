@@ -5,8 +5,7 @@ import { useRouter, useParams } from "next/navigation";
 
 function ConflictoForm() {
 
-    const router = useRouter()
-    const params = useParams()
+
 
     const [conflicto, setConflicto] = useState({
         ano_fiscal: "",
@@ -19,6 +18,9 @@ function ConflictoForm() {
     });
 
     const form = useRef(null)
+    const router = useRouter()
+    const params = useParams()
+
 
     const handleChange = (e) => {
         setConflicto({
@@ -27,18 +29,26 @@ function ConflictoForm() {
         })
     };
 
-    console.log(params)
     useEffect(() => {
         if (params.id) {
-            console.log('cargar datos')
+            axios.get('/api/conflicto/' + params.id).then(res => {
+                setConflicto({
+                    ano_fiscal: res.data.ano_fiscal,
+                    fecha: res.data.fecha,
+                    evento: res.data.evento,
+                    lugar: res.data.lugar,
+                    riesgo: res.data.riesgo,
+                    factor: res.data.factor,
+                    tipo_conflicto_social: res.data.tipo_conflicto_social
+                })
+            })
         }
-    }, (params))
+    }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const res = await axios.post('/api/conflicto', conflicto)
-        console.log(res)
         form.current.reset()
         router.push('/dashboard/conflictoSocial')
     }
@@ -57,6 +67,7 @@ function ConflictoForm() {
                     name="ano_fiscal"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     onChange={handleChange}
+                    value={conflicto.ano_fiscal || ""}
                     required />
             </div>
             <div className="mb-5">
@@ -66,6 +77,7 @@ function ConflictoForm() {
                     name="fecha"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     onChange={handleChange}
+                    value={conflicto.fecha || ""}
                     required />
             </div>
             <div className="mb-5">
@@ -74,6 +86,7 @@ function ConflictoForm() {
                     name="evento"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     onChange={handleChange}
+                    value={conflicto.evento || ""}
                     required />
             </div>
             <div className="mb-5">
@@ -83,6 +96,7 @@ function ConflictoForm() {
                     name="lugar"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     onChange={handleChange}
+                    value={conflicto.lugar || ""}
                     required />
             </div>
             <div className="mb-5">
@@ -92,6 +106,7 @@ function ConflictoForm() {
                     name="riesgo"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     onChange={handleChange}
+                    value={conflicto.riesgo || ""}
                     required />
             </div>
             <div className="mb-5">
@@ -101,6 +116,7 @@ function ConflictoForm() {
                     name="factor"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     onChange={handleChange}
+                    value={conflicto.factor || ""}
                     required />
             </div>
             <div className="mb-5">
@@ -110,6 +126,7 @@ function ConflictoForm() {
                     name="tipo_conflicto_social"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     onChange={handleChange}
+                    value={conflicto.tipo_conflicto_social || ""}
                     required />
             </div>
             <div className="flex items-start mb-5">
