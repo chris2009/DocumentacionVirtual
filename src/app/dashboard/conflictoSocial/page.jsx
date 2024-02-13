@@ -10,7 +10,6 @@ async function loadConflicto() {
 
 async function rinfaPage() {
     const conflictos = await loadConflicto()
-    console.log(conflictos)
     return (
         <div className='pl-60 pt-24'>
 
@@ -47,7 +46,7 @@ async function rinfaPage() {
                         </thead>
                         <tbody>
                             {conflictos.map((conflicto) => (
-                                <ConflictoTable conflicto={conflicto} key={conflicto.id}/>
+                                <ConflictoTable conflicto={conflicto} key={conflicto.id} />
                             ))}
                         </tbody>
 

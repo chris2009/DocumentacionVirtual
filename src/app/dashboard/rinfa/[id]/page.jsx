@@ -23,7 +23,6 @@
 
 
 // function loadRinfa(rinfaId) {
-//     console.log(rinfaId)
 // }
 
 // const rinfaDetail = async ({ params }) => {
@@ -97,7 +96,6 @@ import React from 'react'
 const rinfaDetail = async ({ params }) => {
 
     function loadRinfa(rinfaId) {
-        console.log(rinfaId)
     }
 
     loadRinfa(params.id)

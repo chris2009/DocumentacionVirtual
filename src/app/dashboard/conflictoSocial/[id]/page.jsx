@@ -9,8 +9,7 @@ async function loadConflicto(conflictoId) {
 const conflictoDetail = async ({ params }) => {
 
     const conflicto = await loadConflicto(params.id)
-    // console.log(conflicto)
-
+   
     return (
         <div className='pl-60 pt-24 flex justify-center items-center'>
             <div key={conflicto.id} className='rounded-md bg-kaitoke-green-200 mx-6'>

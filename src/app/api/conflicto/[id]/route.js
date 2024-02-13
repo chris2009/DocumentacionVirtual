@@ -62,8 +62,8 @@ export async function PUT(request, { params }) {
     const { id } = params;
 
     const result = await executeQuery(
-        "UPDATE tbl_2023_conflictos SET ano_fiscal = ?, fecha = ?, evento = ?, lugar = ?, riesgo = ?, factor = ?, pathName = ? WHERE id = ?",
-        [data.ano_fiscal, data.fecha, data.evento, data.lugar, data.riesgo, data.factor, data.pathName, id]
+        "UPDATE tbl_2023_conflictos SET ano_fiscal = ?, fecha = ?, evento = ?, lugar = ?, riesgo = ?, factor = ?, tipo_conflicto_social = ? WHERE id = ?",
+        [data.ano_fiscal, data.fecha, data.evento, data.lugar, data.riesgo, data.factor, data.tipo_conflicto_social, id]
     );
 
     // console.log(result); // Puedes manejar la respuesta de la consulta aquí si es necesario

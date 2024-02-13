@@ -1,16 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
-// import axios from 'axios'
 
-// async function LoadConflicto() {
-//     const { data } = await axios.get('http://localhost:3000/api/conflicto')
-//     return data;
-// }
+async function ConflictoTable({ conflicto }) {
 
-async function ConflictoTable({conflicto}) {
-    // const conflictos = await LoadConflicto();
-    // console.log(conflictos)
-    // const result = await executeQuery("SELECT * FROM tbl_2023_conflictos", [])
     return (
 
         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">

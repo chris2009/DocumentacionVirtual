@@ -36,7 +36,8 @@ export async function POST(request) {
             evento,
             lugar,
             riesgo,
-            factor
+            factor,
+            tipo_conflicto_social
         });
     } catch (error) {
         console.log(error);
