@@ -66,7 +66,7 @@ export async function PUT(request, { params }) {
         [data.ano_fiscal, data.fecha, data.evento, data.lugar, data.riesgo, data.factor, data.pathName, id]
     );
 
-    console.log(result); // Puedes manejar la respuesta de la consulta aquí si es necesario
+    // console.log(result); // Puedes manejar la respuesta de la consulta aquí si es necesario
 
     return NextResponse.json({
         ...data,

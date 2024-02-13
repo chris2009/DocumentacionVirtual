@@ -1,11 +1,12 @@
 'use client';
 import axios from "axios";
-import { useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRef, useState, useEffect } from "react";
+import { useRouter, useParams } from "next/navigation";
 
 function ConflictoForm() {
 
     const router = useRouter()
+    const params = useParams()
 
     const [conflicto, setConflicto] = useState({
         ano_fiscal: "",
@@ -24,7 +25,14 @@ function ConflictoForm() {
             ...conflicto,
             [e.target.name]: e.target.value,
         })
-    }
+    };
+
+    console.log(params)
+    useEffect(() => {
+        if (params.id) {
+            console.log('cargar datos')
+        }
+    }, (params))
 
     const handleSubmit = async (e) => {
         e.preventDefault();
