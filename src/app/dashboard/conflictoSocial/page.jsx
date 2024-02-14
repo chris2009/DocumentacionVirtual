@@ -22,7 +22,7 @@ async function conflictoPage() {
                         <Link href="/dashboard/conflictoSocial/new">
                             <button className="bg-kaitoke-green-400 hover:bg-kaitoke-green-600 py-2 px-3 rounded-md text-white font-bold my-2 mx-3">Agregar</button>
                         </Link>
-                        <Buscar conflictos={conflictos || setFilteredConflictos} />
+                        <Buscar />
                         <input type='date' className="border border-kaitoke-green-100 outline-kaitoke-green-200  rounded p-2">
                         </input>
                         <Lugar />
