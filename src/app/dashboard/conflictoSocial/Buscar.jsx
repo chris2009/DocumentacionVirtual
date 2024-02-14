@@ -1,47 +1,29 @@
 'use client'
+import React, { useState } from 'react';
 
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+function Buscar({ conflictos, setFilteredConflictos }) {
+    const [searchTerm, setSearchTerm] = useState('');
+    // const [filteredConflictos, setFilteredConflictos] = useState([]);
 
-const Buscar = () => {
-    const [terminoBusqueda, setTerminoBusqueda] = useState('');
-    const [conflictos, setConflictos] = useState([]);
-
-    useEffect(() => {
-        const loadConflicto = async () => {
-            try {
-                const { data } = await axios.get("http://localhost:3000/api/conflicto");
-                setConflictos(data);
-            } catch (error) {
-                console.error('Error al cargar conflictos:', error);
-            }
-        };
-        loadConflicto();
-    }, []);
-
-    const handleBuscar = (event) => {
-        const searchTerm = event.target.value.toLowerCase();
-        setTerminoBusqueda(searchTerm);
-
-        const filteredConflictos = conflictos.filter(conflicto =>
-            conflicto.evento.toLowerCase().includes(searchTerm) 
+    const handleSearch = (e) => {
+        const term = e.target.value;
+        setSearchTerm(term);
+        const filtered = conflictos.filter(conflicto =>
+            conflicto.evento.toLowerCase().includes(term.toLowerCase())
         );
-
-        // Llama a la función proporcionada por el componente padre para pasar los resultados de la búsqueda
-        onBuscar(filteredConflictos);
+        setFilteredConflictos(filtered);
     };
 
     return (
-        <div>
-            <input
-                type="text"
-                value={terminoBusqueda}
-                onChange={handleBuscar}
-               className="border border-kaitoke-green-100 outline-kaitoke-green-200 rounded p-2"
-                placeholder="Buscar..."
-            />
-        </div>
+        <input
+            type='text'
+            className="border border-kaitoke-green-100 outline-kaitoke-green-200 rounded p-2"
+            placeholder="Buscar evento..."
+            value={searchTerm}
+            onChange={handleSearch}
+        />
     );
-};
+}
 
 export default Buscar;
+
