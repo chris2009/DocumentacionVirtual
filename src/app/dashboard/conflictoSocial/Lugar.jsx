@@ -4,8 +4,8 @@ export default async function  Lugar() {
     const result = await executeQuery("SELECT lugar FROM tbl_lugar ORDER BY lugar", [])
 
     return (
-        <select className="border border-gray-300 rounded p-2" defaultValue="">
-            <option value="" disabled hidden>Seleccione</option>
+        <select className="border border-kaitoke-green-100 outline-kaitoke-green-200  rounded p-2" defaultValue="">
+            <option value="" disabled hidden>Lugar...</option>
             {result.map((lugar) => (
                 <option key={lugar.id} value={lugar.lugar}>{lugar.lugar}</option>
             ))}
