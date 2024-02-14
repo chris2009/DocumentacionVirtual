@@ -2,6 +2,9 @@
 import axios from 'axios';
 import Link from 'next/link';
 import ConflictoTable from '@/components/ConflictoTable';
+import Lugar from './Lugar';
+import Factor from './Factor';
+import Riesgo from './Riesgo';
 
 async function loadConflicto() {
     const { data } = await axios.get("http://localhost:3000/api/conflicto")
@@ -24,28 +27,21 @@ async function conflictoPage() {
                     <p>
                         Fecha:
                     </p>
-                    <input type='date'>
+                    <input type='date' className="border border-gray-300 rounded p-2">
                     </input>
                     <p>
                         Lugar:
                     </p>
-                    <select>
-                        <option>Callao</option>
-                        <option>Lima</option>
-                        <option>Loreto</option>
-                    </select>
+                    <Lugar />
                     <p>
-                        riesgo
+                        riesgo:
                     </p>
-                    <select>
-                        <option>Alto</option>
-                        <option>Intermedio</option>
-                        <option>Bajo</option>
-                    </select>
+                    <Riesgo />
                     <p>
-                        Factor
+                        Factor:
                     </p>
-                    
+                    < Factor />
+
                 </div>
                 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
