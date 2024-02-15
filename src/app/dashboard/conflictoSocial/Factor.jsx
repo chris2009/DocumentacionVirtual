@@ -11,5 +11,6 @@ export default async function Factor() {
                 <option key={factor.id} value={factor.factor}>{factor.factor}</option>
             ))}
         </select>
+       
     )
 }
