@@ -3,7 +3,6 @@ import executeQuery from '@/libs/mysql';
 
 export async function GET() {
 
-
     try {
         const result = await executeQuery("SELECT * FROM tbl_2023_conflictos");
         return NextResponse.json(result);
@@ -21,6 +20,7 @@ export async function GET() {
 
 
 export async function POST(request) {
+ 
     try {
         const { ano_fiscal, fecha, evento, lugar, riesgo, factor, tipo_conflicto_social } = await request.json();
 
