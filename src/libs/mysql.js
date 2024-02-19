@@ -29,7 +29,7 @@ import mysql from 'mysql2/promise';
 let pool;
 
 const createPool = async () => {
-    pool = await mysql.createPool({
+    pool = await mysql.createConnection({
         host: process.env.DB_HOST,
         port: 3306,
         database: process.env.DB_DATABASE,

@@ -1,109 +1,39 @@
-// import React from 'react'
-// import axios from 'axios'
-// import { useState } from 'react'
-// import executeQuery from '@/libs/mysql'
-
-// functionrinfaForm(){
-//     const [rinfa, setRinfa] = useState({
-//         fecha: "",
-//         evento: "",
-//         lugar: "",
-//         riesgo: "",
-//         factor: "",
-//     });
-// }
-
-// const handleChange = (e) => {
-//     setRInfa({
-//         ...rinfa,
-//         [e.target.name]: e.target.value
-//     })
-// }
-
-
-
-// function loadRinfa(rinfaId) {
-// }
-
-// const rinfaDetail = async ({ params }) => {
-//     loadRinfa(params.id)
-//     const result = await executeQuery("SELECT * FROM tbl_escalafon", [])
-//     return (
-//         <div className="relative overflow-x-auto px-6">
-
-//             <h1 className='text-center'> RESUMEN DE INFORMACIÓN DE FUENTE ABIERTA</h1>
-//             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-//                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-//                     <tr>
-//                         <th scope="col" className="px-6 py-3">
-//                             N°
-//                         </th>
-//                         <th scope="col" className="px-6 py-3">
-//                             Fecha
-//                         </th>
-//                         <th scope="col" className="px-6 py-3">
-//                             Evento
-//                         </th>
-//                         <th scope="col" className="px-6 py-3">
-//                             Lugar
-//                         </th>
-//                         <th scope="col" className="px-6 py-3">
-//                             Riesgo
-//                         </th>
-//                         <th scope="col" className="px-6 py-3">
-//                             Factor
-//                         </th>
-//                     </tr>
-//                 </thead>
-//                 <tbody >
-//                     {/* {result.map((rinfa) => ( */}
-//                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-//                         <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white text-center">
-//                             {params.id}
-//                         </th>
-//                         <td className="px-6 py-4 text-center">
-//                             {params.fecha}
-//                         </td>
-//                         <td className="px-6 py-4 text-center">
-//                             {params.evento}
-//                         </td>
-//                         <td className="px-6 py-4 text-center">
-//                             {params.lugar}
-//                         </td>
-//                         <td className="px-6 py-4 text-center">
-//                             {params.riesgo}
-//                         </td>
-//                         <td className="px-6 py-4 text-center">
-//                             {params.factor}
-//                         </td>
-//                         <td className="px-6 py-4 text-center">
-//                         </td>
-//                     </tr>
-//                     {/* ))} */}
-//                 </tbody>
-//             </table>
-//         </div>
-//     )
-// }
-// export default rinfaDetail;
-
-import RinfaForm from '@/components/RinfaForm';
+import { NextResponse } from "next/server";
 import React from 'react'
-// import axios from 'axios'
-// import executeQuery from '@/libs/mysql'
+import axios from 'axios';
+import Buttons from './Buttons';
 
-
-const rinfaDetail = async ({ params }) => {
-
-    function loadRinfa(rinfaId) {
+async function loadRinfa(rinfaId) {
+    try {
+        const { data } = await axios.get('http://localhost:3000/api/rinfa/' + rinfaId)
+        console.log(data.evento)
+        return data
+    } catch (error) {
+        return NextResponse.json(
+            {
+                message: error.message,
+            },
+            {
+                status: 500
+            }
+        );
     }
+}
+const conflictoDetail = async ({ params }) => {
 
-    loadRinfa(params.id)
-    // const result = await executeQuery("SELECT * FROM tbl_escalafon", [])
+    const conflicto = await loadRinfa(params.id)
+
     return (
-        <div className='flex justify-center items-center h-screen'>
-            <RinfaForm />
+        <div className='pl-60 pt-24 flex justify-center items-center'>
+            <div key={conflicto.id} className='rounded-md bg-kaitoke-green-50 mx-6'>
+                <div className=' px-6 py-4 '>
+                    <p className='text-gray-700 font-bold'>ID:&nbsp;<span className='font-normal text-sm'>{conflicto.id}</span></p>
+                    <p className='text-gray-700 font-bold'>Fecha:&nbsp;<span className='font-normal text-sm'>{conflicto.fecha.split('T')[0]}</span></p>
+                    <p className='text-gray-700 font-bold text-justify'>Evento:&nbsp;<span className='font-normal text-sm'>{conflicto.evento}</span></p>
+                </div>
+                <Buttons rinfaId={conflicto.id} />
+            </div>
         </div>
     )
 }
-export default rinfaDetail;
+export default conflictoDetail;

@@ -9,7 +9,7 @@ export async function GET(request, { params }) {
         if (result.length === 0) {
             return NextResponse.json(
                 {
-                    message: "Rinfa no encontrado",
+                    message: "Conflitcto no encontrado",
                 },
                 {
                     status: 404
@@ -35,7 +35,7 @@ export async function DELETE(request, { params }) {
         if (result.affectedRows === 0) {
             return NextResponse.json(
                 {
-                    message: "Rinfa no encontrado"
+                    message: "Conflicto no encontrado"
                 },
                 {
                     status: 404

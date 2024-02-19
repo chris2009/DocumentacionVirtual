@@ -62,8 +62,8 @@ export async function PUT(request, { params }) {
     const { id } = params;
 
     const result = await executeQuery(
-        "UPDATE tbl_escalafon SET ano_fiscal = ?, fecha = ?, evento = ?, lugar = ?, riesgo = ?, factor = ?, pathName = ? WHERE id = ?",
-        [data.ano_fiscal, data.fecha, data.evento, data.lugar, data.riesgo, data.factor, data.pathName, id]
+        "UPDATE tbl_escalafon SET fecha = ?, evento = ?, pathName = ? WHERE id = ?",
+        [data.fecha, data.evento, data.pathName, id]
     );
 
     return NextResponse.json({

@@ -1,70 +1,73 @@
 // 'use client'
-// import React, { useState } from 'react';
+// import axios from 'axios'
+// import { useState } from 'react'
+// import React from 'react'
 
-// function Buscar({ onBuscar }) {
-//     const [busqueda, setBusqueda] = useState('');
+// export default function SearchConflictos() {
+//   const [query, setQuery] = useState('')
 
-//     const handleBusquedaChange = (e) => {
-//         setBusqueda(e.target.value);
-//         onBuscar(e.target.value); // Llama a la función de búsqueda pasando el valor actual de búsqueda
-//     };
+//   const handleSubmit = async (e) => {
+//     e.preventDefault()
 
-//     return (
-//         <input
-//             type='text'
-//             className="border border-kaitoke-green-100 outline-kaitoke-green-200 rounded p-2"
-//             placeholder="Buscar"
-//             value={busqueda}
-//             onChange={handleBusquedaChange}
-//         />
-//     );
+//     const response = await axios.get(`/api/conflicto/search?query=${query}`)
+//     getSearchResults(response.data)
+
+//   }
+//   const getSearchResults = (data) => {
+//     // Realiza las operaciones necesarias con los datos de búsqueda y devuelve el resultado
+//     return data;
+//   }
+//   return (
+//     <div className='my-2'>
+//       <form onSubmit={handleSubmit}>
+//         <input className="border border-kaitoke-green-100 outline-kaitoke-green-200  rounded p-2" type="text" placeholder="Buscar conflicto..." value={query} onChange={(e) => setQuery(e.target.value)}>
+//         </input>
+//         <button className="bg-gray-400 hover:bg-gray-600  text-white py-2 px-3 rounded-md ml-2" type="submit">
+//           Buscar
+//         </button>
+//       </form>
+//     </div>
+//   )
 // }
 
-// export default Buscar;
 
-'use client'
-// import React, { useState } from 'react';
+// 'use client'
+// import axios from 'axios'
+// import { useState } from 'react'
 
-// export default function Buscar({ onSearch }) {
-//     const [query, setQuery] = useState('');
+// export default function SearchConflictos({ getSearchResults }) {
+//   const [query, setQuery] = useState('')
 
-//     const handleInputChange = (event) => {
-//         setQuery(event.target.value);
-//         onSearch(event.target.value);
-//     };
+//   const handleSubmit = async (e) => {
+//     e.preventDefault()
 
-//     return (
-//         <input
-//             type='text'
-//             placeholder='Buscar evento...'
-//             value={query}
-//             onChange={handleInputChange}
-//             className="border border-kaitoke-green-100 outline-kaitoke-green-200  rounded p-2"
-//         />
-//     );
+//     try {
+//       const response = await axios.get(`/api/conflicto`, {
+//         params: {
+//           query: query
+//         }
+//       })
+//       console.log(query)
+//       getSearchResults(response.data)
+//     } catch (error) {
+//       console.error("Error al realizar la búsqueda:", error)
+//     }
+//   }
+
+//   return (
+//     <div className='my-2'>
+//       <form onSubmit={handleSubmit}>
+//         <input className="border border-kaitoke-green-100 outline-kaitoke-green-200 rounded p-2" type="text" placeholder="Buscar conflicto..." value={query} onChange={(query) => setQuery(query.evento.)} />
+//         <button className="bg-gray-400 hover:bg-gray-600 text-white py-2 px-3 rounded-md ml-2" type="submit">Buscar</button>
+//       </form>
+//     </div>
+//   )
 // }
 
-// Buscar.jsx
-import React, { useState } from 'react';
+import React from 'react'
 
-const Buscar = ({ onSearch }) => {
-    const [query, setQuery] = useState('');
-
-    const handleInputChange = (event) => {
-        const value = event.target.value;
-        setQuery(value);
-        onSearch(value);
-    };
-
-    return (
-        <input
-            type='text'
-            placeholder='Buscar evento...'
-            value={query}
-            onChange={handleInputChange}
-            className="border border-kaitoke-green-100 outline-kaitoke-green-200 rounded p-2"
-        />
-    );
-};
-
-export default Buscar;
+export default function Buscar() {
+  return (
+    <div>Buscar</div>
+  )
+}

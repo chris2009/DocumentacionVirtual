@@ -3,7 +3,7 @@ import Lugar from '@/app/dashboard/conflictoSocial/Lugar';
 import Factor from '@/app/dashboard/conflictoSocial/Factor';
 import Riesgo from '@/app/dashboard/conflictoSocial/Riesgo';
 import Buscar from '@/app/dashboard/conflictoSocial/Buscar';
-import Link from 'next/link';
+import Link from 'next/link'
 export default function FiltroConflicto() {
     return (
         <div className='flex  items-center justify-around text-xs text-gray-700'>
