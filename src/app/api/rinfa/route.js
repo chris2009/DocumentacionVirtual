@@ -22,22 +22,26 @@ export async function GET() {
 
 export async function POST(request) {
     try {
-        const { ano_fiscal, fecha, evento, lugar, riesgo, factor, pathName } = await request.json();
+        // const { ano_fiscal, fecha, evento, lugar, riesgo, factor, pathName } = await request.formData();
+        const data = await request.formData();
+        console.log(data.get('fecha'))
+        console.log(data.get('evento'))
+        console.log(data.get('file'))
 
-        const result = await executeQuery(
-            "INSERT INTO tbl_escalafon (ano_fiscal, fecha, evento, lugar, riesgo, factor, pathName) VALUES (?, ?, ?, ?, ?, ?, ?)",
-            [ano_fiscal, fecha, evento, lugar, riesgo, factor, pathName]
-        );
+        // const result = await executeQuery(
+        //     "INSERT INTO tbl_escalafon (ano_fiscal, fecha, evento, lugar, riesgo, factor, pathName) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        //     [ano_fiscal, fecha, evento, lugar, riesgo, factor, pathName]
+        // );
 
         return NextResponse.json({
-            id: result.insertId,
-            ano_fiscal,
-            fecha,
-            evento,
-            lugar,
-            riesgo,
-            factor,
-            pathName
+            // id: result.insertId,
+            // ano_fiscal,
+            // fecha,
+            // evento,
+            // lugar,
+            // riesgo,
+            // factor,
+            // pathName
         });
     } catch (error) {
         console.log(error);

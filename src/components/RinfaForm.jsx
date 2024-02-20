@@ -41,9 +41,20 @@ function RinfaForm() {
         e.preventDefault();
 
         if (!params.id) {
-            await axios.post('/api/rinfa', rinfa);
+            const formData = new FormData()
+            formData.append('fecha', rinfa.fecha)
+            formData.append('evento', rinfa.evento)
+            formData.append('file', file)
+
+           const res = await axios.post('/api/rinfa', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            console.log(res)
         } else {
-            await axios.put('/api/rinfa/' + params.id, rinfa);
+            const res = await axios.put('/api/rinfa/' + params.id, rinfa);
+            console.log(res)
         }
         form.current.reset();
         router.refresh();
@@ -53,7 +64,11 @@ function RinfaForm() {
     return (
         <div className="pl-64 flex justify-start items-center pr-6">
             <div className="w-3/5">
-                <embed src={rinfa.pathName} type="application/pdf" width="100%" height="500px" />
+                {/* <embed src={rinfa.pathName} type="application/pdf" className="w-full h-[85vh]" /> */}
+                {/* {file && <embed src={URL.createObjectURL(file)} type="application/pdf" className="w-full h-[85vh]" />} */}
+                <embed src={file ? URL.createObjectURL(file) : rinfa.pathName} type="application/pdf" className="w-full h-[85vh]" />
+
+
             </div>
             <form
                 className="w-2/5"
@@ -62,14 +77,18 @@ function RinfaForm() {
             >
                 <div className="mb-5 ml-6 ">
                     <div className="mb-5 flex flex-col">
-                        <label className="mb-2 text-sm font-medium text-gray-900 dark:text-white">Archivo:</label>
+
+                        <label className="block mb-2 text-sm font-medium text-gray-900">Subir archivo:</label>
                         <input
+                            className="file:bg-kaitoke-green-700 file:hover:bg-kaitoke-green-800 file:text-white file:h-10 file:cursor-pointer block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none file:border-none h-10"
                             type="file"
+                            name="file"
+                            accept="application/pdf"
                             onChange={(e) => {
                                 setFile(e.target.files[0])
                             }}
-                            disabled
                         />
+
                         <label className="mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha:</label>
                         <input
                             type="date"
@@ -91,7 +110,7 @@ function RinfaForm() {
                     </div>
                 </div>
                 <div className="flex justify-end items-center">
-                    <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{params.id ? "Actualizar" : "Guardar"}</button>
+                    <button type="submit" className="text-white bg-kaitoke-green-700 hover:bg-kaitoke-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{params.id ? "Actualizar" : "Guardar"}</button>
                 </div>
             </form>
         </div>
