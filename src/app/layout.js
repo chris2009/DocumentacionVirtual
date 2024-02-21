@@ -16,3 +16,4 @@ export default function RootLayout({ children }) {
   );
 }
 // esto es una prueba
+// segunda prueba
