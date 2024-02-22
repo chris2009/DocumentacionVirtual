@@ -17,8 +17,8 @@ export default function Buttons({ rinfaId }) {
             <button
                 className='bg-red-500 hover:bg-red-700 text-white rounded py-2 px-3'
                 onClick={async () => {
-                    if (confirm('Estás seguro de eliminar el conflicto?')) {
-                        const res = await axios.delete('/api/conflicto/' + rinfaId)
+                    if (confirm('Estás seguro de eliminar el rinfa?')) {
+                        const res = await axios.delete('/api/rinfa/' + rinfaId)
                         if (res.status === 204) {
                             router.push(('/dashboard/rinfa'))
                             router.refresh()
