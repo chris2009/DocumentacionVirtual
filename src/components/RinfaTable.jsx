@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-async function RinfaTable({ rinfa }) {
+function RinfaTable({ rinfa }) {
 
     return (
 

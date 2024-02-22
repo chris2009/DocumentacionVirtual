@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-async function ConflictoTable({ conflicto }) {
+function ConflictoTable({ conflicto }) {
 
     return (
 

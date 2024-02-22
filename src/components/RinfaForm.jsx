@@ -40,20 +40,29 @@ function RinfaForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!params.id) {
-            const formData = new FormData()
-            formData.append('fecha', rinfa.fecha)
-            formData.append('evento', rinfa.evento)
-            formData.append('file', file)
+        const formData = new FormData()
+        formData.append('fecha', rinfa.fecha)
+        formData.append('evento', rinfa.evento)
 
-           const res = await axios.post('/api/rinfa', formData, {
+        if (file) {
+            formData.append('file', file)
+        }
+
+        if (!params.id) {
+
+            const res = await axios.post('/api/rinfa', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
             console.log(res)
         } else {
-            const res = await axios.put('/api/rinfa/' + params.id, rinfa);
+
+            const res = await axios.put('/api/rinfa/' + params.id, rinfa, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            });
             console.log(res)
         }
         form.current.reset();
@@ -78,17 +87,6 @@ function RinfaForm() {
                 <div className="mb-5 ml-6 ">
                     <div className="mb-5 flex flex-col">
 
-                        <label className="block mb-2 text-sm font-medium text-gray-900">Subir archivo:</label>
-                        <input
-                            className="file:bg-kaitoke-green-700 file:hover:bg-kaitoke-green-800 file:text-white file:h-10 file:cursor-pointer block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none file:border-none h-10"
-                            type="file"
-                            name="file"
-                            accept="application/pdf"
-                            onChange={(e) => {
-                                setFile(e.target.files[0])
-                            }}
-                        />
-
                         <label className="mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha:</label>
                         <input
                             type="date"
@@ -98,6 +96,7 @@ function RinfaForm() {
                             value={rinfa.fecha || ""}
                             required
                         />
+                        
                         <label className="mb-2 text-sm font-medium text-gray-900 dark:text-white">Evento:</label>
                         <textarea
                             rows={12}
@@ -106,6 +105,18 @@ function RinfaForm() {
                             onChange={handleChange}
                             value={rinfa.evento || ""}
                             required
+                        />
+
+                        <label className="block mb-2 text-sm font-medium text-gray-900">Subir archivo:</label>
+                        <input
+                            className="file:bg-kaitoke-green-700 file:hover:bg-kaitoke-green-800 file:text-white file:h-10 file:cursor-pointer block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none file:border-none h-10"
+                            type="file"
+                            name="file"
+                            accept="application/pdf"
+                            required
+                            onChange={(e) => {
+                                setFile(e.target.files[0])
+                            }}
                         />
                     </div>
                 </div>

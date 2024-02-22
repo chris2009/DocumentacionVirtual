@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import executeQuery from '@/libs/mysql';
+import { writeFile } from 'fs/promises'
+import path from "path";
 
 export async function GET() {
 
@@ -24,24 +26,39 @@ export async function POST(request) {
     try {
         // const { ano_fiscal, fecha, evento, lugar, riesgo, factor, pathName } = await request.formData();
         const data = await request.formData();
-        console.log(data.get('fecha'))
-        console.log(data.get('evento'))
-        console.log(data.get('file'))
+        const file = data.get('file')
 
-        // const result = await executeQuery(
-        //     "INSERT INTO tbl_escalafon (ano_fiscal, fecha, evento, lugar, riesgo, factor, pathName) VALUES (?, ?, ?, ?, ?, ?, ?)",
-        //     [ano_fiscal, fecha, evento, lugar, riesgo, factor, pathName]
-        // );
+        if (!file) {
+            return NextResponse.json({
+                message: "Archivo es requerido"
+            }, {
+                error: 400
+            }
+            )
+        }
+        const bytes = await file.arrayBuffer()
+        const buffer = Buffer.from(bytes)
+
+        const filePath = path.join(process.cwd(), 'public/rinfa', file.name)
+        const relativePath = path.relative(process.cwd() + '/public', filePath);
+
+
+        await writeFile(filePath, buffer)
+
+        const result = await executeQuery(
+            "INSERT INTO tbl_escalafon (fecha, evento, pathName) VALUES (?, ?, ?)",
+            [
+                data.get('fecha'),
+                data.get('evento'),
+                '/' + relativePath
+            ]
+        );
 
         return NextResponse.json({
-            // id: result.insertId,
-            // ano_fiscal,
-            // fecha,
-            // evento,
-            // lugar,
-            // riesgo,
-            // factor,
-            // pathName
+            id: result.insertId,
+            fecha: data.get('fecha'),
+            evento: data.get('evento'),
+            pathName: '/' + relativePath
         });
     } catch (error) {
         console.log(error);
