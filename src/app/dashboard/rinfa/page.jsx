@@ -17,15 +17,22 @@ function rinfaPage() {
         getRinfas();
     }, []);
 
-    // const handleSearch = useDebouncedCallback((e) => {
-    //     setSearchTerm(e.target.value)), 300;
-    // };
-    const handleSearch = ((e) => {
+    const handleSearch = (e) => {
         setSearchTerm(e.target.value);
-    });
+    };
 
-    const filteredRinfas = rinfas.filter((conflicto) =>
-        conflicto.evento.toLowerCase().includes(searchTerm.toLowerCase())
+    function getFileNameWithoutExtension(pathName) {
+        // Obtener el nombre del archivo desde la última barra diagonal
+        const fileNameWithExtension = pathName.substring(pathName.lastIndexOf('/') + 1);
+
+        // Eliminar la extensión del archivo
+        const fileNameWithoutExtension = fileNameWithExtension.substring(0, fileNameWithExtension.lastIndexOf('.'));
+
+        return fileNameWithoutExtension;
+    }
+
+    const filteredRinfas = rinfas.filter((rinfa) =>
+        getFileNameWithoutExtension(rinfa.pathName).toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     return (
@@ -36,7 +43,7 @@ function rinfaPage() {
                 </Link>
                 <input
                     type="text"
-                    placeholder="Buscar evento..."
+                    placeholder="Buscar rinfa..."
                     value={searchTerm}
                     onChange={handleSearch}
                     className="border border-gray-300 rounded-md px-3 py-1 my-4"
@@ -46,7 +53,10 @@ function rinfaPage() {
                         <thead className="text-xs text-gray-700 uppercase bg-kaitoke-green-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" className="px-6 py-3 text-xs text-center">
-                                    Evento
+                                    Resumen de información de fuente abierta
+                                </th>
+                                <th scope="col" className="px-6 py-3 text-xs text-center">
+                                    Fecha
                                 </th>
                                 <th>
 

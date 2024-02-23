@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@formkit/tempo": "^0.0.10",
     "@radix-ui/react-popover": "1.0.7",
     "axios": "^1.6.7",
     "class-variance-authority": "^0.7.0",

@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import executeQuery from '@/libs/mysql';
+import { writeFile } from 'fs/promises'
+import path from "path";
 
 export async function GET(request, { params }) {
 
@@ -60,7 +62,8 @@ export async function DELETE(request, { params }) {
 export async function PUT(request, { params }) {
     try {
         const data = await request.formData();
-        // const { id } = params;
+        const file = data.get('file')
+
         if (!data.get("evento")) {
             return NextResponse.json(
                 {
@@ -71,21 +74,29 @@ export async function PUT(request, { params }) {
                 })
         }
 
-        if (!data.get("file")) {
+        if (!file) {
             return NextResponse.json({
-                message: "file is required"
+                message: "Archivo es requerido"
             }, {
-                status: 400
-            })
+                error: 400
+            }
+            )
         }
+
+        const bytes = await file.arrayBuffer()
+        const buffer = Buffer.from(bytes)
+
+        const filePath = path.join(process.cwd(), 'public/rinfa', file.name)
+        const relativePath = path.relative(process.cwd() + '/public', filePath);
+
+
+        await writeFile(filePath, buffer)
 
         const result = await executeQuery(
             "UPDATE tbl_escalafon SET fecha = ?, evento = ?, pathName = ? WHERE id = ?", [
-            // [data.fecha, data.evento, data.pathName, id]
-            {
-                fecha: data.get("fecha"),
-                evento: data.get("evento")
-            },
+            data.get('fecha'),
+            data.get('evento'),
+            '/' + relativePath,
             params.id
         ]);
 

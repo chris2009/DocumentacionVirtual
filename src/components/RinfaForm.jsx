@@ -58,7 +58,7 @@ function RinfaForm() {
             console.log(res)
         } else {
 
-            const res = await axios.put('/api/rinfa/' + params.id, rinfa, {
+            const res = await axios.put('/api/rinfa/' + params.id, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 }
