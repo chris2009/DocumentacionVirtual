@@ -59,13 +59,14 @@ function ConflictoForm() {
         router.push('/dashboard/conflictoSocial');
     };
 
+
     return (
         <form
             className="max-w-sm mx-auto"
             onSubmit={handleSubmit}
             ref={form}
         >
-            <div className="mb-5 flex justify-around  items-center">
+            <div className="flex justify-around  items-center">
                 {/* <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Año fiscal</label>
                 <input
                     autoFocus

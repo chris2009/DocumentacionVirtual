@@ -5,6 +5,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import Loading from '@/components/global/loading';
 import RinfaTable from '@/components/RinfaTable';
+import { MagnifyingGlassIcon, PlusIcon } from '@heroicons/react/24/outline';
 function rinfaPage() {
     const [rinfas, setRinfas] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -36,18 +37,26 @@ function rinfaPage() {
     );
 
     return (
-        <div className='pl-56 pt-14'>
+        <div className='ml-64 pt-14'>
             <div className="relative px-4">
-                <Link href="/dashboard/rinfa/new">
-                    <button className="bg-kaitoke-green-400 hover:bg-kaitoke-green-600 py-2 px-3 rounded-md text-white font-bold my-2 mx-3">Agregar</button>
-                </Link>
-                <input
-                    type="text"
-                    placeholder="Buscar rinfa..."
-                    value={searchTerm}
-                    onChange={handleSearch}
-                    className="border border-gray-300 rounded-md px-3 py-1 my-4"
-                />
+                <div className="flex items-center my-4">
+                    <Link href="/dashboard/rinfa/new">
+                        <button className="flex bg-kaitoke-green-400 hover:bg-kaitoke-green-600 py-2 pl-4 pr-2 rounded-full text-white mr-3">
+                            Agregar <PlusIcon className='animate-bounce hover:animate-spin flex w-4 h-full' />
+                        </button>
+                    </Link>
+
+                    <div className="relative">
+                        <input
+                            type="text"
+                            placeholder="Buscar rinfa..."
+                            value={searchTerm}
+                            onChange={handleSearch}
+                            className="border border-gray-300 rounded-full px-3 py-1"
+                        />
+                        <MagnifyingGlassIcon className='w-6 h-6 text-gray-400 absolute top-1/2 transform -translate-y-1/2 right-3' />
+                    </div>
+                </div>
                 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead className="text-xs text-gray-700 uppercase bg-kaitoke-green-50 dark:bg-gray-700 dark:text-gray-400">

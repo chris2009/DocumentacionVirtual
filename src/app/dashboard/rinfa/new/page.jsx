@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function page() {
     return (
-        <div className='pt-20'>
+        <div className='ml-64 mt-14'>
             <RinfaForm />
         </div>
     )
