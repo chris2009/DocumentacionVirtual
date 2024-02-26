@@ -1,14 +1,13 @@
 'use client'
-import { Fragment } from 'react'
+import React, { Fragment } from 'react'
 // import { useEffect } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon, HomeIcon, DocumentTextIcon, UserGroupIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React from 'react'
+import { signOut } from 'next-auth/react'
 
 function Navbar() {
-
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
     }
@@ -53,7 +52,7 @@ function Navbar() {
                                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                                     <button
                                         type="button"
-                                        className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                        className="relative rounded-full p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                                     >
                                         <span className="absolute -inset-1.5" />
                                         <span className="sr-only">View notifications</span>
@@ -96,12 +95,13 @@ function Navbar() {
 
                                                 <Menu.Item>
                                                     {({ active }) => (
-                                                        <a
+                                                        <button
                                                             href="#"
                                                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                            onClick={() => signOut()}
                                                         >
                                                             Cerrar sesión
-                                                        </a>
+                                                        </button>
                                                     )}
                                                 </Menu.Item>
                                             </Menu.Items>

@@ -24,9 +24,9 @@ function RinfaTable({ rinfa }) {
             <td className="px-6 py-2 text-justify text-xs">
                 {format((rinfa.fecha), "full", "es")}
             </td>
-            <td className="text-center text-xs px-2 py-1 flex justify-end">
+            <td className="text-center text-xs px-2 py-1 flex justify-center">
                 <Link key={rinfa.id} href={`/dashboard/rinfa/${rinfa.id}`}>
-                <button className='bg-kaitoke-green-400 hover:bg-kaitoke-green-600 text-white px-5 py-2  rounded-full font-bold'><EyeIcon className='animate-pulse w-4 h-full'/></button>
+                    <EyeIcon className='animate-pulse w-4 h-full text-kaitoke-green-800' />
                 </Link>
             </td>
         </tr>

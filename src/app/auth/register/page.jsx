@@ -18,7 +18,7 @@ function RegisterPage() {
 
         const res = await axios.post("/api/auth/register", {
             username: data.username,
-            email: data.email,
+            DNI: data.DNI,
             password: data.password,
         }, {
             headers: {
@@ -61,22 +61,22 @@ function RegisterPage() {
                     </span>
                 )}
 
-                <label htmlFor="email" className="text-slate-500 mb-2 block text-sm">
-                    Email:
+                <label htmlFor="DNI" className="text-slate-500 mb-2 block text-sm">
+                    DNI:
                 </label>
                 <input
-                    type="email"
-                    {...register("email", {
+                    type="text"
+                    {...register("DNI", {
                         required: {
                             value: true,
-                            message: "Email is required",
+                            message: "DNI is required",
                         },
                     })}
                     className="p-3 rounded block mb-2 bg-slate-900 text-slate-300 w-full"
-                    placeholder="user@email.com"
+                    placeholder="Ingrese DNI"
                 />
-                {errors.email && (
-                    <span className="text-red-500 text-xs">{errors.email.message}</span>
+                {errors.DNI && (
+                    <span className="text-red-500 text-xs">{errors.DNI.message}</span>
                 )}
 
                 <label htmlFor="password" className="text-slate-500 mb-2 block text-sm">

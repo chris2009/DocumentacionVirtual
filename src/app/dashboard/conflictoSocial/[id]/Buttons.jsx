@@ -7,7 +7,7 @@ export default function Buttons({ conflictoId }) {
     return (
         <div className='flex gap-2 justify-end mr-2 mb-2'>
             <button
-                className='bg-gray-500 hover:bg-gray-700 text-white rounded py-2 px-3'
+                className='bg-gray-500 hover:bg-gray-700 text-white rounded-full py-2 px-4'
                 onClick={() =>
                     router.push(`/dashboard/conflictoSocial/edit/${conflictoId}`)}
             >
@@ -15,7 +15,7 @@ export default function Buttons({ conflictoId }) {
                 Editar
             </button>
             <button
-                className='bg-red-500 hover:bg-red-700 text-white rounded py-2 px-3'
+                className='bg-red-500 hover:bg-red-700 text-white rounded-full py-2 px-4'
                 onClick={async () => {
                     if (confirm('Estás seguro de eliminar el conflicto?')) {
                         const res = await axios.delete('/api/conflicto/' + conflictoId)

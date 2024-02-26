@@ -8,33 +8,33 @@ export const authOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "text", placeholder: "jsmith" },
+        DNI: { label: "DNI", type: "text", placeholder: "jsmith" },
         password: { label: "Password", type: "password", placeholder: "*****" },
       },
       async authorize(credentials, req) {
         try {
           // Buscar usuario por email
           const userFound = await executeQuery(
-            'SELECT * FROM user WHERE email = ?',
-            [credentials.email]
+            'SELECT * FROM user WHERE DNI = ?',
+            [credentials.DNI]
           );
 
           if (!userFound || userFound.length === 0) {
-            throw new Error('No user found');
+            throw new Error('Usuario no encontrado');
           }
 
           // Verificar contraseña
           const matchPassword = await bcrypt.compare(credentials.password, userFound[0].password);
 
           if (!matchPassword) {
-            throw new Error('Wrong password');
+            throw new Error('Contraseña incorrecta');
           }
 
           // Devolver los datos del usuario
           return {
             id: userFound[0].id,
             name: userFound[0].username,
-            email: userFound[0].email,
+            DNI: userFound[0].DNI,
           };
         } catch (error) {
           throw new Error(error.message);

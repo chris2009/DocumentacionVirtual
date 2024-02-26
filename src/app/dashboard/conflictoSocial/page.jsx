@@ -47,7 +47,7 @@ function conflictoPage() {
                             onChange={handleSearch}
                             className="border border-gray-300 rounded-full px-3 py-1 pl-3"
                         />
-                        <MagnifyingGlassIcon className='w-6 h-6 text-gray-400 absolute top-1/2 transform -translate-y-1/2 right-3' />
+                        <MagnifyingGlassIcon className='w-5 h-5 text-gray-400 absolute top-1/2 transform -translate-y-1/2 right-3' />
                     </div>
                 </div>
                 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
