@@ -64,10 +64,10 @@ export async function PUT(request, { params }) {
         const data = await request.formData();
         const file = data.get('file')
 
-        if (!data.get("evento")) {
+        if (!data.get("fecha")) {
             return NextResponse.json(
                 {
-                    message: "evento is required"
+                    message: "fecha is required"
                 },
                 {
                     status: 400
@@ -93,9 +93,8 @@ export async function PUT(request, { params }) {
         await writeFile(filePath, buffer)
 
         const result = await executeQuery(
-            "UPDATE tbl_escalafon SET fecha = ?, evento = ?, pathName = ? WHERE id = ?", [
+            "UPDATE tbl_escalafon SET fecha = ?, pathName = ? WHERE id = ?", [
             data.get('fecha'),
-            data.get('evento'),
             '/' + relativePath,
             params.id
         ]);

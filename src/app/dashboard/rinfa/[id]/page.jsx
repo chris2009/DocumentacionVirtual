@@ -7,7 +7,6 @@ import { format } from "@formkit/tempo";
 async function loadRinfa(rinfaId) {
     try {
         const { data } = await axios.get('http://localhost:3000/api/rinfa/' + rinfaId)
-        console.log(data.evento)
         return data
     } catch (error) {
         return NextResponse.json(

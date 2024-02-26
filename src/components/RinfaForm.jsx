@@ -6,10 +6,10 @@ import { useRouter, useParams } from "next/navigation";
 
 function RinfaForm() {
 
+
     const [file, setFile] = useState(null)
     const [rinfa, setRinfa] = useState({
         fecha: "",
-        evento: "",
         pathName: ""
     });
 
@@ -30,7 +30,6 @@ function RinfaForm() {
             axios.get('/api/rinfa/' + params.id).then(res => {
                 setRinfa({
                     fecha: res.data.fecha.split('T')[0],
-                    evento: res.data.evento,
                     pathName: res.data.pathName
                 });
             });
@@ -42,7 +41,6 @@ function RinfaForm() {
 
         const formData = new FormData()
         formData.append('fecha', rinfa.fecha)
-        formData.append('evento', rinfa.evento)
 
         if (file) {
             formData.append('file', file)
@@ -65,11 +63,13 @@ function RinfaForm() {
             });
             console.log(res)
         }
+
         form.current.reset();
         router.refresh();
         router.push('/dashboard/rinfa');
     };
 
+    
     function getFileNameWithoutExtension(pathName) {
         // Obtener el nombre del archivo desde la última barra diagonal
         const fileNameWithExtension = pathName.substring(pathName.lastIndexOf('/') + 1);

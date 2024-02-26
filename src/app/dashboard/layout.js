@@ -3,9 +3,7 @@ import Navbar from "../../components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
-
-
-export default function RootLayout({ children }) {
+export default function Layout({ children }) {
     return (
         <html lang="en">
             <body className={inter.className}><Navbar />{children}</body>

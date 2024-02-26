@@ -36,12 +36,12 @@ function RegisterPage() {
     console.log(errors);
 
     return (
-        <div className="h-[calc(100vh-7rem)] flex justify-center items-center">
-            <form onSubmit={onSubmit} className="w-1/4">
+        <div className="h-screen flex justify-center items-center bg-kaitoke-green-50">
+            <form onSubmit={onSubmit} className="w-1/4 bg-white p-4 rounded">
                 <h1 className="text-slate-200 font-bold text-4xl mb-4">Register</h1>
 
                 <label htmlFor="username" className="text-slate-500 mb-2 block text-sm">
-                    Username:
+                    Nombre del usuario:
                 </label>
                 <input
                     type="text"
@@ -80,7 +80,7 @@ function RegisterPage() {
                 )}
 
                 <label htmlFor="password" className="text-slate-500 mb-2 block text-sm">
-                    Password:
+                    Contraseña:
                 </label>
                 <input
                     type="password"
@@ -103,7 +103,7 @@ function RegisterPage() {
                     htmlFor="confirmPassword"
                     className="text-slate-500 mb-2 block text-sm"
                 >
-                    Confirm Password:
+                    Confirmar contraseña:
                 </label>
                 <input
                     type="password"
@@ -122,9 +122,11 @@ function RegisterPage() {
                     </span>
                 )}
 
-                <button className="w-full bg-blue-500 text-white p-3 rounded-lg mt-2">
-                    Register
-                </button>
+                <div className="flex justify-end">
+                    <button className="bg-blue-500 text-white p-3 rounded-lg mt-2">
+                        Registrar
+                    </button>
+                </div>
             </form>
         </div>
     );

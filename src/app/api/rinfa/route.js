@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import executeQuery from '@/libs/mysql';
 import { writeFile } from 'fs/promises'
 import path from "path";
+import unlink
 
 export async function GET() {
 
@@ -46,10 +47,9 @@ export async function POST(request) {
         await writeFile(filePath, buffer)
 
         const result = await executeQuery(
-            "INSERT INTO tbl_escalafon (fecha, evento, pathName) VALUES (?, ?, ?)",
+            "INSERT INTO tbl_escalafon (fecha, pathName) VALUES (?, ?)",
             [
                 data.get('fecha'),
-                data.get('evento'),
                 '/' + relativePath
             ]
         );
@@ -57,7 +57,6 @@ export async function POST(request) {
         return NextResponse.json({
             id: result.insertId,
             fecha: data.get('fecha'),
-            evento: data.get('evento'),
             pathName: '/' + relativePath
         });
     } catch (error) {
