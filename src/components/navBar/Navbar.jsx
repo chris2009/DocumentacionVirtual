@@ -23,8 +23,8 @@ function Navbar( {props }) {
 
     const links = [
         { name: 'Dashboard', href: '/dashboard', icon: <HomeIcon /> },
-        { name: 'Rinfa', href: '/dashboard/rinfa', icon: <DocumentTextIcon /> },
-        { name: 'Conflicto social', href: '/dashboard/conflictoSocial', icon: <UserGroupIcon /> }
+        { name: 'Rinfa', href: '/rinfa', icon: <DocumentTextIcon /> },
+        { name: 'Conflicto social', href: '/conflictoSocial', icon: <UserGroupIcon /> }
     ]
     const jsonString = JSON.stringify(props);
     const parsedJson = JSON.parse(jsonString);

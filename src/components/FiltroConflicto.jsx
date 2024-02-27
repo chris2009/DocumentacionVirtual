@@ -1,8 +1,8 @@
 import React from 'react'
-import Lugar from '@/app/dashboard/conflictoSocial/Lugar';
-import Factor from '@/app/dashboard/conflictoSocial/Factor';
-import Riesgo from '@/app/dashboard/conflictoSocial/Riesgo';
-import Buscar from '@/app/dashboard/conflictoSocial/Buscar';
+import Lugar from '@/app/conflictoSocial/Lugar';
+import Factor from '@/app/conflictoSocial/Factor';
+import Riesgo from '@/app/conflictoSocial/Riesgo';
+import Buscar from '@/app/conflictoSocial/Buscar';
 import Link from 'next/link'
 export default function FiltroConflicto() {
     return (
