@@ -45,7 +45,7 @@ function conflictoPage() {
                             placeholder="Buscar evento..."
                             value={searchTerm}
                             onChange={handleSearch}
-                            className="border border-gray-300 rounded-full px-3 py-1 pl-3"
+                            className="border border-gray-300 rounded-full px-3 py-1"
                         />
                         <MagnifyingGlassIcon className='w-5 h-5 text-gray-400 absolute top-1/2 transform -translate-y-1/2 right-3' />
                     </div>
@@ -72,6 +72,7 @@ function conflictoPage() {
                     </table>
                 </div>
             </div >
+    
         </div >
     );
 }

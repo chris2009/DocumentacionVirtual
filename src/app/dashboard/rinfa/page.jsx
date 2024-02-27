@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Loading from '@/components/global/loading';
 import RinfaTable from '@/components/RinfaTable';
 import { MagnifyingGlassIcon, PlusIcon } from '@heroicons/react/24/outline';
+
 function rinfaPage() {
     const [rinfas, setRinfas] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');

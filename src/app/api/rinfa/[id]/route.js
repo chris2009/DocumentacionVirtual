@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server";
 import executeQuery from '@/libs/mysql';
-import { writeFile } from 'fs/promises'
+import { writeFile, unlink } from 'fs/promises'
 import path from "path";
 
 export async function GET(request, { params }) {
 
-    // return NextResponse.json(result)
     try {
         const result = await executeQuery("SELECT * FROM tbl_escalafon WHERE id = ?", [params.id,]);
         if (result.length === 0) {
@@ -63,6 +62,7 @@ export async function PUT(request, { params }) {
     try {
         const data = await request.formData();
         const file = data.get('file')
+        unlink(file)
 
         if (!data.get("fecha")) {
             return NextResponse.json(
@@ -89,9 +89,15 @@ export async function PUT(request, { params }) {
         const filePath = path.join(process.cwd(), 'public/rinfa', file.name)
         const relativePath = path.relative(process.cwd() + '/public', filePath);
 
-
         await writeFile(filePath, buffer)
 
+        const oldFilePath = path.join(process.cwd(), 'public/rinfa', params.id + '.pdf');
+        try {
+            await unlink(oldFilePath); // Elimina el archivo antiguo
+        } catch (error) {
+            console.error('Error al eliminar el archivo antiguo:', error);
+        }
+        
         const result = await executeQuery(
             "UPDATE tbl_escalafon SET fecha = ?, pathName = ? WHERE id = ?", [
             data.get('fecha'),

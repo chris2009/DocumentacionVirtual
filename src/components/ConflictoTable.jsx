@@ -10,9 +10,9 @@ function ConflictoTable({ conflicto }) {
             <td className="px-6 py-2 text-justify text-xs">
                 {conflicto.evento}
             </td>
-            <td className="text-center text-xs px-2 justify-center pr-6">
+            <td className="text-center text-xs px-2 pr-6">
                 <Link key={conflicto.id} href={`/dashboard/conflictoSocial/${conflicto.id}`}>
-                    <button><EyeIcon className='animate-pulse w-4 h-full'/></button>
+                    <EyeIcon className='animate-pulse w-4 h-full'/>
                 </Link>
             </td>
         </tr>

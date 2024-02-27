@@ -1,12 +1,5 @@
-import { Inter } from "next/font/google";
 import Navbar from "../../components/Navbar";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export default function Layout({ children }) {
-    return (
-        <html lang="en">
-            <body className={inter.className}><Navbar />{children}</body>
-        </html>
-    );
+export default function DashboardLayout({ children }) {
+    return <section><Navbar />{children}</section>
 }

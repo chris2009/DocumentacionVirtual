@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import executeQuery from '@/libs/mysql';
 import { writeFile } from 'fs/promises'
 import path from "path";
-import unlink
 
 export async function GET() {
 
@@ -22,10 +21,8 @@ export async function GET() {
     }
 }
 
-
 export async function POST(request) {
     try {
-        // const { ano_fiscal, fecha, evento, lugar, riesgo, factor, pathName } = await request.formData();
         const data = await request.formData();
         const file = data.get('file')
 
