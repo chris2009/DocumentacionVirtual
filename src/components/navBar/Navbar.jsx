@@ -5,14 +5,17 @@ import { Bars3Icon, BellIcon, XMarkIcon, HomeIcon, DocumentTextIcon, UserGroupIc
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { signOut, } from 'next-auth/react'
-// import { getServerSession } from 'next-auth'
+// import { signOut, useSession } from 'next-auth/react';
+
+import { getServerSession } from 'next-auth/next'
 // import { useSession } from 'next-auth/react'
 // import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 
-function Navbar() {
-
+function Navbar( {props }) {
+    // const { data: session, status } = useSession();
     // const { data: session } = useSession();
 
+    // const data = await getServerSession(authOptions)
 
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
@@ -23,10 +26,13 @@ function Navbar() {
         { name: 'Rinfa', href: '/dashboard/rinfa', icon: <DocumentTextIcon /> },
         { name: 'Conflicto social', href: '/dashboard/conflictoSocial', icon: <UserGroupIcon /> }
     ]
-
+    const jsonString = JSON.stringify(props);
+    const parsedJson = JSON.parse(jsonString);
+   
     const pathname = usePathname()
     return (
         <div>
+            {/* <h1>{JSON.stringify(data)}</h1> */}
             <Disclosure as="nav" className="fixed top-0 z-50 w-full bg-kaitoke-green-900 border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                 {({ open }) => (
                     <>
@@ -87,22 +93,21 @@ function Navbar() {
                                             leaveFrom="transform opacity-100 scale-100"
                                             leaveTo="transform opacity-0 scale-95"
                                         >
-                                            <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                                {/* <Menu.Item>
+                                            <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                                <Menu.Item>
                                                     {({ active }) => (
                                                         <a
                                                             href="#"
                                                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                                         >
-                                                            Your Profile
+                                                            {parsedJson.session.user.name}
                                                         </a>
                                                     )}
-                                                </Menu.Item> */}
+                                                </Menu.Item>
 
                                                 <Menu.Item>
                                                     {({ active }) => (
                                                         <button
-                                                            href="#"
                                                             className={classNames(active ? 'bg-gray-100 w-full text-start' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                                             onClick={() => signOut()}
                                                         >

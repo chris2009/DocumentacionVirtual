@@ -1,5 +1,5 @@
-import Navbar from "../../components/Navbar";
+import NavbarProps from "@/components/navBar/NavBarProps"
 
 export default function DashboardLayout({ children }) {
-    return <section><Navbar />{children}</section>
+    return <section><NavbarProps />{children}</section>
 }
