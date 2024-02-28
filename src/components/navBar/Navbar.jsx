@@ -32,8 +32,7 @@ function Navbar( {props }) {
     const pathname = usePathname()
     return (
         <div>
-            {/* <h1>{JSON.stringify(data)}</h1> */}
-            <Disclosure as="nav" className="fixed top-0 z-50 w-full bg-kaitoke-green-900 border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+            <Disclosure as="nav" className="fixed top-0 z-50 w-full bg-white border-b border-kaitoke-green-400 dark:bg-gray-800 dark:border-gray-700">
                 {({ open }) => (
                     <>
                         <div className="px-3 lg:px-5 lg:pl-3">
@@ -57,14 +56,14 @@ function Navbar( {props }) {
                                             src="/CIAINF.png"
                                             alt="Your Company"
                                         />
-                                        <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-white">DocVirtual</span>
+                                        <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-gray-400">DocVirtual</span>
                                     </Link>
 
                                 </div>
                                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                                     <button
                                         type="button"
-                                        className="relative rounded-full p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                        className="relative rounded-full p-1 text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                                     >
                                         <span className="absolute -inset-1.5" />
                                         <span className="sr-only">View notifications</span>
@@ -144,12 +143,12 @@ function Navbar( {props }) {
                 )}
             </Disclosure>
 
-            <aside id="logo-sidebar" className="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-kaitoke-green-900 border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
-                <div className="h-full px-3 pb-4 overflow-y-auto bg-kaitoke-green-900 ">
+            <aside id="logo-sidebar" className="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-kaitoke-green-400 sm:translate-x-0" aria-label="Sidebar">
+                <div className="h-full pb-4 overflow-y-auto bg-kaitoke-green-400 ">
                     <ul className="space-y-2 font-medium">
                         {links.map((link) => (
                             <li key={link.href}>
-                                <Link href={link.href} className={`flex items-center p-2 rounded-full  hover:bg-gray-100 dark:hover:bg-gray-700 group ${pathname === link.href ? 'bg-gray-100 text-gray-900' : 'text-white hover:text-gray-900'}`}>
+                                <Link href={link.href} className={`flex items-center py-2  hover:bg-white transition-opacity duration-300 hover:text-gray-700 group ${pathname === link.href ? 'bg-white text-gray-700' : 'text-white'}`}>
                                     <span className="flex items-center ms-3">
                                         <div className="w-6 h-full " >{link.icon}</div>
                                         <div className="ml-2">{link.name}</div>
