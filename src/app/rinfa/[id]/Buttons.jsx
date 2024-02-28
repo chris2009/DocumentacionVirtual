@@ -9,7 +9,7 @@ export default function Buttons({ rinfaId }) {
             <button
                 className='bg-gray-500 hover:bg-gray-700 text-white rounded-full py-2 px-4'
                 onClick={() =>
-                    router.push(`/dashboard/rinfa/edit/${rinfaId}`)}
+                    router.push(`/rinfa/edit/${rinfaId}`)}
             >
 
                 Editar
@@ -20,7 +20,7 @@ export default function Buttons({ rinfaId }) {
                     if (confirm('Estás seguro de eliminar el rinfa?')) {
                         const res = await axios.delete('/api/rinfa/' + rinfaId)
                         if (res.status === 204) {
-                            router.push(('/dashboard/rinfa'))
+                            router.push(('/rinfa'))
                             router.refresh()
                         }
                     }
