@@ -1,6 +1,5 @@
 import mysql from 'mysql2/promise';
 
-// Crea un pool de conexiones utilizando las variables de entorno para la configuración
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
     port: 3306,
@@ -14,7 +13,6 @@ const pool = mysql.createPool({
 
 const executeQuery = async (query, data) => {
     try {
-        // No es necesario verificar si el pool existe, ya que se crea al cargar el módulo
         const [rows, fields] = await pool.execute(query, data);
         return rows;
     } catch (error) {

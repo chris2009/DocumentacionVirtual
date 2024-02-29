@@ -77,18 +77,18 @@ function ConflictoForm() {
                     onChange={handleChange}
                     value={conflicto.ano_fiscal || ""}
                     required /> */}
-                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha</label>
+                <label className="block mb-2 text-sm font-medium text-gray-900">Fecha</label>
                 <input
                     type="date"
                     name="fecha"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5"
                     onChange={handleChange}
                     value={conflicto.fecha || ""}
                     required />
-                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lugar</label>
+                <label className="block mb-2 text-sm font-medium text-gray-900">Lugar</label>
                 <select
                     name="lugar"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5 "
                     onChange={handleChange}
                     value={conflicto.lugar || ""}
                     required
@@ -126,7 +126,7 @@ function ConflictoForm() {
                 <textarea
                     rows={6}
                     name="evento"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-justify"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-justify"
                     onChange={handleChange}
                     value={conflicto.evento || ""}
                     required />
@@ -141,11 +141,11 @@ function ConflictoForm() {
                     onChange={handleChange}
                     value={conflicto.lugar || ""}
                     required /> */}
-                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Riesgo</label>
+                <label className="block mb-2 text-sm font-medium text-gray-900">Riesgo</label>
                 <select
                     type="text"
                     name="riesgo"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5"
                     onChange={handleChange}
                     value={conflicto.riesgo || ""}
                     required>
@@ -154,11 +154,11 @@ function ConflictoForm() {
                     <option value="Intermedio">Intermedio</option>
                     <option value="Bajo">Bajo</option>
                 </select>
-                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Factor</label>
+                <label className="block mb-2 text-sm font-medium text-gray-900">Factor</label>
                 <select
 
                     name="factor"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5 "
                     onChange={handleChange}
                     value={conflicto.factor || ""}
                     required>
