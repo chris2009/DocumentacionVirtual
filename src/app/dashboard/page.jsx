@@ -23,9 +23,40 @@ ChartJS.register(
 );
 
 export default function FactorPage() {
-  const [factor, setFactor] = useState([]);
-  const [riesgo, setRiesgo] = useState([]);
-  const [selectedPlace, setSelectedPlace] = useState('');
+  const [factor, setFactor] = useState(['Lima']);
+  const [riesgo, setRiesgo] = useState(['Lima']);
+  const [tipo, setTipo] = useState(['Lima']);
+  const [selectedPlace, setSelectedPlace] = useState(['Lima']);
+  const [factoresPorMes, setFactoresPorMes] = useState([]);
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+
+  // useEffect(() => {
+  //   if (selectedPlace) {
+  //     const getFactores = async () => {
+  //       const response = await axios.get(`/api/factor?lugar=${selectedPlace}`);
+  //       setFactor(response.data);
+  //     };
+  //     getFactores();
+
+  //     const getRiesgos = async () => {
+  //       const response = await axios.get(`/api/riesgo?lugar=${selectedPlace}`);
+  //       setRiesgo(response.data);
+  //     };
+  //     getRiesgos();
+
+  //     const getTipo = async () => {
+  //       const response = await axios.get(`/api/tipo?lugar=${selectedPlace}`);
+  //       setTipo(response.data)
+  //     };
+  //     getTipo();
+
+  //     const fetchFactoresPorMes = async () => {
+  //       const response = await axios.get(`/api/fecha?year=${selectedYear}`);
+  //       setFactoresPorMes(response.data);
+  //     };
+  //     fetchFactoresPorMes();
+  //   }
+  // }, [selectedPlace]);
 
   useEffect(() => {
     if (selectedPlace) {
@@ -40,12 +71,30 @@ export default function FactorPage() {
         setRiesgo(response.data);
       };
       getRiesgos();
+
+      const getTipo = async () => {
+        const response = await axios.get(`/api/tipo?lugar=${selectedPlace}`);
+        setTipo(response.data);
+      };
+      getTipo();
     }
-  }, [selectedPlace]);
+
+    const fetchFactoresPorMes = async () => {
+      const response = await axios.get(`/api/fecha?year=${selectedYear}`);
+      setFactoresPorMes(response.data);
+    };
+
+    if (selectedYear) {
+      fetchFactoresPorMes();
+    }
+  }, [selectedPlace, selectedYear]); // Incluye selectedYear en las dependencias
 
   const handlePlaceChange = (e) => {
     setSelectedPlace(e.target.value);
   };
+
+
+  const meses = ['ENE', 'FEB', 'MAR', 'ABR', 'MAY', 'JUN', 'JUL', 'AGO', 'SEP', 'OCT', 'NOV', 'DIC'];
 
   // Configuración de los datos para los factores
   const dataFactores = {
@@ -53,9 +102,9 @@ export default function FactorPage() {
     datasets: [{
       label: 'Factores',
       data: factor.map(item => item.cantidad),
-      backgroundColor: '#166535',
-      pointBorderColor: '#166535',
-      tension: 0.1
+      backgroundColor: 'rgba(0,100,0, 0.5)',
+      borderColor: 'rgba(0,100,0, 1)',
+      borderWidth: 1
     }]
   };
 
@@ -65,9 +114,34 @@ export default function FactorPage() {
     datasets: [{
       label: 'Riesgos',
       data: riesgo.map(item => item.cantidad),
-      backgroundColor: '#FF6384',
-      pointBorderColor: '#FF6384',
-      tension: 0.1
+      backgroundColor: 'rgba(255,0,0, 0.5)',
+      borderColor: 'rgba(255,0,0, 1)',
+      borderWidth: 1
+    }]
+  };
+
+  const dataTipos = {
+    labels: tipo.map(item => item.tipo),
+    datasets: [{
+      label: 'Tipos de conflictos sociales',
+      data: tipo.map(item => item.cantidad),
+      backgroundColor: 'rgba(0,0,255, 0.5)',
+      borderColor: 'rgba(0,0,255, 1)',
+      borderWidth: 1
+    }]
+  };
+
+  const dataFactoresPorMes = {
+    labels: meses,
+    datasets: [{
+      label: 'Cantidad de Factores por Mes',
+      data: meses.map((_, i) => {
+        const mesData = factoresPorMes.find(d => d.mes === i + 1);
+        return mesData ? mesData.cantidad : 0;
+      }),
+      backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      borderColor: 'rgba(53, 162, 235, 1)',
+      borderWidth: 1
     }]
   };
 
@@ -93,15 +167,26 @@ export default function FactorPage() {
 
   return (
     <div className='pl-64 pt-20 w-full'>
-      <div className='pl-6'>
-        <label className="block mb-2 text-sm font-medium text-gray-900">Lugar</label>
+      <div className='pl-6 flex items-center'>
+        <label className="block mb-2 text-sm font-medium text-gray-900 mr-3">Año:</label>
+        <select
+          name="year"
+          onChange={(e) => setSelectedYear(e.target.value)}
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block p-2.5 w-24"
+          required
+        >
+          <option value="2023">2023</option>
+          <option value="2024">2024</option>
+        </select>
+        <label className="block mb-2 text-sm font-medium text-gray-900 mx-3">Lugar:</label>
         <select
           name="lugar"
           onChange={handlePlaceChange}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5 "
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block p-2.5 "
           required
         >
           <option disabled value="">Lugar...</option>
+          <option value="Lima">Lima</option>
           <option value="Amazonas">Amazonas</option>
           <option value="Ancash">Ancash</option>
           <option value="Apurimac">Apurimac</option>
@@ -116,7 +201,6 @@ export default function FactorPage() {
           <option value="Junin">Junin</option>
           <option value="La Libertad">La Libertad</option>
           <option value="Lambayeque">Lambayeque</option>
-          <option value="Lima">Lima</option>
           <option value="Loreto">Loreto</option>
           <option value="Madre de Dios">Madre de Dios</option>
           <option value="Moquegua">Moquegua</option>
@@ -128,6 +212,7 @@ export default function FactorPage() {
           <option value="Tumbes">Tumbes</option>
           <option value="Ucayali">Ucayali</option>
         </select>
+
       </div>
       <div className='grid gap-4 grid-cols-2 pt-6 pl-6'>
 
@@ -151,7 +236,7 @@ export default function FactorPage() {
           <Line
             width={800}
             height={400}
-            data={dataRiesgos}
+            data={dataFactoresPorMes}
             options={options}
           />
         </div>
@@ -159,7 +244,7 @@ export default function FactorPage() {
           <Line
             width={800}
             height={400}
-            data={dataRiesgos}
+            data={dataTipos}
             options={options}
           />
         </div>
