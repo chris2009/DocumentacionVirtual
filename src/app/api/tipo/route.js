@@ -3,7 +3,6 @@ import executeQuery from "@/libs/mysql";
 
 export async function GET(request) {
     const url = new URL(request.url);
-    // Obtiene el parámetro 'lugar' de la URL de la petición
     const lugar = url.searchParams.get("lugar");
 
     // Asegúrate de validar el parámetro 'lugar' para evitar consultas SQL maliciosas
@@ -12,8 +11,7 @@ export async function GET(request) {
     }
 
     try {
-        // Usa el valor de 'lugar' directamente en el query
-        const query = "SELECT r.riesgo AS riesgo, COUNT(*) AS cantidad FROM tbl_2023_conflictos t INNER JOIN tbl_riesgo r ON t.riesgo = r.id WHERE t.lugar = ? GROUP BY r.riesgo;";
+        const query = "SELECT tcs.tipo_conflicto AS tipo, COUNT(*) AS cantidad FROM tbl_2023_conflictos t INNER JOIN tbl_tipo tcs ON t.tipo_conflicto_social = tcs.id WHERE t.lugar = 'lima' GROUP BY tcs.tipo_conflicto";
         const result = await executeQuery(query, [lugar]);
         return NextResponse.json(result);
     } catch (error) {
