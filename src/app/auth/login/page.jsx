@@ -14,7 +14,6 @@ function LoginPage() {
   const [error, setError] = useState(null)
   
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
 
     const res = await signIn("credentials", {
       DNI: data.DNI,
@@ -22,7 +21,6 @@ function LoginPage() {
       redirect: false,
     });
 
-    console.log(res)
     if (res.error) {
       setError(res.error)
     } else {
