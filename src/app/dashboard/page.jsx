@@ -30,61 +30,44 @@ export default function FactorPage() {
   const [factoresPorMes, setFactoresPorMes] = useState([]);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
 
-  // useEffect(() => {
-  //   if (selectedPlace) {
-  //     const getFactores = async () => {
-  //       const response = await axios.get(`/api/factor?lugar=${selectedPlace}`);
-  //       setFactor(response.data);
-  //     };
-  //     getFactores();
-
-  //     const getRiesgos = async () => {
-  //       const response = await axios.get(`/api/riesgo?lugar=${selectedPlace}`);
-  //       setRiesgo(response.data);
-  //     };
-  //     getRiesgos();
-
-  //     const getTipo = async () => {
-  //       const response = await axios.get(`/api/tipo?lugar=${selectedPlace}`);
-  //       setTipo(response.data)
-  //     };
-  //     getTipo();
-
-  //     const fetchFactoresPorMes = async () => {
-  //       const response = await axios.get(`/api/fecha?year=${selectedYear}`);
-  //       setFactoresPorMes(response.data);
-  //     };
-  //     fetchFactoresPorMes();
-  //   }
-  // }, [selectedPlace]);
-
   useEffect(() => {
-    if (selectedPlace) {
+    if (selectedPlace && selectedYear) {
       const getFactores = async () => {
-        const response = await axios.get(`/api/factor?lugar=${selectedPlace}`);
+        const response = await axios.get(`/api/factor?lugar=${selectedPlace}&year=${selectedYear}`);
         setFactor(response.data);
       };
       getFactores();
 
+      // const getRiesgos = async () => {
+      //   const response = await axios.get(`/api/riesgo?lugar=${selectedPlace}`);
+      //   setRiesgo(response.data);
+      // };
+      // getRiesgos();
+
       const getRiesgos = async () => {
-        const response = await axios.get(`/api/riesgo?lugar=${selectedPlace}`);
+        // Incluye tanto el lugar como el año en la solicitud
+        const response = await axios.get(`/api/riesgo?lugar=${selectedPlace}&year=${selectedYear}`);
         setRiesgo(response.data);
       };
-      getRiesgos();
+      getRiesgos()
 
-      const getTipo = async () => {
-        const response = await axios.get(`/api/tipo?lugar=${selectedPlace}`);
-        setTipo(response.data);
-      };
-      getTipo();
+      if (selectedPlace && selectedYear) {
+        const getTipo = async () => {
+          const response = await axios.get(`/api/tipo?lugar=${selectedPlace}&year=${selectedYear}`);
+          setTipo(response.data); // Asegúrate de tener un estado 'setTipo' para almacenar esta información
+        };
+        getTipo();
+      }
     }
 
+
     const fetchFactoresPorMes = async () => {
-      const response = await axios.get(`/api/fecha?year=${selectedYear}`);
+      // Asegúrate de incluir tanto el year como el lugar en la solicitud
+      const response = await axios.get(`/api/fecha?year=${selectedYear}&lugar=${selectedPlace}`);
       setFactoresPorMes(response.data);
     };
 
-    if (selectedYear) {
+    if (selectedYear && selectedPlace) {
       fetchFactoresPorMes();
     }
   }, [selectedPlace, selectedYear]); // Incluye selectedYear en las dependencias
@@ -175,8 +158,8 @@ export default function FactorPage() {
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block p-2.5 w-24"
           required
         >
-          <option value="2023">2023</option>
           <option value="2024">2024</option>
+          <option value="2023">2023</option>
         </select>
         <label className="block mb-2 text-sm font-medium text-gray-900 mx-3">Lugar:</label>
         <select

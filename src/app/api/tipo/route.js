@@ -4,6 +4,7 @@ import executeQuery from "@/libs/mysql";
 export async function GET(request) {
     const url = new URL(request.url);
     const lugar = url.searchParams.get("lugar");
+    const year = url.searchParams.get("year")
 
     // Asegúrate de validar el parámetro 'lugar' para evitar consultas SQL maliciosas
     if (!lugar) {
@@ -11,8 +12,8 @@ export async function GET(request) {
     }
 
     try {
-        const query = "SELECT tcs.tipo_conflicto AS tipo, COUNT(*) AS cantidad FROM tbl_2023_conflictos t INNER JOIN tbl_tipo tcs ON t.tipo_conflicto_social = tcs.id WHERE t.lugar = ? GROUP BY tcs.tipo_conflicto";
-        const result = await executeQuery(query, [lugar]);
+        const query = "SELECT tcs.tipo_conflicto AS tipo, COUNT(*) AS cantidad FROM tbl_2023_conflictos t INNER JOIN tbl_tipo tcs ON t.tipo_conflicto_social = tcs.id WHERE t.lugar = ? AND YEAR(t.fecha) = ? GROUP BY tcs.tipo_conflicto";
+        const result = await executeQuery(query, [lugar, year]);
         return NextResponse.json(result);
     } catch (error) {
         return NextResponse.json(
