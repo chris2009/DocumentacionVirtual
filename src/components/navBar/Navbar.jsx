@@ -1,25 +1,18 @@
 'use client'
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon, HomeIcon, DocumentTextIcon, UserGroupIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, BellIcon, XMarkIcon, HomeIcon, DocumentTextIcon, UserGroupIcon, ChevronLeftIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { signOut, } from 'next-auth/react'
-// import { signOut, useSession } from 'next-auth/react';
 
-import { getServerSession } from 'next-auth/next'
-// import { useSession } from 'next-auth/react'
-// import { authOptions } from '@/app/api/auth/[...nextauth]/route'
-
-function Navbar( {props }) {
-    // const { data: session, status } = useSession();
-    // const { data: session } = useSession();
-
-    // const data = await getServerSession(authOptions)
+function Navbar({ props }) {
 
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
     }
+
+    const [open, setOpen] = useState(true)
 
     const links = [
         { name: 'Dashboard', href: '/dashboard', icon: <HomeIcon /> },
@@ -28,7 +21,7 @@ function Navbar( {props }) {
     ]
     const jsonString = JSON.stringify(props);
     const parsedJson = JSON.parse(jsonString);
-   
+
     const pathname = usePathname()
     return (
         <div>
@@ -143,15 +136,18 @@ function Navbar( {props }) {
                 )}
             </Disclosure>
 
-            <aside id="logo-sidebar" className="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-kaitoke-green-400 sm:translate-x-0" aria-label="Sidebar">
-                <div className="h-full pb-4 overflow-y-auto bg-kaitoke-green-400 ">
+              <aside className={`fixed top-0 left-0 z-40 h-screen pt-28 bg-kaitoke-green-400 transition-all duration-300 ${open ? 'w-52' : 'w-16'}`} aria-label="Sidebar">
+                <ChevronLeftIcon className={`bg-white text-kaitoke-green-700 rounded-full w-6 border-2 p-[2px] border-kaitoke-green-400 absolute -right-3 top-[76px] cursor-pointer ${!open && "rotate-180"} duration-300`} onClick={() => setOpen(!open)} />
+                <div className="h-full pb-4 overflow-y-auto bg-kaitoke-green-400">
                     <ul className="space-y-2 font-medium">
                         {links.map((link) => (
                             <li key={link.href}>
                                 <Link href={link.href} className={`flex items-center py-2  hover:bg-white transition-opacity duration-300 hover:text-gray-700 group ${pathname === link.href ? 'bg-white text-gray-700' : 'text-white'}`}>
                                     <span className="flex items-center ms-3">
-                                        <div className="w-6 h-full " >{link.icon}</div>
-                                        <div className="ml-2">{link.name}</div>
+                                        <div className="w-8 h-full" >{link.icon}</div>
+                                    </span>
+                                    <span className="flex items-center ms-3">
+                                        <div className={`ml-2 w-full ${!open && "hidden"}`}>{link.name}</div>
                                     </span>
                                 </Link>
                             </li>

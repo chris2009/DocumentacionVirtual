@@ -1,23 +1,29 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
-import { Line } from 'react-chartjs-2';
+import { Line, Radar, Bar, Pie } from 'react-chartjs-2';
 import axios from 'axios';
 import {
   Chart as ChartJS,
+  ArcElement,
   LineElement,
+  BarElement,
+  PointElement,
   CategoryScale,
   LinearScale,
-  PointElement,
+  RadialLinearScale,
   Legend,
   Tooltip
 } from 'chart.js';
 
 ChartJS.register(
+  ArcElement,
   LineElement,
+  BarElement,
+  PointElement,
   CategoryScale,
   LinearScale,
-  PointElement,
+  RadialLinearScale,
   Legend,
   Tooltip
 );
@@ -97,8 +103,16 @@ export default function FactorPage() {
     datasets: [{
       label: 'Riesgos',
       data: riesgo.map(item => item.cantidad),
-      backgroundColor: 'rgba(255,0,0, 0.5)',
-      borderColor: 'rgba(255,0,0, 1)',
+      backgroundColor: [
+        'rgba(255,0,0, 0.5)',
+        'rgba(0,255,0, 0.5)',
+        'rgba(0,0,255, 0.5)',
+      ],
+      borderColor: [
+        'rgba(255,0,0, 1)',
+        'rgba(0,255,0, 1)',
+        'rgba(0,0,255, 1)',
+      ],
       borderWidth: 1
     }]
   };
@@ -117,7 +131,7 @@ export default function FactorPage() {
   const dataFactoresPorMes = {
     labels: meses,
     datasets: [{
-      label: 'Cantidad de Factores por Mes',
+      label: 'Eventos',
       data: meses.map((_, i) => {
         const mesData = factoresPorMes.find(d => d.mes === i + 1);
         return mesData ? mesData.cantidad : 0;
@@ -207,28 +221,24 @@ export default function FactorPage() {
             options={options}
           />
         </div>
-        <div>
-          <Line
+        <div className='mx-auto w-80 h-full'>
+          <Pie
             width={800}
             height={400}
             data={dataRiesgos}
-            options={options}
           />
         </div>
         <div>
-          <Line
+          <Bar
             width={800}
             height={400}
             data={dataFactoresPorMes}
             options={options}
           />
         </div>
-        <div>
-          <Line
-            width={800}
-            height={400}
+        <div className='mx-auto w-80 h-full'>
+          <Radar
             data={dataTipos}
-            options={options}
           />
         </div>
       </div>
