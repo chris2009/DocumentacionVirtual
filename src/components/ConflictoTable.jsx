@@ -11,7 +11,7 @@ function ConflictoTable({ conflicto }) {
                 {conflicto.evento}
             </td>
             <td className="text-center text-xs px-2 pr-6">
-                <Link key={conflicto.id} href={`/conflictoSocial/${conflicto.id}`}>
+                <Link key={conflicto.id} href={`/dashboard/conflictoSocial/${conflicto.id}`}>
                     <EyeIcon className='animate-pulse w-4 h-full'/>
                 </Link>
             </td>

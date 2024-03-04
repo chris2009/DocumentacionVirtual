@@ -56,7 +56,7 @@ function ConflictoForm() {
         }
         form.current.reset();
         router.refresh();
-        router.push('/conflictoSocial');
+        router.push('/dashboard/conflictoSocial');
     };
 
 
