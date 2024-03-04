@@ -1,7 +1,7 @@
 'use client'
 import React, { Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon, HomeIcon, DocumentTextIcon, UserGroupIcon, ChevronLeftIcon, MapIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, BellIcon, XMarkIcon, HomeIcon, DocumentTextIcon, UserGroupIcon, ChevronLeftIcon, MapIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { signOut, } from 'next-auth/react'
@@ -85,23 +85,21 @@ function Navbar({ props }) {
                                             leaveTo="transform opacity-0 scale-95"
                                         >
                                             <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                                <Menu.Item>
-                                                    {({ active }) => (
+                                                <Menu.Item>                   
                                                         <label
                                                             className={classNames('block px-4 py-2 text-sm text-gray-700 border-b-[1px] ')}
                                                         >
                                                             {parsedJson.session.user.name}
                                                         </label>
-                                                    )}
                                                 </Menu.Item>
 
                                                 <Menu.Item>
                                                     {({ active }) => (
                                                         <button
-                                                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 w-full text-end')}
+                                                            className={classNames(active ? 'bg-gray-100' : '', 'px-4 py-1 text-sm text-gray-700 w-full flex items-center justify-end')}
                                                             onClick={() => signOut()}
                                                         >
-                                                            Cerrar sesión
+                                                          <ArrowLeftStartOnRectangleIcon className='w-6'/>  Cerrar sesión
                                                         </button>
                                                     )}
                                                 </Menu.Item>
