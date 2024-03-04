@@ -163,8 +163,9 @@ export default function FactorPage() {
   };
 
   return (
-    <div className='pl-64 pt-20 w-full'>
+    <div className='pl-52 pt-20 w-full mx-4'>
       <div className='pl-6 flex items-center'>
+        <h1 className='text-gray-700 mr-6 font-bold'>Estadística de conflicto social</h1>
         <label className="block mb-2 text-sm font-medium text-gray-900 mr-3">Año:</label>
         <select
           name="year"
@@ -211,9 +212,9 @@ export default function FactorPage() {
         </select>
 
       </div>
-      <div className='grid gap-4 grid-cols-2 pt-6 pl-6'>
+      <div className='grid gap-5 grid-cols-2 py-6'>
 
-        <div>
+        <div className='border-2 border-kaitoke-green-400 p-2 rounded-lg'>
           <Line
             width={900}
             height={400}
@@ -221,24 +222,22 @@ export default function FactorPage() {
             options={options}
           />
         </div>
-        <div className='mx-auto w-80 h-full'>
-          <Pie
-            width={800}
-            height={400}
-            data={dataRiesgos}
-          />
-        </div>
-        <div>
+        <div className='border-2 border-kaitoke-green-400 p-2 rounded-lg w-[95%]'>
           <Bar
-            width={800}
-            height={400}
             data={dataFactoresPorMes}
             options={options}
           />
         </div>
-        <div className='mx-auto w-80 h-full'>
+      </div>
+      <div className='grid gap-5 grid-cols-2'>
+        <div className='mx-auto border-2 border-kaitoke-green-400 p-2 rounded-lg'>
           <Radar
             data={dataTipos}
+          />
+        </div>
+        <div className='mx-auto border-2 border-kaitoke-green-400 p-2 rounded-lg'>
+          <Pie
+            data={dataRiesgos}
           />
         </div>
       </div>

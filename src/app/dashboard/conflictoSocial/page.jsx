@@ -3,54 +3,46 @@
 import { useState, useEffect, Suspense } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import ConflictoTable from '@/components/ConflictoTable';
 import Loading from '@/components/global/loading';
-import RinfaTable from '@/components/RinfaTable';
-import { MagnifyingGlassIcon, PlusIcon } from '@heroicons/react/24/outline';
-
-function rinfaPage() {
-    const [rinfas, setRinfas] = useState([]);
+import { PlusIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+function conflictoPage() {
+    const [conflictos, setConflictos] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
-        const getRinfas = async () => {
-            const response = await axios.get('/api/rinfa');
-            setRinfas(response.data);
+        const getConflictos = async () => {
+            const response = await axios.get('/api/conflicto');
+            setConflictos(response.data);
         };
-        getRinfas();
+        getConflictos();
     }, []);
 
-    const handleSearch = (e) => {
+    // const handleSearch = useDebouncedCallback((e) => {
+    //     setSearchTerm(e.target.value)), 300;
+    // };
+    const handleSearch = ((e) => {
         setSearchTerm(e.target.value);
-    };
+    });
 
-    function getFileNameWithoutExtension(pathName) {
-        // Obtener el nombre del archivo desde la última barra diagonal
-        const fileNameWithExtension = pathName.substring(pathName.lastIndexOf('/') + 1);
-
-        // Eliminar la extensión del archivo
-        const fileNameWithoutExtension = fileNameWithExtension.substring(0, fileNameWithExtension.lastIndexOf('.'));
-
-        return fileNameWithoutExtension;
-    }
-
-    const filteredRinfas = rinfas.filter((rinfa) =>
-        getFileNameWithoutExtension(rinfa.pathName).toLowerCase().includes(searchTerm.toLowerCase())
+    const filteredConflictos = conflictos.filter((conflicto) =>
+        conflicto.evento.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     return (
-        <div className='ml-64 pt-14'>
+        <div className='ml-52 pt-14'>
             <div className="relative px-4">
                 <div className="flex items-center my-4">
-                    <Link href="/rinfa/new">
+                    <Link href="/conflictoSocial/new">
                         <button className="flex bg-kaitoke-green-400 hover:bg-kaitoke-green-600 py-2 pl-4 pr-2 rounded-full text-white mr-3">
                             Agregar <PlusIcon className='animate-bounce hover:animate-spin flex w-4 h-full' />
                         </button>
                     </Link>
-
+            
                     <div className="relative">
                         <input
                             type="text"
-                            placeholder="Buscar rinfa..."
+                            placeholder="Buscar evento..."
                             value={searchTerm}
                             onChange={handleSearch}
                             className="border border-gray-300 rounded-full px-3 py-1"
@@ -60,13 +52,10 @@ function rinfaPage() {
                 </div>
                 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table className="w-full text-sm text-left rtl:text-right text-gray-500">
-                        <thead className="text-xs text-gray-700 uppercase bg-kaitoke-green-50">
+                        <thead className="text-xs text-white uppercase bg-kaitoke-green-400">
                             <tr>
                                 <th scope="col" className="px-6 py-3 text-xs text-center">
-                                    Resumen de información de fuente abierta
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-xs text-center">
-                                    Fecha
+                                    Evento
                                 </th>
                                 <th>
 
@@ -75,19 +64,20 @@ function rinfaPage() {
                         </thead>
                         <Suspense fallback={<Loading />}>
                             <tbody>
-                                {filteredRinfas.map((rinfa) => (
-                                    <RinfaTable rinfa={rinfa} key={rinfa.id} />
+                                {filteredConflictos.map((conflicto) => (
+                                    <ConflictoTable conflicto={conflicto} key={conflicto.id} />
                                 ))}
                             </tbody>
                         </Suspense>
                     </table>
                 </div>
             </div >
+    
         </div >
     );
 }
 
-export default rinfaPage;
+export default conflictoPage;
 
 
 
@@ -102,17 +92,17 @@ export default rinfaPage;
 // import Loading from '../rinfa/loading';
 
 // function conflictoPage() {
-//     const [conflictos, setRinfas] = useState([]);
+//     const [conflictos, setConflictos] = useState([]);
 //     const [searchTerm, setSearchTerm] = useState('');
 //     const [currentPage, setCurrentPage] = useState(1);
 //     const [itemsPerPage] = useState(10); // Número de elementos por página
 
 //     useEffect(() => {
-//         const getRinfas = async () => {
+//         const getConflictos = async () => {
 //             const response = await axios.get('/api/conflicto');
-//             setRinfas(response.data);
+//             setConflictos(response.data);
 //         };
-//         getRinfas();
+//         getConflictos();
 //     }, []);
 
 //     const handleSearch = (e) => {
@@ -182,4 +172,3 @@ export default rinfaPage;
 // }
 
 // export default conflictoPage;
-

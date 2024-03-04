@@ -1,7 +1,7 @@
 'use client'
 import React, { Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon, HomeIcon, DocumentTextIcon, UserGroupIcon, ChevronLeftIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, BellIcon, XMarkIcon, HomeIcon, DocumentTextIcon, UserGroupIcon, ChevronLeftIcon, MapIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { signOut, } from 'next-auth/react'
@@ -16,8 +16,9 @@ function Navbar({ props }) {
 
     const links = [
         { name: 'Dashboard', href: '/dashboard', icon: <HomeIcon /> },
-        { name: 'Rinfa', href: '/rinfa', icon: <DocumentTextIcon /> },
-        { name: 'Conflicto social', href: '/conflictoSocial', icon: <UserGroupIcon /> }
+        { name: 'Rinfa', href: '/dashboard/rinfa', icon: <DocumentTextIcon /> },
+        { name: 'Conflicto social', href: '/dashboard/conflictoSocial', icon: <UserGroupIcon /> },
+        { name: 'Mapa', href: '/dashboard/mapa', icon: <MapIcon /> }
     ]
     const jsonString = JSON.stringify(props);
     const parsedJson = JSON.parse(jsonString);
@@ -88,19 +89,18 @@ function Navbar({ props }) {
                                             <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                                 <Menu.Item>
                                                     {({ active }) => (
-                                                        <a
-                                                            href="#"
-                                                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                        <label
+                                                            className={classNames('block px-4 py-2 text-sm text-gray-700 border-b-[1px] ')}
                                                         >
                                                             {parsedJson.session.user.name}
-                                                        </a>
+                                                        </label>
                                                     )}
                                                 </Menu.Item>
 
                                                 <Menu.Item>
                                                     {({ active }) => (
                                                         <button
-                                                            className={classNames(active ? 'bg-gray-100 w-full text-start' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 w-full text-end')}
                                                             onClick={() => signOut()}
                                                         >
                                                             Cerrar sesión
@@ -147,7 +147,7 @@ function Navbar({ props }) {
                                         <div className="w-8 h-full" >{link.icon}</div>
                                     </span>
                                     <span className="flex items-center ms-3">
-                                        <div className={`ml-2 w-full ${!open && "hidden"}`}>{link.name}</div>
+                                        <div className={`ml-2 w-full absolute ${!open && "hidden"}`}>{link.name}</div>
                                     </span>
                                 </Link>
                             </li>
