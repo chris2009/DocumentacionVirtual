@@ -138,7 +138,7 @@ function Navbar({ props }) {
                     <ul className="space-y-2 font-medium">
                         {links.map((link) => (
                             <li key={link.href}>
-                                <Link href={link.href} className={`flex items-center py-2  hover:bg-white transition-opacity duration-300 hover:text-gray-700 group ${pathname === link.href ? 'bg-white text-gray-700' : 'text-white'}`}>
+                                <Link href={link.href} className={`flex items-center py-2 ml-2 rounded-l-full hover:bg-white transition-opacity duration-300 hover:text-gray-700 group ${pathname === link.href ? 'bg-white rounded-l-full text-gray-700' : 'text-white'}`}>
                                     <span className="flex items-center ms-3">
                                         <div className="w-8 h-full" >{link.icon}</div>
                                     </span>
