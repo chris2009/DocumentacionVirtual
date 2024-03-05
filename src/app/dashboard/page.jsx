@@ -32,8 +32,8 @@ ChartJS.register(
 export default function FactorPage() {
   const [factor, setFactor] = useState(['']);
   const [riesgo, setRiesgo] = useState(['']);
-  const [lugar, setLugar] = useState(['']);
   const [tipo, setTipo] = useState(['']);
+  const [lugares, setLugares] = useState([]);
   const [selectedPlace, setSelectedPlace] = useState(['Lima']);
   const [factoresPorMes, setFactoresPorMes] = useState([]);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
@@ -60,14 +60,7 @@ export default function FactorPage() {
         };
         getTipo();
       }
-
-      const getLugar = async () => {
-        const response = await axios.get('/api/lugar');
-        setLugar(response.data)
-      };
-      getLugar
     }
-    console.log(lugar)
 
     if (selectedYear && selectedPlace) {
       const fetchFactoresPorMes = async () => {
@@ -78,6 +71,17 @@ export default function FactorPage() {
 
       fetchFactoresPorMes();
     }
+
+    const getLugares = async () => {
+      try {
+        const response = await axios.get('/api/lugar');
+        setLugares(response.data); // Asumiendo que la respuesta es un arreglo de lugares
+      } catch (error) {
+        console.error('Error al obtener los lugares:', error);
+      }
+    };
+    getLugares();
+
   }, [selectedPlace, selectedYear]); // Incluye selectedYear en las dependencias
 
   const handlePlaceChange = (e) => {
@@ -126,7 +130,6 @@ export default function FactorPage() {
     }]
   };
 
-
   const dataTipos = {
     labels: tipo.map(item => item.tipo),
     datasets: [{
@@ -172,8 +175,6 @@ export default function FactorPage() {
     }
   };
 
-  console.log(selectedPlace)
-
   return (
     <div className='pl-52 pt-20 w-full mx-4'>
       <div className='pl-6 flex items-center pb-4'>
@@ -197,31 +198,9 @@ export default function FactorPage() {
           required
         >
           <option disabled value="">Lugar...</option>
-          <option value="Lima">Lima</option>
-          <option value="Amazonas">Amazonas</option>
-          <option value="Ancash">Ancash</option>
-          <option value="Apurimac">Apurimac</option>
-          <option value="Arequipa">Arequipa</option>
-          <option value="Ayacucho">Ayacucho</option>
-          <option value="Cajamarca">Cajamarca</option>
-          <option value="Callao">Callao</option>
-          <option value="Cusco">Cusco</option>
-          <option value="Huancavelica">Huancavelica</option>
-          <option value="Huanuco">Huanuco</option>
-          <option value="Ica">Ica</option>
-          <option value="Junin">Junin</option>
-          <option value="La Libertad">La Libertad</option>
-          <option value="Lambayeque">Lambayeque</option>
-          <option value="Loreto">Loreto</option>
-          <option value="Madre de Dios">Madre de Dios</option>
-          <option value="Moquegua">Moquegua</option>
-          <option value="Pasco">Pasco</option>
-          <option value="Piura">Piura</option>
-          <option value="Puno">Puno</option>
-          <option value="San Martin">San Martin</option>
-          <option value="Tacna">Tacna</option>
-          <option value="Tumbes">Tumbes</option>
-          <option value="Ucayali">Ucayali</option>
+          {lugares.map((lugar) => (
+            <option key={lugar.id} value={lugar.lugar}>{lugar.lugar}</option>
+            ))}
         </select>
 
       </div>
