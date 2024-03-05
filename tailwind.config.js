@@ -10,6 +10,16 @@ module.exports = {
   ],
   theme: {
     extend: {
+      animation: {
+        'displace': 'displace 1s infinite',
+      },
+      keyframes: {
+        displace: {
+          '0%, 100%': { transform: 'translateX(0)' },
+          '50%': { transform: 'translateX(25%)' }, // Ajusta este valor para la distancia de desplazamiento deseada
+        },
+      },
+
       colors:
       {
         'kaitoke-green': {

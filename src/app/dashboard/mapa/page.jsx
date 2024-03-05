@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import Map from '../@map/page'
+import Map from '../@map/PeruSvg'
 import { Dialog } from '@headlessui/react'
 
 export default function page() {

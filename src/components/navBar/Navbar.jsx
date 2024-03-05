@@ -1,7 +1,7 @@
 'use client'
 import React, { Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon, HomeIcon, DocumentTextIcon, UserGroupIcon, ChevronLeftIcon, MapIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, BellIcon, XMarkIcon, HomeIcon, DocumentTextIcon, UserGroupIcon, ChevronLeftIcon, ChevronRightIcon, MapIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { signOut, } from 'next-auth/react'
@@ -11,13 +11,33 @@ function Navbar({ props }) {
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
     }
+    const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
 
     const [open, setOpen] = useState(true)
 
     const links = [
-        { name: 'Dashboard', href: '/dashboard', icon: <HomeIcon /> },
-        { name: 'Rinfa', href: '/dashboard/rinfa', icon: <DocumentTextIcon /> },
-        { name: 'Conflicto social', href: '/dashboard/conflictoSocial', icon: <UserGroupIcon /> },
+        {
+            name: 'Dashboard',
+            href: '/dashboard',
+            icon: <HomeIcon />
+        },
+        {
+            name: 'Rinfa',
+            href: '/dashboard/rinfa',
+            icon: <DocumentTextIcon />
+        },
+        {
+            name: 'Conflicto social',
+            href: '/dashboard/conflictoSocial',
+            icon: <UserGroupIcon />,
+            subLinks: [
+                {
+                    name: 'Ingresar estadística',
+                    href: '/dashboard/conflictoSocial/ingresarEstadistica'
+                }
+                // otros subenlaces si los hay...
+            ]
+        },
         { name: 'Mapa', href: '/dashboard/mapa', icon: <MapIcon /> }
     ]
     const jsonString = JSON.stringify(props);
@@ -66,15 +86,15 @@ function Navbar({ props }) {
 
                                     {/* Profile dropdown */}
                                     <Menu as="div" className="relative ml-3">
-                                            <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                                                <span className="absolute -inset-1.5" />
-                                                <span className="sr-only">Open user menu</span>
-                                                <img
-                                                    className="h-10 w-full rounded-full"
-                                                    src="/47983599.jpeg"
-                                                    alt=""
-                                                />
-                                            </Menu.Button>
+                                        <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                            <span className="absolute -inset-1.5" />
+                                            <span className="sr-only">Open user menu</span>
+                                            <img
+                                                className="h-10 w-full rounded-full"
+                                                src="/47983599.jpeg"
+                                                alt=""
+                                            />
+                                        </Menu.Button>
                                         <Transition
                                             as={Fragment}
                                             enter="transition ease-out duration-100"
@@ -85,12 +105,12 @@ function Navbar({ props }) {
                                             leaveTo="transform opacity-0 scale-95"
                                         >
                                             <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                                <Menu.Item>                   
-                                                        <label
-                                                            className={classNames('block px-4 py-2 text-sm text-gray-700 border-b-[1px] ')}
-                                                        >
-                                                            {parsedJson.session.user.name}
-                                                        </label>
+                                                <Menu.Item>
+                                                    <label
+                                                        className={classNames('block px-4 py-2 text-sm text-gray-700 border-b-[1px] ')}
+                                                    >
+                                                        {parsedJson.session.user.name}
+                                                    </label>
                                                 </Menu.Item>
 
                                                 <Menu.Item>
@@ -99,7 +119,7 @@ function Navbar({ props }) {
                                                             className={classNames(active ? 'bg-gray-100' : '', 'px-4 py-1 text-sm text-gray-700 w-full flex items-center justify-end')}
                                                             onClick={() => signOut()}
                                                         >
-                                                          <ArrowLeftStartOnRectangleIcon className='w-6'/>  Cerrar sesión
+                                                            <ArrowLeftStartOnRectangleIcon className='w-6' />  Cerrar sesión
                                                         </button>
                                                     )}
                                                 </Menu.Item>
@@ -132,12 +152,20 @@ function Navbar({ props }) {
                 )}
             </Disclosure>
 
-              <aside className={`fixed top-0 left-0 z-40 h-screen pt-28 bg-kaitoke-green-400 transition-all duration-300 ${open ? 'w-52' : 'w-16'}`} aria-label="Sidebar">
-                <ChevronLeftIcon className={`bg-white text-kaitoke-green-700 rounded-full w-6 border-2 p-[2px] border-kaitoke-green-400 absolute -right-3 top-[76px] cursor-pointer ${!open && "rotate-180"} duration-300`} onClick={() => setOpen(!open)} />
+            <aside className={`fixed top-0 left-0 z-40 h-screen pt-28 bg-kaitoke-green-400 transition-all duration-300 ${open ? 'w-52' : 'w-16'}`} aria-label="Sidebar">
+                {/* <ChevronLeftIcon className={`bg-white animate-displace text-kaitoke-green-700 rounded-full w-6 border-2 p-[2px] border-kaitoke-green-400 absolute -right-3 top-[76px] cursor-pointer ${!open && ""} duration-300`} onClick={() => setOpen(!open)} /> */}
+                <ChevronLeftIcon
+                    className={`bg-white animate-displace text-kaitoke-green-700 rounded-full w-6 border-2 p-[2px] border-kaitoke-green-400 absolute -right-3 top-[76px] cursor-pointer ${open ? '' : 'hidden'} duration-300`}
+                    onClick={() => setOpen(!open)}
+                />
+                <ChevronRightIcon
+                    className={`bg-white animate-displace text-kaitoke-green-700 rounded-full w-6 border-2 p-[2px] border-kaitoke-green-400 absolute -right-3 top-[76px] cursor-pointer ${!open ? '' : 'hidden'} duration-300`}
+                    onClick={() => setOpen(!open)}
+                />
                 <div className="h-full pb-4 overflow-y-auto bg-kaitoke-green-400">
                     <ul className="space-y-2 font-medium">
                         {links.map((link) => (
-                            <li key={link.href}>
+                            <li key={link.name}>
                                 <Link href={link.href} className={`flex items-center py-2 ml-2 rounded-l-full hover:bg-white transition-opacity duration-300 hover:text-gray-700 group ${pathname === link.href ? 'bg-white rounded-l-full text-gray-700' : 'text-white'}`}>
                                     <span className="flex items-center ms-3">
                                         <div className="w-8 h-full" >{link.icon}</div>
