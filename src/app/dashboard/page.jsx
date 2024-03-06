@@ -1,7 +1,9 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { Line, Radar, Bar, Pie } from 'react-chartjs-2';
+import { Listbox, Transition } from '@headlessui/react';
+import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import axios from 'axios';
 import {
   Chart as ChartJS,
@@ -37,7 +39,7 @@ export default function FactorPage() {
   const [selectedPlace, setSelectedPlace] = useState(['Lima']);
   const [factoresPorMes, setFactoresPorMes] = useState([]);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-  console.log(selectedPlace)
+
   useEffect(() => {
     if (selectedPlace && selectedYear) {
       const getFactores = async () => {
@@ -84,8 +86,8 @@ export default function FactorPage() {
 
   }, [selectedPlace, selectedYear]); // Incluye selectedYear en las dependencias
 
-  const handlePlaceChange = (e) => {
-    setSelectedPlace(e.target.value);
+  const handlePlaceChange = (newValue) => {
+    setSelectedPlace(newValue);
   };
 
 
@@ -129,6 +131,7 @@ export default function FactorPage() {
       borderWidth: 1
     }]
   };
+
 
   const dataTipos = {
     labels: tipo.map(item => item.tipo),
@@ -174,49 +177,102 @@ export default function FactorPage() {
       }
     }
   };
-
+  const years = [2024, 2023]
   return (
     <div className='pl-52 pt-20 w-full mx-4'>
       <div className='pl-6 flex items-center pb-4'>
         <h1 className='text-gray-700 mr-6 font-bold text-sm bg-kaitoke-green-00 px-4 py-2 rounded-lg'>Estadística de conflicto social</h1>
-        {/* <label className="text-sm font-bold text-gray-700 mr-3">Año:</label> */}
-        <select
-          name="year"
-          onChange={(e) => setSelectedYear(e.target.value)}
-          className="bg-kaitoke-green-50 border border-kaitoke-green-400 text-gray-900 text-sm rounded-l-full focus:ring-kaitoke-green-500 focus:border-kaitoke-green-500 block p-2.5 w-24"
-          required
-        >
-          <option value="2024">2024</option>
-          <option value="2023">2023</option>
-        </select>
-        {/* <label className="text-sm font-bold text-gray-700 mx-3">Lugar:</label> */}
-        <select
-          name="lugar"
-          onChange={handlePlaceChange}
-          value={selectedPlace}
-          className="bg-kaitoke-green-50 border border-kaitoke-green-400 text-gray-900 text-sm rounded-r-full focus:ring-kaitoke-green-500 focus:border-kaitoke-green-500 block p-2.5"
-          required
-        >
-          <option disabled value="">Lugar...</option>
-          {lugares.map((lugar) => (
-            <option key={lugar.id} value={lugar.lugar}>{lugar.lugar}</option>
-            ))}
-        </select>
+        <div className="top-16 ml-3 w-28">
+          <Listbox value={selectedYear} onChange={setSelectedYear}>
+            <div className="relative mt-1">
+              <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 sm:text-sm">
+                <span className="block truncate">{selectedYear}</span>
+                <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                  <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                </span>
+              </Listbox.Button>
+              <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
+                <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+                  {years.map((year) => (
+                    <Listbox.Option
+                      key={year}
+                      className={({ active }) =>
+                        `relative cursor-default select-none py-2 pl-10 pr-4 ${active ? 'bg-kaitoke-green-100 text-kaitoke-green-900' : 'text-gray-900'}`
+                      }
+                      value={year}
+                    >
+                      {({ selected }) => (
+                        <>
+                          <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
+                            {year}
+                          </span>
+                          {selected && (
+                            <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-kaitoke-green-600">
+                              <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </Listbox.Option>
+                  ))}
+                </Listbox.Options>
+              </Transition>
+            </div>
+          </Listbox>
+        </div>
+        <div className="top-16 ml-3 w-44">
+          <Listbox value={selectedPlace} onChange={handlePlaceChange}>
+            <div className="relative mt-1">
+              <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                <span className="block truncate">{selectedPlace}</span>
+                <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                  <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                </span>
+              </Listbox.Button>
+              <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
+                <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+                  {lugares.map((lugar) => (
+                    <Listbox.Option
+                      key={lugar.id}
+                      className={({ active }) =>
+                        `relative cursor-default select-none py-2 pl-10 pr-4 ${active ? 'bg-kaitoke-green-100 text-kaitoke-green-900' : 'text-gray-900'}`
+                      }
+                      value={lugar.lugar}
+                    >
+                      {({ selected }) => (
+                        <>
+                          <span className={`block truncate ${selectedPlace ? 'font-medium' : 'font-normal'}`}>
+                            {lugar.lugar}
+                          </span>
+                          {selected && (
+                            <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-kaitoke-green-600">
+                              <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </Listbox.Option>
+                  ))}
+                </Listbox.Options>
+              </Transition>
+            </div>
+          </Listbox>
+        </div>
 
       </div>
       <div className='flex'>
-        <div className='border-2 border-kaitoke-green-400 p-4 rounded-lg mr-4'>
+        <div className='shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4 mr-4'>
           <PeruSvg selectedPlace={selectedPlace} />
         </div>
         <div className='grid grid-cols-1 gap-y-4 mr-4 items-baseline w-2/5'>
 
-          <div className='border-2 border-kaitoke-green-400 rounded-lg'>
+          <div className='shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4'>
             <Line
               data={dataFactores}
               options={options}
             />
           </div>
-          <div className='border-2 border-kaitoke-green-400 p-2 rounded-lg'>
+          <div className='shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4'>
             <Bar
               data={dataFactoresPorMes}
               options={options}
@@ -225,12 +281,12 @@ export default function FactorPage() {
 
         </div>
         <div className='grid grid-cols-1 gap-y-4 items-baseline w-1/5'>
-          <div className='mx-auto border-2 border-kaitoke-green-400 p-2 rounded-lg'>
+          <div className='shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4'>
             <Radar
               data={dataTipos}
             />
           </div>
-          <div className='mx-auto border-2 border-kaitoke-green-400 p-2 rounded-lg'>
+          <div className='shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4'>
             <Pie
               data={dataRiesgos}
             />
