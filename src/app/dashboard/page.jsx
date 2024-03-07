@@ -43,21 +43,21 @@ export default function FactorPage() {
   useEffect(() => {
     if (selectedPlace && selectedYear) {
       const getFactores = async () => {
-        const response = await axios.get(`/api/factor?lugar=${selectedPlace}&year=${selectedYear}`);
+        const response = await axios.get(`/api/conflicto/factor?lugar=${selectedPlace}&year=${selectedYear}`);
         setFactor(response.data);
       };
       getFactores();
 
       const getRiesgos = async () => {
         // Incluye tanto el lugar como el año en la solicitud
-        const response = await axios.get(`/api/riesgo?lugar=${selectedPlace}&year=${selectedYear}`);
+        const response = await axios.get(`/api/conflicto/riesgo?lugar=${selectedPlace}&year=${selectedYear}`);
         setRiesgo(response.data);
       };
       getRiesgos()
 
       if (selectedPlace && selectedYear) {
         const getTipo = async () => {
-          const response = await axios.get(`/api/tipo?lugar=${selectedPlace}&year=${selectedYear}`);
+          const response = await axios.get(`/api/conflicto/tipo?lugar=${selectedPlace}&year=${selectedYear}`);
           setTipo(response.data); // Asegúrate de tener un estado 'setTipo' para almacenar esta información
         };
         getTipo();
@@ -67,7 +67,7 @@ export default function FactorPage() {
     if (selectedYear && selectedPlace) {
       const fetchFactoresPorMes = async () => {
         // Asegúrate de incluir tanto el year como el lugar en la solicitud
-        const response = await axios.get(`/api/fecha?year=${selectedYear}&lugar=${selectedPlace}`);
+        const response = await axios.get(`/api/conflicto/fecha?year=${selectedYear}&lugar=${selectedPlace}`);
         setFactoresPorMes(response.data);
       };
 
