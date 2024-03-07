@@ -66,7 +66,7 @@ function RinfaForm() {
 
         form.current.reset();
         router.refresh();
-        router.push('/rinfa');
+        router.push('/dashboard/rinfa');
     };
 
 

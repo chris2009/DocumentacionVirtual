@@ -20,7 +20,7 @@ export default function Buttons({ rinfaId }) {
                     if (confirm('Estás seguro de eliminar el rinfa?')) {
                         const res = await axios.delete('/api/rinfa/' + rinfaId)
                         if (res.status === 204) {
-                            router.push(('/rinfa'))
+                            router.push(('/dashboard/rinfa'))
                             router.refresh()
                         }
                     }

@@ -36,7 +36,7 @@ export async function GET(request) {
         const requestBody = await request.json();
         const query = requestBody.query;
 
-        const result = await executeQuery("SELECT * FROM tbl_2023_conflictos");
+        const result = await executeQuery("SELECT * FROM tbl_conflictos");
        
         console.log(request.url)
 

@@ -4,7 +4,7 @@ import executeQuery from '@/libs/mysql';
 export async function GET() {
 
     try {
-        const result = await executeQuery("SELECT * FROM tbl_2023_conflictos");
+        const result = await executeQuery("SELECT * FROM tbl_conflictos");
         return NextResponse.json(result);
     } catch (error) {
         return NextResponse.json(
@@ -25,7 +25,7 @@ export async function POST(request) {
         const { ano_fiscal, fecha, evento, lugar, riesgo, factor, tipo_conflicto_social } = await request.json();
 
         const result = await executeQuery(
-            "INSERT INTO tbl_2023_conflictos (ano_fiscal, fecha, evento, lugar, riesgo, factor, tipo_conflicto_social) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            "INSERT INTO tbl_conflictos (ano_fiscal, fecha, evento, lugar, riesgo, factor, tipo_conflicto_social) VALUES (?, ?, ?, ?, ?, ?, ?)",
             [ano_fiscal, fecha, evento, lugar, riesgo, factor, tipo_conflicto_social]
         );
 

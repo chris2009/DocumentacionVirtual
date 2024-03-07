@@ -3,7 +3,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Line, Radar, Bar, Pie } from 'react-chartjs-2';
 import { Listbox, Transition } from '@headlessui/react';
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
+import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/outline';
 import axios from 'axios';
 import {
   Chart as ChartJS,
@@ -179,10 +179,10 @@ export default function FactorPage() {
   };
   const years = [2024, 2023]
   return (
-    <div className='pl-52 pt-20 w-full mx-4'>
+    <div className='pl-52 pt-20 w-[calc(100%-theme(space.8))] mx-4'>
       <div className='pl-6 flex items-center pb-4'>
         <h1 className='text-gray-700 mr-6 font-bold text-sm bg-kaitoke-green-00 px-4 py-2 rounded-lg'>Estadística de conflicto social</h1>
-        <div className="top-16 ml-3 w-28">
+        <div className="top-16 ml-3 w-28 z-10">
           <Listbox value={selectedYear} onChange={setSelectedYear}>
             <div className="relative mt-1">
               <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 sm:text-sm">
@@ -262,7 +262,7 @@ export default function FactorPage() {
       </div>
       <div className='flex'>
         <div className='shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4 mr-4'>
-          <PeruSvg selectedPlace={selectedPlace} />
+          <PeruSvg className="" selectedPlace={selectedPlace} />
         </div>
         <div className='grid grid-cols-1 gap-y-4 mr-4 items-baseline w-2/5'>
 

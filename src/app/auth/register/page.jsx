@@ -20,20 +20,12 @@ function RegisterPage() {
             username: data.username,
             DNI: data.DNI,
             password: data.password,
-        }, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
         });
 
-        console.log(res)
-
-        if (res.ok) {
+        if (res.status === 200) {
             router.push("/auth/login");
         }
     });
-
-    console.log(errors);
 
     return (
         <div className="h-screen flex justify-center items-center bg-kaitoke-green-50">

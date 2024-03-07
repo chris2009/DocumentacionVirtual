@@ -12,7 +12,7 @@ export async function GET(request) {
     }
 
     try {
-        const query = "SELECT tcs.tipo_conflicto AS tipo, COUNT(*) AS cantidad FROM tbl_2023_conflictos t INNER JOIN tbl_tipo tcs ON t.tipo_conflicto_social = tcs.id WHERE t.lugar = ? AND YEAR(t.fecha) = ? GROUP BY tcs.tipo_conflicto";
+        const query = "SELECT tcs.tipo_conflicto AS tipo, COUNT(*) AS cantidad FROM tbl_conflictos t INNER JOIN tbl_tipo tcs ON t.tipo_conflicto_social = tcs.id WHERE t.lugar = ? AND YEAR(t.fecha) = ? GROUP BY tcs.tipo_conflicto";
         const result = await executeQuery(query, [lugar, year]);
         return NextResponse.json(result);
     } catch (error) {

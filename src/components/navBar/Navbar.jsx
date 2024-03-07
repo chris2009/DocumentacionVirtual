@@ -38,7 +38,7 @@ function Navbar({ props }) {
     const pathname = usePathname()
     return (
         <div>
-            <Disclosure as="nav" className="fixed top-0 z-50 w-full bg-white border-b border-kaitoke-green-400 dark:bg-gray-800 dark:border-gray-700">
+            <Disclosure as="nav" className="fixed top-0 z-50 w-full bg-white shadow-md border-kaitoke-green-400 dark:bg-gray-800 dark:border-gray-700">
                 <div className="px-3 lg:px-5 lg:pl-3">
                     <div className="relative flex h-16 items-center justify-between">
                         <div className="flex flex-1 items-center justify-start sm:items-stretch">
@@ -85,7 +85,7 @@ function Navbar({ props }) {
                                     <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                         <Menu.Item>
                                             <label
-                                                className={classNames('block px-4 py-2 text-sm text-gray-700 border-b-[1px] ')}
+                                                className={classNames('block px-4 py-2 text-sm text-gray-700 shadow-lg')}
                                             >
                                                 {parsedJson.session.user.name}
                                             </label>
@@ -128,7 +128,7 @@ function Navbar({ props }) {
                                         <div className="w-8 h-full" >{link.icon}</div>
                                     </span>
                                     <span className="flex items-center ms-3">
-                                        <div className={`ml-2 w-full absolute ${!open && "hidden"}`}>{link.name}</div>
+                                        <div className={`ml-2 absolute ${!open && "hidden"}`}>{link.name}</div>
                                     </span>
                                 </Link>
                             </li>

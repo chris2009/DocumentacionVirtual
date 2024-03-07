@@ -7,11 +7,11 @@ export async function GET(request) {
     const lugar = url.searchParams.get("lugar"); // Agrega la obtención del parámetro lugar
 
     try {
-        // Asegúrate de adaptar el query para incluir el filtro por lugar
-        const queryYear = "SELECT MONTH(fecha) AS mes, COUNT(*) AS cantidad FROM tbl_2023_conflictos WHERE YEAR(fecha) = ? AND lugar = ? GROUP BY MONTH(fecha);";
+        const queryYear = "SELECT MONTH(fecha) AS mes, COUNT(*) AS cantidad FROM tbl_conflictos WHERE YEAR(fecha) = ? AND lugar = ? GROUP BY MONTH(fecha);";
         const resultYear = await executeQuery(queryYear, [year, lugar]); // Incluye el lugar en los parámetros
 
         return NextResponse.json(resultYear);
+        // Asegúrate de adaptar el query para incluir el filtro por lugar
     } catch (error) {
         return NextResponse.json(
             {

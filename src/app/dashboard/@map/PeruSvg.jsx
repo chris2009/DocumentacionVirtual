@@ -12,6 +12,7 @@ function PeruSvg({ selectedPlace }) {
       strokeLinejoin="round"
       strokeWidth="0.5"
       version="1.2"
+      className="scale-75 -my-24 -mx-14 "
 
     >
       <svg id="Lima" className={selectedPlace === 'Lima' ? "fill-kaitoke-green-800 duration-300" : ""}>
