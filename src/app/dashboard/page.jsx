@@ -36,7 +36,7 @@ export default function FactorPage() {
   const [riesgo, setRiesgo] = useState(['']);
   const [tipo, setTipo] = useState(['']);
   const [lugares, setLugares] = useState([]);
-  const [selectedPlace, setSelectedPlace] = useState(['Lima']);
+  const [selectedPlace, setSelectedPlace] = useState('Seleccione lugar');
   const [factoresPorMes, setFactoresPorMes] = useState([]);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
 

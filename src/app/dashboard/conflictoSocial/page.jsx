@@ -18,9 +18,6 @@ function conflictoPage() {
         getConflictos();
     }, []);
 
-    // const handleSearch = useDebouncedCallback((e) => {
-    //     setSearchTerm(e.target.value)), 300;
-    // };
     const handleSearch = ((e) => {
         setSearchTerm(e.target.value);
     });
@@ -33,7 +30,7 @@ function conflictoPage() {
         <div className='ml-52 pt-14'>
             <div className="relative px-4">
                 <div className="flex items-center my-4">
-                    <Link href="/conflictoSocial/new">
+                    <Link href="/dashboard/conflictoSocial/new">
                         <button className="flex bg-kaitoke-green-400 hover:bg-kaitoke-green-600 py-2 pl-4 pr-2 rounded-full text-white mr-3">
                             Agregar <PlusIcon className='animate-bounce hover:animate-spin flex w-4 h-full' />
                         </button>

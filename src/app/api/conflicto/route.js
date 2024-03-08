@@ -20,18 +20,17 @@ export async function GET() {
 
 
 export async function POST(request) {
- 
+
     try {
-        const { ano_fiscal, fecha, evento, lugar, riesgo, factor, tipo_conflicto_social } = await request.json();
+        const { fecha, evento, lugar, riesgo, factor, tipo_conflicto_social } = await request.json();
 
         const result = await executeQuery(
-            "INSERT INTO tbl_conflictos (ano_fiscal, fecha, evento, lugar, riesgo, factor, tipo_conflicto_social) VALUES (?, ?, ?, ?, ?, ?, ?)",
-            [ano_fiscal, fecha, evento, lugar, riesgo, factor, tipo_conflicto_social]
+            "INSERT INTO tbl_conflictos ( fecha, evento, lugar, riesgo, factor, tipo_conflicto_social) VALUES (?, ?, ?, ?, ?, ?)",
+            [fecha, evento, lugar, riesgo, factor, tipo_conflicto_social]
         );
 
         return NextResponse.json({
             id: result.insertId,
-            ano_fiscal,
             fecha,
             evento,
             lugar,
