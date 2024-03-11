@@ -1,12 +1,28 @@
 'use client'
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useRef, useEffect } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, HomeIcon, DocumentTextIcon, UserGroupIcon, ChevronLeftIcon, ChevronRightIcon, MapIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline'
+import { BellIcon, HomeIcon, DocumentTextIcon, UserGroupIcon, ChevronLeftIcon, ChevronRightIcon, MapIcon, ArrowLeftStartOnRectangleIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { signOut, } from 'next-auth/react'
 
-function Navbar({ props }) {
+function Navbar({ props, sidebarOpen, setSidebarOpen }) {
+
+    // Define state for sidebar expansion
+    const [sidebarExpanded, setSidebarExpanded] = useState(false);
+    const [expandedLink, setExpandedLink] = useState(null);
+
+    // Create a reference to the sidebar element
+    const sidebar = useRef(null);
+
+    // Effect to add or remove a class to the body element based on sidebar expansion
+    useEffect(() => {
+        if (sidebarExpanded) {
+            document.querySelector("body")?.classList.add("sidebar-expanded");
+        } else {
+            document.querySelector("body")?.classList.remove("sidebar-expanded");
+        }
+    }, [sidebarExpanded]);
 
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
@@ -27,10 +43,31 @@ function Navbar({ props }) {
         },
         {
             name: 'Conflicto social',
-            href: '/dashboard/conflictoSocial',
             icon: <UserGroupIcon />,
+            children: [ // Aquí se agregan los sublinks
+                {
+                    name: 'Tabla',
+                    href: '/dashboard/conflictoSocial/tabla',
+                },
+                {
+                    name: 'Estadística',
+                    href: '/dashboard/conflictoSocial/estadistica',
+                },
+                {
+                    name: 'Matiz lugar por mes',
+                    href: '/dashboard/conflictoSocial/matrizLugarMes',
+                },
+                {
+                    name: 'Matiz factor por mes',
+                    href: '/dashboard/conflictoSocial/matrizFactorMes',
+                },
+                {
+                    name: 'Matiz riesgo por mes',
+                    href: '/dashboard/conflictoSocial/matrizRiesgoMes',
+                },
+            ],
         },
-        { name: 'Mapa', href: '/dashboard/mapa', icon: <MapIcon /> }
+        // { name: 'Mapa', href: '/dashboard/mapa', icon: <MapIcon /> }
     ]
     const jsonString = JSON.stringify(props);
     const parsedJson = JSON.parse(jsonString);
@@ -38,7 +75,7 @@ function Navbar({ props }) {
     const pathname = usePathname()
     return (
         <div>
-            <Disclosure as="nav" className="fixed top-0 z-50 w-full bg-white shadow-md border-kaitoke-green-400 dark:bg-gray-800 dark:border-gray-700">
+            <Disclosure as="nav" ref={sidebar} className={`fixed top-0 z-50 w-full bg-white shadow-md border-kaitoke-green-400 dark:bg-gray-800 dark:border-gray-700  ${sidebarOpen ? "translate-x-0" : "-translate-x-72}"}`}>
                 <div className="px-3 lg:px-5 lg:pl-3">
                     <div className="relative flex h-16 items-center justify-between">
                         <div className="flex flex-1 items-center justify-start sm:items-stretch">
@@ -109,7 +146,7 @@ function Navbar({ props }) {
                 </div>
             </Disclosure>
 
-            <aside className={`fixed top-0 left-0 z-40 h-screen pt-28 bg-kaitoke-green-400 transition-all duration-300 ${open ? 'w-52' : 'w-16'}`} aria-label="Sidebar">
+            <aside className={`fixed top-0 left-0 z-40 h-screen pt-28 bg-kaitoke-green-400 transition-all duration-300 ${open ? 'w-64' : 'w-16'}`} aria-label="Sidebar">
                 {/* <ChevronLeftIcon className={`bg-white animate-displace text-kaitoke-green-700 rounded-full w-6 border-2 p-[2px] border-kaitoke-green-400 absolute -right-3 top-[76px] cursor-pointer ${!open && ""} duration-300`} onClick={() => setOpen(!open)} /> */}
                 <ChevronLeftIcon
                     className={`bg-white animate-displace text-kaitoke-green-700 rounded-full w-6 border-2 p-[2px] border-kaitoke-green-400 absolute -right-3 top-[76px] cursor-pointer ${open ? '' : 'hidden'} duration-300`}
@@ -120,20 +157,71 @@ function Navbar({ props }) {
                     onClick={() => setOpen(!open)}
                 />
                 <div className="h-full pb-4 overflow-y-auto bg-kaitoke-green-400">
-                    <ul className="space-y-2 font-medium">
+                    {/* <ul className="space-y-2 font-medium">
                         {links.map((link) => (
                             <li key={link.name}>
-                                <Link href={link.href} className={`flex items-center py-2 ml-2 rounded-l-full hover:bg-white transition-opacity duration-300 hover:text-gray-700 group ${pathname === link.href ? 'bg-white rounded-l-full text-gray-700' : 'text-white'}`}>
-                                    <span className="flex items-center ms-3">
-                                        <div className="w-8 h-full" >{link.icon}</div>
+                                <Link href={link.href} className={`flex items-center py-2 mx-2 rounded-full hover:bg-white transition-opacity duration-300 hover:text-gray-700 group ${pathname === link.href ? 'bg-white rounded-full text-gray-700' : 'text-white'}`}>
+                                    <span className="flex items-center ms-2">
+                                        <div className="w-8 h-full">{link.icon}</div>
                                     </span>
                                     <span className="flex items-center ms-3">
-                                        <div className={`ml-2 absolute ${!open && "hidden"}`}>{link.name}</div>
+                                        <div className={`ml-2 ${!open && "hidden"}`}>{link.name}</div>
+                                       
+                                        {link.name === 'Conflicto social' && open && (
+                                            <ChevronDownIcon className="ml-6 h-5 w-5" />
+                                        )}
                                     </span>
                                 </Link>
                             </li>
                         ))}
+                    </ul> */}
+                    <ul className="space-y-2 font-medium">
+                        {links.map((link, index) => (
+                            <li key={index}>
+                                {/* Comprueba si el enlace tiene subenlaces */}
+                                {link.children ? (
+                                    // Usamos un botón para "Conflicto social" porque no tiene href
+                                    <div
+                                        className={`flex items-center py-2 mx-2 rounded-full hover:bg-white transition-opacity duration-300 hover:text-gray-700 group ${pathname.includes(link.children[0].href) ? 'bg-white rounded-full text-gray-700' : 'text-white'}`}
+                                        onClick={() => setExpandedLink(expandedLink === link.name ? null : link.name)}
+                                    >
+                                        <span className="w-8 h-full ml-2">
+                                            {link.icon}
+                                        </span>
+                                        <span className="flex items-center ms-3">
+                                            {link.name}
+                                            <ChevronDownIcon className={`ml-6 h-5 w-5  ${expandedLink === link.name ? 'rotate-180 duration-300' : ''}`} />
+                                        </span>
+                                    </div>
+                                ) : (
+                                    <Link href={link.href} className={`flex items-center py-2 mx-2 rounded-full hover:bg-white transition-opacity duration-300 hover:text-gray-700 group ${pathname === link.href ? 'bg-white rounded-full text-gray-700' : 'text-white'}`}>   
+                                            <span className="w-8 h-full ml-2">
+                                                {link.icon}
+                                            </span>
+                                            <span className="flex items-center ms-3">
+                                                {link.name}
+                                            </span>
+                                    </Link>
+                                )}
+
+                                {/* Sublinks para "Conflicto social" */}
+                                {link.children && expandedLink === link.name && (
+                                    <ul className="pl-10">
+                                        {link.children.map((sublink, subIndex) => (
+                                            <li key={subIndex}>
+                                                <Link href={sublink.href} className="block py-2 text-sm text-white hover:bg-white hover:rounded-full pl-2 mr-6 hover:text-gray-900">
+                                                        {sublink.name}
+                                                </Link>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </li>
+                        ))}
                     </ul>
+
+
+
 
                 </div>
             </aside >
