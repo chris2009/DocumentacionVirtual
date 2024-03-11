@@ -1,7 +1,7 @@
 'use client'
 import React, { Fragment, useState, useRef, useEffect } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, HomeIcon, DocumentTextIcon, UserGroupIcon, ChevronLeftIcon, ChevronRightIcon, MapIcon, ArrowLeftStartOnRectangleIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
+import { BellIcon, HomeIcon, DocumentTextIcon, UserGroupIcon, ChevronLeftIcon, ChevronRightIcon, ArrowLeftStartOnRectangleIcon, ChevronDownIcon, TableCellsIcon, ChartBarIcon, Square2StackIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { signOut, } from 'next-auth/react'
@@ -47,27 +47,31 @@ function Navbar({ props, sidebarOpen, setSidebarOpen }) {
             children: [ // Aquí se agregan los sublinks
                 {
                     name: 'Tabla',
+                    icon: <TableCellsIcon />,
                     href: '/dashboard/conflictoSocial/tabla',
                 },
                 {
                     name: 'Estadística',
+                    icon: <ChartBarIcon />,
                     href: '/dashboard/conflictoSocial/estadistica',
                 },
                 {
                     name: 'Matiz lugar por mes',
+                    icon: <Square2StackIcon />,
                     href: '/dashboard/conflictoSocial/matrizLugarMes',
                 },
                 {
                     name: 'Matiz factor por mes',
+                    icon: <Square2StackIcon />,
                     href: '/dashboard/conflictoSocial/matrizFactorMes',
                 },
                 {
                     name: 'Matiz riesgo por mes',
+                    icon: <Square2StackIcon />,
                     href: '/dashboard/conflictoSocial/matrizRiesgoMes',
                 },
             ],
         },
-        // { name: 'Mapa', href: '/dashboard/mapa', icon: <MapIcon /> }
     ]
     const jsonString = JSON.stringify(props);
     const parsedJson = JSON.parse(jsonString);
@@ -83,7 +87,7 @@ function Navbar({ props, sidebarOpen, setSidebarOpen }) {
                                 <img
                                     className="h-12 w-auto mr-2"
                                     src="/CIAINF.png"
-                                    alt="Your Company"
+                                    alt="CIA CIBER"
                                 />
                                 <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-gray-400">DocVirtual</span>
                             </Link>
@@ -147,7 +151,6 @@ function Navbar({ props, sidebarOpen, setSidebarOpen }) {
             </Disclosure>
 
             <aside className={`fixed top-0 left-0 z-40 h-screen pt-28 bg-kaitoke-green-400 transition-all duration-300 ${open ? 'w-64' : 'w-16'}`} aria-label="Sidebar">
-                {/* <ChevronLeftIcon className={`bg-white animate-displace text-kaitoke-green-700 rounded-full w-6 border-2 p-[2px] border-kaitoke-green-400 absolute -right-3 top-[76px] cursor-pointer ${!open && ""} duration-300`} onClick={() => setOpen(!open)} /> */}
                 <ChevronLeftIcon
                     className={`bg-white animate-displace text-kaitoke-green-700 rounded-full w-6 border-2 p-[2px] border-kaitoke-green-400 absolute -right-3 top-[76px] cursor-pointer ${open ? '' : 'hidden'} duration-300`}
                     onClick={() => setOpen(!open)}
@@ -185,7 +188,7 @@ function Navbar({ props, sidebarOpen, setSidebarOpen }) {
                                         className={`flex items-center py-2 mx-2 rounded-full hover:bg-white transition-opacity duration-300 hover:text-gray-700 group ${pathname.includes(link.children[0].href) ? 'bg-white rounded-full text-gray-700' : 'text-white'}`}
                                         onClick={() => setExpandedLink(expandedLink === link.name ? null : link.name)}
                                     >
-                                        <span className="w-8 h-full ml-2">
+                                        <span className="w-6 h-full ml-2">
                                             {link.icon}
                                         </span>
                                         <span className="flex items-center ms-3">
@@ -194,13 +197,13 @@ function Navbar({ props, sidebarOpen, setSidebarOpen }) {
                                         </span>
                                     </div>
                                 ) : (
-                                    <Link href={link.href} className={`flex items-center py-2 mx-2 rounded-full hover:bg-white transition-opacity duration-300 hover:text-gray-700 group ${pathname === link.href ? 'bg-white rounded-full text-gray-700' : 'text-white'}`}>   
-                                            <span className="w-8 h-full ml-2">
-                                                {link.icon}
-                                            </span>
-                                            <span className="flex items-center ms-3">
-                                                {link.name}
-                                            </span>
+                                    <Link href={link.href} className={`flex items-center py-2 mx-2 rounded-full hover:bg-white transition-opacity duration-300 hover:text-gray-700 group ${pathname === link.href ? 'bg-white rounded-full text-gray-700' : 'text-white'}`}>
+                                        <span className="w-6 h-full ml-2">
+                                            {link.icon}
+                                        </span>
+                                        <span className="flex items-center ms-3">
+                                            {link.name}
+                                        </span>
                                     </Link>
                                 )}
 
@@ -209,8 +212,13 @@ function Navbar({ props, sidebarOpen, setSidebarOpen }) {
                                     <ul className="pl-10">
                                         {link.children.map((sublink, subIndex) => (
                                             <li key={subIndex}>
-                                                <Link href={sublink.href} className="block py-2 text-sm text-white hover:bg-white hover:rounded-full pl-2 mr-6 hover:text-gray-900">
+                                                <Link href={sublink.href} className={`flex py-2 text-sm text-white hover:bg-white hover:rounded-full pl-2 mr-6 hover:text-gray-900 ${pathname === link.href ? 'bg-white rounded-full text-gray-700' : 'text-white'}`}>
+                                                    <span className="w-5 h-full ml-2">
+                                                        {sublink.icon}
+                                                    </span>
+                                                    <span className="flex items-center ms-3">
                                                         {sublink.name}
+                                                    </span>
                                                 </Link>
                                             </li>
                                         ))}
@@ -219,10 +227,6 @@ function Navbar({ props, sidebarOpen, setSidebarOpen }) {
                             </li>
                         ))}
                     </ul>
-
-
-
-
                 </div>
             </aside >
 
