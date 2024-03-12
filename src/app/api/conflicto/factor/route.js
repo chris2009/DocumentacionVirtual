@@ -11,7 +11,7 @@ export async function GET(request) {
     }
 
     try {
-        const query = "SELECT f.factor AS factor, COUNT(*) AS cantidad FROM tbl_conflictos t INNER JOIN tbl_factor f ON t.factor = f.id WHERE t.lugar = ? AND YEAR(t.fecha) = ? GROUP BY f.factor;";
+        const query = "SELECT f.factor AS factor, COUNT(*) AS cantidad  FROM tbl_conflictos t INNER JOIN tbl_factor f ON t.factor = f.id  INNER JOIN tbl_lugar l ON t.lugar = l.id WHERE l.lugar = ? AND YEAR(t.fecha) = ? GROUP BY f.factor;";
         const result = await executeQuery(query, [lugar, year]);
         return NextResponse.json(result);
     } catch (error) {

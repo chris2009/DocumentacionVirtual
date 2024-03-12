@@ -7,7 +7,7 @@ export async function GET(request) {
     const lugar = url.searchParams.get("lugar"); // Agrega la obtención del parámetro lugar
 
     try {
-        const queryYear = "SELECT MONTH(fecha) AS mes, COUNT(*) AS cantidad FROM tbl_conflictos WHERE YEAR(fecha) = ? AND lugar = ? GROUP BY MONTH(fecha);";
+        const queryYear = "SELECT MONTH(t.fecha) AS mes, COUNT(*) AS cantidad FROM tbl_conflictos t INNER JOIN tbl_lugar l ON t.lugar = l.id WHERE YEAR(t.fecha) = ? AND l.lugar = ? GROUP BY MONTH(t.fecha);";
         const resultYear = await executeQuery(queryYear, [year, lugar]); // Incluye el lugar en los parámetros
 
         return NextResponse.json(resultYear);
