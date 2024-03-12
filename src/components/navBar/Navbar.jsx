@@ -93,7 +93,7 @@ function Navbar({ props, sidebarOpen, setSidebarOpen }) {
                             </Link>
 
                         </div>
-                        <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                        <div className="absolute inset-y-0 right-0 flex items-center px-2 sm:static sm:inset-auto sm:mx-6 sm:px-0">
                             <button
                                 type="button"
                                 className="relative rounded-full p-1 text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -185,23 +185,23 @@ function Navbar({ props, sidebarOpen, setSidebarOpen }) {
                                 {link.children ? (
                                     // Usamos un botón para "Conflicto social" porque no tiene href
                                     <div
-                                        className={`flex items-center py-2 mx-2 rounded-full hover:bg-white transition-opacity duration-300 hover:text-gray-700 group ${pathname.includes(link.children[0].href) ? 'bg-white rounded-full text-gray-700' : 'text-white'}`}
+                                        className={`flex items-center py-2 mx-3 rounded-full hover:bg-white transition-opacity duration-300 hover:text-gray-700 group ${pathname === link.href ? 'bg-white rounded-full text-gray-700' : 'text-white'}`}
                                         onClick={() => setExpandedLink(expandedLink === link.name ? null : link.name)}
                                     >
-                                        <span className="w-6 h-full ml-2">
+                                        <span className="block w-6 h-full mx-2">
                                             {link.icon}
                                         </span>
-                                        <span className="flex items-center ms-3">
+                                        <span className={`flex ml-2 ${!open && "hidden"}`}>
                                             {link.name}
                                             <ChevronDownIcon className={`ml-6 h-5 w-5  ${expandedLink === link.name ? 'rotate-180 duration-300' : ''}`} />
                                         </span>
                                     </div>
                                 ) : (
-                                    <Link href={link.href} className={`flex items-center py-2 mx-2 rounded-full hover:bg-white transition-opacity duration-300 hover:text-gray-700 group ${pathname === link.href ? 'bg-white rounded-full text-gray-700' : 'text-white'}`}>
-                                        <span className="w-6 h-full ml-2">
+                                    <Link href={link.href} className={`flex items-center py-2 mx-3 rounded-full hover:bg-white transition-opacity duration-300 hover:text-gray-700 group ${pathname === link.href ? 'bg-white rounded-full text-gray-700' : 'text-white'}`}>
+                                        <span className="block w-6 h-full mx-2">
                                             {link.icon}
                                         </span>
-                                        <span className="flex items-center ms-3">
+                                        <span className={`ml-2 ${!open && "hidden"}`}>
                                             {link.name}
                                         </span>
                                     </Link>
@@ -212,7 +212,7 @@ function Navbar({ props, sidebarOpen, setSidebarOpen }) {
                                     <ul className="pl-10">
                                         {link.children.map((sublink, subIndex) => (
                                             <li key={subIndex}>
-                                                <Link href={sublink.href} className={`flex py-2 text-sm text-white hover:bg-white hover:rounded-full pl-2 mr-6 hover:text-gray-900 ${pathname === link.href ? 'bg-white rounded-full text-gray-700' : 'text-white'}`}>
+                                                <Link href={sublink.href} className={`flex py-2 text-sm text-white hover:bg-white hover:rounded-full px-2 mr-4 hover:text-gray-900 ${pathname === link.href ? 'bg-white rounded-full text-gray-700' : 'text-white'}`}>
                                                     <span className="w-5 h-full ml-2">
                                                         {sublink.icon}
                                                     </span>

@@ -65,11 +65,11 @@ export default function RiesgoMes() {
                 backgroundColor: function (context) {
                     const data = context.dataset.data[context.dataIndex];
                     if (!data) {
-                        return 'rgba(256, 0, 0, 0.5)'; // Retornar un color por defecto si no hay datos.
+                        return 'rgba(255,69,0, 0.5)'; // Retornar un color por defecto si no hay datos.
                     }
                     const value = data.v;
                     const alpha = Math.max(0, Math.min(1, (value - 5) / 40));
-                    return `rgba(256, 0, 0, ${alpha})`;
+                    return `rgba(255, 69, 0, ${alpha})`;
                 },
                 borderWidth: 1,
                 width: ({ chart }) => (chart.chartArea || {}).width / 12,
