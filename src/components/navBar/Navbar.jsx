@@ -1,7 +1,21 @@
 'use client'
 import React, { Fragment, useState, useRef, useEffect } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, HomeIcon, DocumentTextIcon, UserGroupIcon, ChevronLeftIcon, ChevronRightIcon, ArrowLeftStartOnRectangleIcon, ChevronDownIcon, TableCellsIcon, ChartBarIcon, Square2StackIcon } from '@heroicons/react/24/outline'
+import {
+    BellIcon,
+    HomeIcon,
+    ChartBarIcon,
+    UserGroupIcon,
+    TableCellsIcon,
+    ChevronLeftIcon,
+    ChevronDownIcon,
+    DocumentTextIcon,
+    ChevronRightIcon,
+    Square2StackIcon,
+    InformationCircleIcon,
+    EllipsisHorizontalCircleIcon,
+    ArrowLeftStartOnRectangleIcon
+} from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { signOut, } from 'next-auth/react'
@@ -56,6 +70,37 @@ function Navbar({ props, sidebarOpen, setSidebarOpen }) {
                     href: '/dashboard/conflictoSocial/estadistica',
                 },
                 {
+                    name: 'Matiz lugar',
+                    icon: <Square2StackIcon />,
+                    href: '/dashboard/conflictoSocial/matrizLugarMes',
+                },
+                {
+                    name: 'Matiz factor',
+                    icon: <Square2StackIcon />,
+                    href: '/dashboard/conflictoSocial/matrizFactorMes',
+                },
+                {
+                    name: 'Matiz riesgo',
+                    icon: <Square2StackIcon />,
+                    href: '/dashboard/conflictoSocial/matrizRiesgoMes',
+                },
+            ],
+        },
+        {
+            name: 'Inteligencia',
+            icon: <InformationCircleIcon />,
+            children: [ // Aquí se agregan los sublinks
+                {
+                    name: 'Tabla',
+                    icon: <TableCellsIcon />,
+                    href: '/dashboard/conflictoSocial/tabla',
+                },
+                {
+                    name: 'Estadística',
+                    icon: <ChartBarIcon />,
+                    href: '/dashboard/conflictoSocial/estadistica',
+                },
+                {
                     name: 'Matiz lugar por mes',
                     icon: <Square2StackIcon />,
                     href: '/dashboard/conflictoSocial/matrizLugarMes',
@@ -69,6 +114,37 @@ function Navbar({ props, sidebarOpen, setSidebarOpen }) {
                     name: 'Matiz riesgo por mes',
                     icon: <Square2StackIcon />,
                     href: '/dashboard/conflictoSocial/matrizRiesgoMes',
+                },
+            ],
+        },
+        {
+            name: 'ContraInteligencia',
+            icon: <EllipsisHorizontalCircleIcon />,
+            children: [ // Aquí se agregan los sublinks
+                {
+                    name: 'Tabla',
+                    icon: <TableCellsIcon />,
+                    href: '/dashboard/contrainteligencia/tabla',
+                },
+                {
+                    name: 'Estadística',
+                    icon: <ChartBarIcon />,
+                    href: '/dashboard/contrainteligencia/estadistica',
+                },
+                {
+                    name: 'Matiz lugar',
+                    icon: <Square2StackIcon />,
+                    href: '/dashboard/contrainteligencia/matrizLugar',
+                },
+                {
+                    name: 'Matiz categoria',
+                    icon: <Square2StackIcon />,
+                    href: '/dashboard/contrainteligencia/matrizCategoria',
+                },
+                {
+                    name: 'Matiz riesgo',
+                    icon: <Square2StackIcon />,
+                    href: '/dashboard/contrainteligencia/matrizRiesgo',
                 },
             ],
         },
@@ -160,24 +236,6 @@ function Navbar({ props, sidebarOpen, setSidebarOpen }) {
                     onClick={() => setOpen(!open)}
                 />
                 <div className="h-full pb-4 overflow-y-auto bg-kaitoke-green-400">
-                    {/* <ul className="space-y-2 font-medium">
-                        {links.map((link) => (
-                            <li key={link.name}>
-                                <Link href={link.href} className={`flex items-center py-2 mx-2 rounded-full hover:bg-white transition-opacity duration-300 hover:text-gray-700 group ${pathname === link.href ? 'bg-white rounded-full text-gray-700' : 'text-white'}`}>
-                                    <span className="flex items-center ms-2">
-                                        <div className="w-8 h-full">{link.icon}</div>
-                                    </span>
-                                    <span className="flex items-center ms-3">
-                                        <div className={`ml-2 ${!open && "hidden"}`}>{link.name}</div>
-                                       
-                                        {link.name === 'Conflicto social' && open && (
-                                            <ChevronDownIcon className="ml-6 h-5 w-5" />
-                                        )}
-                                    </span>
-                                </Link>
-                            </li>
-                        ))}
-                    </ul> */}
                     <ul className="space-y-2 font-medium">
                         {links.map((link, index) => (
                             <li key={index}>
@@ -185,19 +243,19 @@ function Navbar({ props, sidebarOpen, setSidebarOpen }) {
                                 {link.children ? (
                                     // Usamos un botón para "Conflicto social" porque no tiene href
                                     <div
-                                        className={`flex items-center py-2 mx-3 rounded-full hover:bg-white transition-opacity duration-300 hover:text-gray-700 group ${pathname === link.href ? 'bg-white rounded-full text-gray-700' : 'text-white'}`}
+                                        className={`truncate flex items-center py-2 mx-3 rounded-full hover:bg-white transition-opacity duration-300 hover:text-gray-700 group ${pathname === link.href ? 'bg-white rounded-full text-gray-700' : 'text-white'}`}
                                         onClick={() => setExpandedLink(expandedLink === link.name ? null : link.name)}
                                     >
                                         <span className="block w-6 h-full mx-2">
                                             {link.icon}
                                         </span>
-                                        <span className={`flex ml-2 ${!open && "hidden"}`}>
+                                        <span className={`truncate flex ml-2 ${!open && "hidden"}`}>
                                             {link.name}
                                             <ChevronDownIcon className={`ml-6 h-5 w-5  ${expandedLink === link.name ? 'rotate-180 duration-300' : ''}`} />
                                         </span>
                                     </div>
                                 ) : (
-                                    <Link href={link.href} className={`flex items-center py-2 mx-3 rounded-full hover:bg-white transition-opacity duration-300 hover:text-gray-700 group ${pathname === link.href ? 'bg-white rounded-full text-gray-700' : 'text-white'}`}>
+                                    <Link href={link.href} className={`truncate flex items-center py-2 mx-3 rounded-full hover:bg-white transition-opacity duration-300 hover:text-gray-700 group ${pathname === link.href ? 'bg-white rounded-full text-gray-700' : 'text-white'}`}>
                                         <span className="block w-6 h-full mx-2">
                                             {link.icon}
                                         </span>
@@ -212,8 +270,8 @@ function Navbar({ props, sidebarOpen, setSidebarOpen }) {
                                     <ul className="pl-10">
                                         {link.children.map((sublink, subIndex) => (
                                             <li key={subIndex}>
-                                                <Link href={sublink.href} className={`flex py-2 text-sm text-white hover:bg-white hover:rounded-full px-2 mr-4 hover:text-gray-900 ${pathname === link.href ? 'bg-white rounded-full text-gray-700' : 'text-white'}`}>
-                                                    <span className="w-5 h-full ml-2">
+                                                <Link href={sublink.href} className={`truncate flex py-2 text-sm text-white hover:bg-white hover:rounded-full px-2 mr-4 hover:text-gray-900 ${pathname === link.href ? 'bg-white rounded-full text-gray-700' : 'text-white'}`}>
+                                                    <span className="block w-5 h-full ml-2">
                                                         {sublink.icon}
                                                     </span>
                                                     <span className="flex items-center ms-3">

@@ -32,9 +32,9 @@ ChartJS.register(
 );
 
 export default function tablaConflictoPage() {
-    const [factor, setFactor] = useState(['']);
+    // const [factor, setFactor] = useState(['']);
     const [riesgo, setRiesgo] = useState(['']);
-    const [tipo, setTipo] = useState(['']);
+    const [categoria, setCategoria] = useState(['']);
     const [lugares, setLugares] = useState([]);
     const [selectedPlace, setSelectedPlace] = useState('Seleccione lugar');
     const [factoresPorMes, setFactoresPorMes] = useState([]);
@@ -42,32 +42,32 @@ export default function tablaConflictoPage() {
 
     useEffect(() => {
         if (selectedPlace && selectedYear) {
-            const getFactores = async () => {
-                const response = await axios.get(`/api/conflicto/factor?lugar=${selectedPlace}&year=${selectedYear}`);
-                setFactor(response.data);
-            };
-            getFactores();
+            // const getFactores = async () => {
+            //     const response = await axios.get(`/api/conflicto/factor?lugar=${selectedPlace}&year=${selectedYear}`);
+            //     setFactor(response.data);
+            // };
+            // getFactores();
 
             const getRiesgos = async () => {
                 // Incluye tanto el lugar como el año en la solicitud
-                const response = await axios.get(`/api/conflicto/riesgo?lugar=${selectedPlace}&year=${selectedYear}`);
+                const response = await axios.get(`/api/contrainteligencia/riesgo?lugar=${selectedPlace}&year=${selectedYear}`);
                 setRiesgo(response.data);
             };
             getRiesgos()
 
             if (selectedPlace && selectedYear) {
-                const getTipo = async () => {
-                    const response = await axios.get(`/api/conflicto/tipo?lugar=${selectedPlace}&year=${selectedYear}`);
-                    setTipo(response.data); // Asegúrate de tener un estado 'setTipo' para almacenar esta información
+                const getCategoria = async () => {
+                    const response = await axios.get(`/api/contrainteligencia/categoria?lugar=${selectedPlace}&year=${selectedYear}`);
+                    setCategoria(response.data); // Asegúrate de tener un estado 'setCategoria' para almacenar esta información
                 };
-                getTipo();
+                getCategoria();
             }
         }
 
         if (selectedYear && selectedPlace) {
             const fetchFactoresPorMes = async () => {
                 // Asegúrate de incluir tanto el year como el lugar en la solicitud
-                const response = await axios.get(`/api/conflicto/fecha?year=${selectedYear}&lugar=${selectedPlace}`);
+                const response = await axios.get(`/api/contrainteligencia/fecha?year=${selectedYear}&lugar=${selectedPlace}`);
                 setFactoresPorMes(response.data);
             };
 
@@ -94,16 +94,16 @@ export default function tablaConflictoPage() {
     const meses = ['ENE', 'FEB', 'MAR', 'ABR', 'MAY', 'JUN', 'JUL', 'AGO', 'SEP', 'OCT', 'NOV', 'DIC'];
 
     // Configuración de los datos para los factores
-    const dataFactores = {
-        labels: factor.map(item => item.factor),
-        datasets: [{
-            label: 'Factores',
-            data: factor.map(item => item.cantidad),
-            backgroundColor: 'rgba(0,100,0, 0.5)',
-            borderColor: 'rgba(0,100,0, 1)',
-            borderWidth: 1
-        }]
-    };
+    // const dataFactores = {
+    //     labels: factor.map(item => item.factor),
+    //     datasets: [{
+    //         label: 'Factores',
+    //         data: factor.map(item => item.cantidad),
+    //         backgroundColor: 'rgba(0,100,0, 0.5)',
+    //         borderColor: 'rgba(0,100,0, 1)',
+    //         borderWidth: 1
+    //     }]
+    // };
 
 
     const colorsByRiesgo = {
@@ -133,11 +133,11 @@ export default function tablaConflictoPage() {
     };
 
 
-    const dataTipos = {
-        labels: tipo.map(item => item.tipo),
+    const dataCategorias = {
+        labels: categoria.map(item => item.categoria),
         datasets: [{
-            label: 'Tipos de conflictos sociales',
-            data: tipo.map(item => item.cantidad),
+            label: 'Categorias',
+            data: categoria.map(item => item.cantidad),
             backgroundColor: 'rgba(0,0,255, 0.5)',
             borderColor: 'rgba(0,0,255, 1)',
             borderWidth: 1
@@ -177,11 +177,11 @@ export default function tablaConflictoPage() {
             }
         }
     };
-    const years = [2024, 2023]
+    const years = [2024, 2023, 2022]
     return (
         <div className='ml-64 mt-20 w-[calc(100%-theme(space.90))] mx-4'>
             <div className='ml-6 flex items-center pb-4'>
-                <h1 className='text-gray-700 mr-6 font-bold text-sm bg-kaitoke-green-00 px-4 py-2 rounded-lg'>Estadística de conflicto social</h1>
+                <h1 className='text-gray-700 mr-6 font-bold text-sm bg-kaitoke-green-00 px-4 py-2 rounded-lg'>Estadística de contra Inteligencia</h1>
                 <div className="top-16 ml-3 w-28 z-10">
                     <Listbox value={selectedYear} onChange={setSelectedYear}>
                         <div className="relative mt-1">
@@ -264,35 +264,34 @@ export default function tablaConflictoPage() {
                 <div className='h-[650px] shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4 mr-4'>
                     <PeruSvg selectedPlace={selectedPlace} />
                 </div>
-                <div className='grid grid-cols-1 gap-y-4 mr-4 items-baseline w-2/5'>
+                <div className='grid grid-cols-1 mr-4 items-baseline w-full'>
 
                     <div className='shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4'>
                         <Line
-                            data={dataFactores}
+                            data={dataCategorias}
                             options={options}
+                            height={60}
+                        // className='w-full h-4'
                         />
                     </div>
-                    <div className='shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4'>
-                        <Bar
-                            data={dataFactoresPorMes}
-                            options={options}
-                        />
-                    </div>
-
-                </div>
-                <div className='grid grid-cols-1 gap-y-4 items-baseline w-1/5'>
-                    <div className='shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4'>
-                        <Radar
-                            data={dataTipos}
-                        />
-                    </div>
-                    <div className='shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4'>
-                        <Pie
-                            data={dataRiesgos}
-                        />
+                    <div className='grid grid-cols-1'>
+                        <div className='shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4'>
+                            <Bar
+                                data={dataFactoresPorMes}
+                                options={options}
+                                height={60}
+                            />
+                        </div>
+                        <div className='grid grid-cols-1'>
+                            <div className='w-80 mx-auto shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4'>
+                                <Pie
+                                    data={dataRiesgos}
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }

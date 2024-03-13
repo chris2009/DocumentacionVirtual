@@ -5,7 +5,7 @@ export async function GET() {
 
 
     try {
-        const result = await executeQuery("SELECT MONTH(c.fecha) AS mes, l.lugar, COUNT(*) AS cantidad FROM tbl_conflictos c INNER JOIN tbl_lugar l ON c.lugar = l.id GROUP BY  MONTH (c.fecha), c.lugar;");
+        const result = await executeQuery("SELECT MONTH(fecha) AS mes, cat.catAcro, COUNT(*) AS cantidad FROM tbl_ciber_contrainteligencia c INNER JOIN tbl_categoria cat ON c.categoria = cat.id GROUP BY  MONTH (fecha), cat.catAcro;");
         return NextResponse.json(result);
     } catch (error) {
         return NextResponse.json(

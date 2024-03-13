@@ -3,9 +3,8 @@ import executeQuery from '@/libs/mysql';
 
 export async function GET() {
 
-
     try {
-        const result = await executeQuery("SELECT MONTH(c.fecha) AS mes, l.lugar, COUNT(*) AS cantidad FROM tbl_conflictos c INNER JOIN tbl_lugar l ON c.lugar = l.id GROUP BY  MONTH (c.fecha), c.lugar;");
+        const result = await executeQuery("SELECT * FROM tbl_ciber_contrainteligencia");
         return NextResponse.json(result);
     } catch (error) {
         return NextResponse.json(
