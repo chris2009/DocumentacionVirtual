@@ -251,7 +251,7 @@ function Navbar({ props, sidebarOpen, setSidebarOpen }) {
                                         </span>
                                         <span className={`truncate flex ml-2 ${!open && "hidden"}`}>
                                             {link.name}
-                                            <ChevronDownIcon className={`ml-6 h-5 w-5  ${expandedLink === link.name ? 'rotate-180 duration-300' : ''}`} />
+                                            <ChevronDownIcon className={`ml-3 h-5 w-5  ${expandedLink === link.name ? 'rotate-180 duration-300' : ''}`} />
                                         </span>
                                     </div>
                                 ) : (
