@@ -3,9 +3,10 @@
 import { useState, useEffect, Suspense } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
-import ConflictoTable from '@/components/ConflictoTable';
 import Loading from '@/components/global/loading';
+import ConflictoTable from '@/components/ConflictoTable';
 import { PlusIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+
 function conflictoPage() {
     const [conflictos, setConflictos] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -31,19 +32,22 @@ function conflictoPage() {
             <div className="relative px-4">
                 <div className="flex items-center my-4">
                     <Link href="/dashboard/conflictoSocial/new">
-                        <button className="flex bg-kaitoke-green-400 hover:bg-kaitoke-green-600 py-2 pl-4 pr-2 rounded-full text-white mr-3">
+                    <button className="flex border-kaitoke-green-400 text-sm border-[1px] hover:border-kaitoke-green-600 py-2 pl-4 pr-2 rounded-[7px] text-kaitoke-green-400 mr-3">
                             Agregar <PlusIcon className='animate-bounce hover:animate-spin flex w-4 h-full' />
                         </button>
                     </Link>
 
                     <div className="relative">
                         <input
+                            className="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-kaitoke-green-500 placeholder-shown:border-t-kaitoke-green-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
                             type="text"
-                            placeholder="Buscar evento..."
+                            placeholder=""
                             value={searchTerm}
                             onChange={handleSearch}
-                            className="border border-gray-300 rounded-full px-3 py-1"
                         />
+                        <label
+                            className="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-gray-500 peer-focus:text-gray-900 before:border-kaitoke-green-200 peer-focus:before:!border-kaitoke-green-900 after:border-kaitoke-green-200 peer-focus:after:!border-kaitoke-green-900">Buscar rinfa
+                        </label>
                         <MagnifyingGlassIcon className='w-5 h-5 text-gray-400 absolute top-1/2 transform -translate-y-1/2 right-3' />
                     </div>
                 </div>

@@ -8,7 +8,7 @@ export async function POST(request) {
 
     // Buscar usuario por DNI
     const userFoundByDNI = await executeQuery(
-      'SELECT * FROM user WHERE DNI = ?',
+      'SELECT * FROM tbl_user WHERE DNI = ?',
       [data.DNI]
     );
 
@@ -25,7 +25,7 @@ export async function POST(request) {
 
     // Buscar usuario por nombre de usuario
     const userFoundByUsername = await executeQuery(
-      'SELECT * FROM user WHERE username = ?',
+      'SELECT * FROM tbl_user WHERE username = ?',
       [data.username]
     );
 

@@ -15,7 +15,7 @@ export const authOptions = {
         try {
           // Buscar usuario por email
           const userFound = await executeQuery(
-            'SELECT * FROM user WHERE DNI = ?',
+            'SELECT * FROM tbl_user WHERE DNI = ?',
             [credentials.DNI]
           );
 

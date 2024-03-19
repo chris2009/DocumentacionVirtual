@@ -5,7 +5,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import Loading from '@/components/global/loading';
 import RinfaTable from '@/components/RinfaTable';
-import { MagnifyingGlassIcon, PlusIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 function rinfaPage() {
     const [rinfas, setRinfas] = useState([]);
@@ -46,16 +46,6 @@ function rinfaPage() {
                             Agregar <PlusIcon className='animate-bounce hover:animate-spin flex w-4 h-full' />
                         </button>
                     </Link>
-                    {/* <div className="relative">
-                        <input
-                            // type="text"
-                            placeholder="Buscarasd rinfa..."
-                            value={searchTerm}
-                            onChange={handleSearch}
-                            className="border border-gray-300 rounded-full px-3 py-1 focus:border-kaitoke-green-300 focus:border-2"
-                        />
-                        <MagnifyingGlassIcon className='w-5 h-5 text-gray-400 absolute top-1/2 transform -translate-y-1/2 right-3' />
-                    </div> */}
                     <div className="relative">
                         <input
                             className="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-kaitoke-green-500 placeholder-shown:border-t-kaitoke-green-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"

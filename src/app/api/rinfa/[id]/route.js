@@ -6,7 +6,7 @@ import path from "path";
 export async function GET(request, { params }) {
 
     try {
-        const result = await executeQuery("SELECT * FROM tbl_escalafon WHERE id = ?", [params.id,]);
+        const result = await executeQuery("SELECT * FROM tbl_rinfa WHERE id = ?", [params.id,]);
         if (result.length === 0) {
             return NextResponse.json(
                 {
@@ -32,7 +32,7 @@ export async function GET(request, { params }) {
 
 export async function DELETE(request, { params }) {
     try {
-        const result = await executeQuery("DELETE FROM tbl_escalafon WHERE id = ?", [params.id])
+        const result = await executeQuery("DELETE FROM tbl_rinfa WHERE id = ?", [params.id])
         if (result.affectedRows === 0) {
             return NextResponse.json(
                 {
@@ -99,7 +99,7 @@ export async function PUT(request, { params }) {
         }
         
         const result = await executeQuery(
-            "UPDATE tbl_escalafon SET fecha = ?, pathName = ? WHERE id = ?", [
+            "UPDATE tbl_rinfa SET fecha = ?, pathName = ? WHERE id = ?", [
             data.get('fecha'),
             '/' + relativePath,
             params.id

@@ -138,8 +138,8 @@ export default function tablaConflictoPage() {
         datasets: [{
             label: 'Tipos de conflictos sociales',
             data: tipo.map(item => item.cantidad),
-            backgroundColor: 'rgba(0,0,255, 0.5)',
             borderColor: 'rgba(0,0,255, 1)',
+            backgroundColor: 'rgba(0,0,255, 0.5)',
             borderWidth: 1
         }]
     };
@@ -163,136 +163,132 @@ export default function tablaConflictoPage() {
             legend: true
         },
         scales: {
-            // x: {
-            //   title: {
-            //     display: true,
-            //     text: 'Nombre del Eje X' // Aquí colocas el nombre para el eje X
-            //   }
-            // },
             y: {
                 title: {
                     display: true,
-                    text: 'Cantidad' // Aquí colocas el nombre para el eje Y
+                    text: 'Cantidad' 
                 }
             }
         }
     };
     const years = [2024, 2023]
     return (
-        <div className='ml-64 mt-20 w-[calc(100%-theme(space.90))] mx-4'>
-            <div className='ml-6 flex items-center pb-4'>
-                <h1 className='text-gray-700 mr-6 font-bold text-sm bg-kaitoke-green-00 px-4 py-2 rounded-lg'>Estadística de conflicto social</h1>
-                <div className="top-16 ml-3 w-28 z-10">
-                    <Listbox value={selectedYear} onChange={setSelectedYear}>
-                        <div className="relative mt-1">
-                            <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 sm:text-sm">
-                                <span className="block truncate">{selectedYear}</span>
-                                <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                                    <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-                                </span>
-                            </Listbox.Button>
-                            <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
-                                <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
-                                    {years.map((year) => (
-                                        <Listbox.Option
-                                            key={year}
-                                            className={({ active }) =>
-                                                `relative cursor-default select-none py-2 pl-10 pr-4 ${active ? 'bg-kaitoke-green-100 text-kaitoke-green-900' : 'text-gray-900'}`
-                                            }
-                                            value={year}
-                                        >
-                                            {({ selected }) => (
-                                                <>
-                                                    <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
-                                                        {year}
-                                                    </span>
-                                                    {selected && (
-                                                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-kaitoke-green-600">
-                                                            <CheckIcon className="h-5 w-5" aria-hidden="true" />
-                                                        </span>
-                                                    )}
-                                                </>
-                                            )}
-                                        </Listbox.Option>
-                                    ))}
-                                </Listbox.Options>
-                            </Transition>
-                        </div>
-                    </Listbox>
-                </div>
-                <div className="top-16 ml-3 w-44">
-                    <Listbox value={selectedPlace} onChange={handlePlaceChange}>
-                        <div className="relative mt-1">
-                            <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-                                <span className="block truncate">{selectedPlace}</span>
-                                <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                                    <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-                                </span>
-                            </Listbox.Button>
-                            <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
-                                <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
-                                    {lugares.map((lugar) => (
-                                        <Listbox.Option
-                                            key={lugar.id}
-                                            className={({ active }) =>
-                                                `relative cursor-default select-none py-2 pl-10 pr-4 ${active ? 'bg-kaitoke-green-100 text-kaitoke-green-900' : 'text-gray-900'}`
-                                            }
-                                            value={lugar.lugar}
-                                        >
-                                            {({ selected }) => (
-                                                <>
-                                                    <span className={`block truncate ${selectedPlace ? 'font-medium' : 'font-normal'}`}>
-                                                        {lugar.lugar}
-                                                    </span>
-                                                    {selected && (
-                                                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-kaitoke-green-600">
-                                                            <CheckIcon className="h-5 w-5" aria-hidden="true" />
-                                                        </span>
-                                                    )}
-                                                </>
-                                            )}
-                                        </Listbox.Option>
-                                    ))}
-                                </Listbox.Options>
-                            </Transition>
-                        </div>
-                    </Listbox>
-                </div>
+        <div className='flex ml-64 mt-20 w-[calc(100%-theme(space.90))] mx-4'>
 
-            </div>
-            <div className='flex ml-6'>
-                <div className='h-[650px] shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4 mr-4'>
+            <div className='ml-6 items-center pb-4 w-[450px]'>
+                <div className='flex'>
+                    <div className="top-16 ml-3 w-28 z-10">
+                        <Listbox value={selectedYear} onChange={setSelectedYear}>
+                            <div className="relative mt-1">
+                                <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 sm:text-sm">
+                                    <span className="block truncate">{selectedYear}</span>
+                                    <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                                        <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                                    </span>
+                                </Listbox.Button>
+                                <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
+                                    <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+                                        {years.map((year) => (
+                                            <Listbox.Option
+                                                key={year}
+                                                className={({ active }) =>
+                                                    `relative cursor-default select-none py-2 pl-10 pr-4 ${active ? 'bg-kaitoke-green-100 text-kaitoke-green-900' : 'text-gray-900'}`
+                                                }
+                                                value={year}
+                                            >
+                                                {({ selected }) => (
+                                                    <>
+                                                        <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
+                                                            {year}
+                                                        </span>
+                                                        {selected && (
+                                                            <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-kaitoke-green-600">
+                                                                <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                                                            </span>
+                                                        )}
+                                                    </>
+                                                )}
+                                            </Listbox.Option>
+                                        ))}
+                                    </Listbox.Options>
+                                </Transition>
+                            </div>
+                        </Listbox>
+                    </div>
+                    <div className="top-16 ml-3 w-44 z-10">
+                        <Listbox value={selectedPlace} onChange={handlePlaceChange}>
+                            <div className="relative mt-1">
+                                <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                                    <span className="block truncate">{selectedPlace}</span>
+                                    <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                                        <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                                    </span>
+                                </Listbox.Button>
+                                <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
+                                    <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+                                        {lugares.map((lugar) => (
+                                            <Listbox.Option
+                                                key={lugar.id}
+                                                className={({ active }) =>
+                                                    `relative cursor-default select-none py-2 pl-10 pr-4 ${active ? 'bg-kaitoke-green-100 text-kaitoke-green-900' : 'text-gray-900'}`
+                                                }
+                                                value={lugar.lugar}
+                                            >
+                                                {({ selected }) => (
+                                                    <>
+                                                        <span className={`block truncate ${selectedPlace ? 'font-medium' : 'font-normal'}`}>
+                                                            {lugar.lugar}
+                                                        </span>
+                                                        {selected && (
+                                                            <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-kaitoke-green-600">
+                                                                <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                                                            </span>
+                                                        )}
+                                                    </>
+                                                )}
+                                            </Listbox.Option>
+                                        ))}
+                                    </Listbox.Options>
+                                </Transition>
+                            </div>
+                        </Listbox>
+                    </div>
+                </div>
+                <div className='mt-4 h-[650px] w-[450px] shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4 mr-4'>
                     <PeruSvg selectedPlace={selectedPlace} />
                 </div>
-                <div className='grid grid-cols-1 gap-y-4 mr-4 items-baseline w-2/5'>
-
-                    <div className='shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4'>
-                        <Line
-                            data={dataFactores}
-                            options={options}
-                        />
-                    </div>
-                    <div className='shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4'>
-                        <Bar
-                            data={dataFactoresPorMes}
-                            options={options}
-                        />
-                    </div>
+            </div>
+            <div className='grid grid-cols-1 gap-y-1 ml-4 items-baseline w-full h-[80px]'>
+                <div className='shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4'>
+                    <Line
+                        data={dataFactores}
+                        options={options}
+                        height={80}
+                    />
 
                 </div>
-                <div className='grid grid-cols-1 gap-y-4 items-baseline w-1/5'>
-                    <div className='shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4'>
+                <div className='shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4'>
+                    <Bar
+                        data={dataFactoresPorMes}
+                        options={options}
+                        height={80}
+                    />
+                </div>
+                <div className='flex justify-evenly'>
+                    <div className='shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4 w-80 h-80 flex justify-center'>
                         <Radar
                             data={dataTipos}
                         />
                     </div>
-                    <div className='shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4'>
+                    <div className='shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4 w-80 h-80 flex justify-center'>
                         <Pie
                             data={dataRiesgos}
                         />
                     </div>
                 </div>
+
+
             </div>
-        </div>
+        </div >
     );
 }

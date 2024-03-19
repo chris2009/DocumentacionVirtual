@@ -7,7 +7,7 @@ export async function GET() {
 
 
     try {
-        const result = await executeQuery("SELECT * FROM tbl_escalafon");
+        const result = await executeQuery("SELECT * FROM tbl_rinfa");
         return NextResponse.json(result);
     } catch (error) {
         return NextResponse.json(
@@ -44,7 +44,7 @@ export async function POST(request) {
         await writeFile(filePath, buffer)
 
         const result = await executeQuery(
-            "INSERT INTO tbl_escalafon (fecha, pathName) VALUES (?, ?)",
+            "INSERT INTO tbl_rinfa (fecha, pathName) VALUES (?, ?)",
             [
                 data.get('fecha'),
                 '/' + relativePath
