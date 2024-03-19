@@ -14,7 +14,8 @@ import {
     Square2StackIcon,
     InformationCircleIcon,
     EllipsisHorizontalCircleIcon,
-    ArrowLeftStartOnRectangleIcon
+    ArrowLeftStartOnRectangleIcon,
+    ExclamationCircleIcon
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -118,33 +119,64 @@ function Navbar({ props, sidebarOpen, setSidebarOpen }) {
             ],
         },
         {
-            name: 'ContraInteligencia',
+            name: 'Categoria CIBER CI',
             icon: <EllipsisHorizontalCircleIcon />,
             children: [ // Aquí se agregan los sublinks
                 {
                     name: 'Tabla',
                     icon: <TableCellsIcon />,
-                    href: '/dashboard/contrainteligencia/tabla',
+                    href: '/dashboard/catciberci/tabla',
                 },
                 {
                     name: 'Estadística',
                     icon: <ChartBarIcon />,
-                    href: '/dashboard/contrainteligencia/estadistica',
+                    href: '/dashboard/catciberci/estadistica',
                 },
                 {
                     name: 'Matiz lugar',
                     icon: <Square2StackIcon />,
-                    href: '/dashboard/contrainteligencia/matrizLugar',
+                    href: '/dashboard/catciberci/matrizLugar',
                 },
                 {
                     name: 'Matiz categoria',
                     icon: <Square2StackIcon />,
-                    href: '/dashboard/contrainteligencia/matrizCategoria',
+                    href: '/dashboard/catciberci/matrizCategoria',
                 },
                 {
                     name: 'Matiz riesgo',
                     icon: <Square2StackIcon />,
-                    href: '/dashboard/contrainteligencia/matrizRiesgo',
+                    href: '/dashboard/catciberci/matrizRiesgo',
+                },
+            ],
+        },
+        {
+            name: 'Activos críticos',
+            icon: <ExclamationCircleIcon />,
+            children: [ // Aquí se agregan los sublinks
+                {
+                    name: 'Tabla',
+                    icon: <TableCellsIcon />,
+                    href: '/dashboard/ac/tabla',
+                },
+                {
+                    name: 'Nacional',
+                    icon: <ChartBarIcon />,
+                    href: '/dashboard/ac/nacional',
+                },
+                {
+                    name: 'Institucional',
+                    icon: <ChartBarIcon />,
+                    href: '/dashboard/ac/institucional',
+                },
+                {
+                    name: 'Matiz ACN',
+                    icon: <Square2StackIcon />,
+                    href: '/dashboard/ac/matrizACNMes',
+                },
+                {
+                    name: 'Matiz ACI',
+                    icon: <Square2StackIcon />,
+                    href: '/dashboard/ac/matrizACIMes',
                 },
             ],
         },
@@ -202,7 +234,7 @@ function Navbar({ props, sidebarOpen, setSidebarOpen }) {
                                     <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                         <Menu.Item>
                                             <label
-                                                className={classNames('block px-4 py-2 text-sm text-gray-700 shadow-lg')}
+                                                className={classNames('block px-4 py-2 text-sm text-gray-700 border-b-[1px]')}
                                             >
                                                 {parsedJson.session.user.name}
                                             </label>
