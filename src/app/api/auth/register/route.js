@@ -45,7 +45,7 @@ export async function POST(request) {
 
     // Crear nuevo usuario
     const newUser = await executeQuery(
-      'INSERT INTO user (username, DNI, password) VALUES (?, ?, ?)',
+      'INSERT INTO tbl_user (username, DNI, password) VALUES (?, ?, ?)',
       [data.username, data.DNI, hashedPassword]
     );
 

@@ -21,23 +21,15 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { signOut, } from 'next-auth/react'
 
-function Navbar({ props, sidebarOpen, setSidebarOpen }) {
+function Navbar({ props }) {
 
     // Define state for sidebar expansion
-    const [sidebarExpanded, setSidebarExpanded] = useState(false);
     const [expandedLink, setExpandedLink] = useState(null);
 
     // Create a reference to the sidebar element
     const sidebar = useRef(null);
 
     // Effect to add or remove a class to the body element based on sidebar expansion
-    useEffect(() => {
-        if (sidebarExpanded) {
-            document.querySelector("body")?.classList.add("sidebar-expanded");
-        } else {
-            document.querySelector("body")?.classList.remove("sidebar-expanded");
-        }
-    }, [sidebarExpanded]);
 
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
@@ -187,7 +179,7 @@ function Navbar({ props, sidebarOpen, setSidebarOpen }) {
     const pathname = usePathname()
     return (
         <div>
-            <Disclosure as="nav" ref={sidebar} className={`fixed top-0 z-50 w-full bg-white shadow-md border-kaitoke-green-400 dark:bg-gray-800 dark:border-gray-700  ${sidebarOpen ? "translate-x-0" : "-translate-x-72}"}`}>
+            <Disclosure as="nav"  className="fixed top-0 z-50 w-full bg-white shadow-md border-kaitoke-green-400 dark:bg-gray-800 dark:border-gray-700">
                 <div className="px-3 lg:px-5 lg:pl-3">
                     <div className="relative flex h-16 items-center justify-between">
                         <div className="flex flex-1 items-center justify-start sm:items-stretch">

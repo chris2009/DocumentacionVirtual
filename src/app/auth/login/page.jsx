@@ -68,6 +68,7 @@ function page() {
                 message: "La contraseña es requerida",
               },
             })}
+            type="password"
             autoComplete="off"
             placeholder=" " />
           <label

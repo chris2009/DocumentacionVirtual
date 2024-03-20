@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, Fragment } from 'react';
-import { Line, Radar, Bar, Pie } from 'react-chartjs-2';
+import { Line, Bar, Pie } from 'react-chartjs-2';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/outline';
 import axios from 'axios';

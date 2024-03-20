@@ -1,4 +1,5 @@
 'use client'
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Chart as ChartJS, CategoryScale, LinearScale } from 'chart.js';

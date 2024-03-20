@@ -91,7 +91,7 @@ export default function tablaConflictoPage() {
     };
 
 
-    const meses = ['ENE', 'FEB', 'MAR', 'ABR', 'MAY', 'JUN', 'JUL', 'AGO', 'SEP', 'OCT', 'NOV', 'DIC'];
+    const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
 
     // Configuración de los datos para los factores
     const dataFactores = {
@@ -160,13 +160,17 @@ export default function tablaConflictoPage() {
 
     const options = {
         plugins: {
-            legend: true
+            legend: true,
+            subtitle: {
+                display: true,
+                text: 'Custom Chart Subtitle'
+            }
         },
         scales: {
             y: {
                 title: {
                     display: true,
-                    text: 'Cantidad' 
+                    text: 'Cantidad'
                 }
             }
         }
