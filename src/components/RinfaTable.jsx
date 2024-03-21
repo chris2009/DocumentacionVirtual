@@ -25,7 +25,7 @@ function RinfaTable({ rinfa }) {
                 {format((rinfa.fecha), "full", "es")}
             </td>
             <td className="text-center text-xs px-2 py-1">
-                <Link key={rinfa.id} href={`/dashboard/rinfa/${rinfa.id}`}>
+                <Link key={rinfa.id} href={`/dashboard/ciberintg/rinfa/${rinfa.id}`}>
                    <EyeIcon className='animate-pulse w-4 h-full text-kaitoke-green-800' />
                 </Link>
             </td>

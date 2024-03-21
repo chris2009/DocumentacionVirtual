@@ -177,7 +177,7 @@ export default function tablaConflictoPage() {
     };
     const years = [2024, 2023]
     return (
-        <div className='flex ml-64 mt-20 w-[calc(100%-theme(space.90))] mx-4'>
+        <div className='flex ml-64 mt-20 w-full mx-4'>
 
             <div className='ml-6 items-center pb-4 w-[450px]'>
                 <div className='flex'>

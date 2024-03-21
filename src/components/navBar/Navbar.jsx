@@ -270,7 +270,7 @@ function Navbar({ props }) {
                             <div ref={menuRef} className="flex justify-start pt-2">
                                 {/* Menús principales y submenús aquí */}
                                 <div className='relative'>
-                                    <Link href="/">
+                                    <Link href="/dashboard">
                                         <button className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium flex items-center">
                                             Dashboard
                                         </button>
