@@ -41,7 +41,7 @@ function rinfaPage() {
         <div className='mx-2 mt-28'>
             <div className="relative px-4">
                 <div className="flex items-center my-4">
-                    <Link href="/dashboard/rinfa/new">
+                    <Link href="/dashboard/ciberintg/rinfa/new">
                         <button className="flex border-kaitoke-green-400 text-sm border-[1px] hover:border-kaitoke-green-600 py-2 pl-4 pr-2 rounded-[7px] text-kaitoke-green-400 mr-3">
                             Agregar <PlusIcon className='animate-bounce hover:animate-spin flex w-4 h-full' />
                         </button>

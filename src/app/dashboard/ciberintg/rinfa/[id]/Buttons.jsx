@@ -9,7 +9,7 @@ export default function Buttons({ rinfaId }) {
             <button
                 className='bg-gray-500 hover:bg-gray-700 text-white rounded-full py-2 px-4'
                 onClick={() =>
-                    router.push(`/dashboard/rinfa/edit/${rinfaId}`)}
+                    router.push(`/dashboard/ciberintg/rinfa/edit/${rinfaId}`)}
             >
 
                 Editar
