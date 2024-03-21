@@ -38,7 +38,7 @@ function rinfaPage() {
     );
 
     return (
-        <div className='ml-64 mt-20'>
+        <div className='mx-2 mt-28'>
             <div className="relative px-4">
                 <div className="flex items-center my-4">
                     <Link href="/dashboard/rinfa/new">
