@@ -52,7 +52,7 @@ function ConflictoForm() {
         }
         form.current.reset();
         router.refresh();
-        router.push('/dashboard/conflictoSocial');
+        router.push('/dashboard/ciberintg/conflictoSocial');
     };
 
 

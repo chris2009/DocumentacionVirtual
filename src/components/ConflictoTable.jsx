@@ -13,7 +13,7 @@ function ConflictoTable({ conflicto }) {
                 {conflicto.evento}
             </td>
             <td className="text-center text-xs px-2 pr-6">
-                <Link key={conflicto.id} href={`/dashboard/conflictoSocial/${conflicto.id}`}>
+                <Link key={conflicto.id} href={`/dashboard/ciberintg/conflictoSocial/${conflicto.id}`}>
                     <div className="text-right">
                         <Menu as="div" className="relative inline-block text-left">
                             <div>

@@ -23,32 +23,32 @@ const mapearNumeroMesANombre = (numeroMes) => {
     return nombresDeMes[numeroMes - 1];
 };
 
-export default function RiesgoMes() {
-    const [riesgosMes, setRiesgosMes] = useState([]);
+export default function lugarMes() {
+    const [lugarMes, setLugarMes] = useState([]);
 
     useEffect(() => {
-        const getRiesgoMes = async () => {
+        const getLugarMes = async () => {
             try {
-                const response = await axios.get('/api/conflicto/riesgoMes');
-                setRiesgosMes(response.data); // Asumiendo que la respuesta es un arreglo
+                const response = await axios.get('/api/conflicto/lugarMes');
+                setLugarMes(response.data); // Asumiendo que la respuesta es un arreglo
             } catch (error) {
                 console.error('Error al obtener los datos:', error);
             }
         };
 
-        getRiesgoMes();
+        getLugarMes();
     }, []);
 
     // Acumulación de datos
-    const datosAcumulados = riesgosMes.reduce((acc, { mes, riesgo, cantidad }) => {
+    const datosAcumulados = lugarMes.reduce((acc, { mes, lugar, cantidad }) => {
         // Creamos una clave única para cada combinación de mes y riesgo
-        const clave = `${mapearNumeroMesANombre(mes)}-${riesgo}`;
+        const clave = `${mapearNumeroMesANombre(mes)}-${lugar}`;
         // Si ya existe, sumamos a la cantidad existente
         if (acc[clave]) {
             acc[clave].v += cantidad;
         } else {
             // Si no existe, creamos una nueva entrada
-            acc[clave] = { x: mapearNumeroMesANombre(mes), y: riesgo, v: cantidad };
+            acc[clave] = { x: mapearNumeroMesANombre(mes), y: lugar, v: cantidad };
         }
         return acc;
     }, {});
@@ -60,20 +60,20 @@ export default function RiesgoMes() {
     const data = {
         datasets: [
             {
-                label: 'Cantidad de eventos por nivel de riesgo y mes',
+                label: 'Cantidad de eventos por lugar y mes',
                 data: datosGrafico,
                 backgroundColor: function (context) {
                     const data = context.dataset.data[context.dataIndex];
                     if (!data) {
-                        return 'rgba(255,69,0, 0.5)'; // Retornar un color por defecto si no hay datos.
+                        return 'rgba(0, 0, 256, 0.5)'; // Retornar un color por defecto si no hay datos.
                     }
                     const value = data.v;
                     const alpha = Math.max(0, Math.min(1, (value - 5) / 40));
-                    return `rgba(255, 69, 0, ${alpha})`;
+                    return `rgba(0, 0, 256, ${alpha})`;
                 },
                 borderWidth: 1,
                 width: ({ chart }) => (chart.chartArea || {}).width / 12,
-                height: ({ chart }) => (chart.chartArea || {}).height / 3 // Asumiendo 3 niveles de riesgo
+                height: ({ chart }) => (chart.chartArea || {}).height / 25 // Asumiendo 25 lugares
             },
         ],
     };
@@ -93,7 +93,7 @@ export default function RiesgoMes() {
             },
             y: {
                 type: 'category',
-                labels: ['Alto', 'Intermedio', 'Bajo'],
+                // labels: ['Amazona', 'Ancash', 'Bajo'],
                 offset: true,
                 ticks: {
                     display: true
@@ -131,7 +131,7 @@ export default function RiesgoMes() {
     };
 
     return (
-        <div className='ml-64 mt-20'>
+        <div className='mt-4'>
             <div className='mx-6'>
                 <Chart type='matrix' data={data} options={options} />
             </div>

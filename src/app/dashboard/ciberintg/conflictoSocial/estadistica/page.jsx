@@ -17,7 +17,7 @@ import {
     Legend,
     Tooltip
 } from 'chart.js';
-import PeruSvg from '../../@map/PeruSvg';
+import PeruSvg from '../../../../../components/@map/PeruSvg';
 
 ChartJS.register(
     ArcElement,
@@ -177,9 +177,9 @@ export default function tablaConflictoPage() {
     };
     const years = [2024, 2023]
     return (
-        <div className='flex ml-64 mt-20 w-full mx-4'>
+        <div className='flex w-[calc(100%-theme(space.12))] mx-4 mt-4 '>
 
-            <div className='ml-6 items-center pb-4 w-[450px]'>
+            <div className='items-center pb-4 w-[450px]'>
                 <div className='flex'>
                     <div className="top-16 ml-3 w-28 z-10">
                         <Listbox value={selectedYear} onChange={setSelectedYear}>
@@ -267,7 +267,7 @@ export default function tablaConflictoPage() {
                     <Line
                         data={dataFactores}
                         options={options}
-                        height={80}
+                        height={55}
                     />
 
                 </div>
@@ -275,7 +275,7 @@ export default function tablaConflictoPage() {
                     <Bar
                         data={dataFactoresPorMes}
                         options={options}
-                        height={80}
+                        height={55}
                     />
                 </div>
                 <div className='flex justify-evenly'>

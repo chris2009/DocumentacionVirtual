@@ -17,7 +17,7 @@ import {
     Legend,
     Tooltip
 } from 'chart.js';
-import PeruSvg from '../../@map/PeruSvg';
+import PeruSvg from '../../../../../components/@map/PeruSvg';
 
 ChartJS.register(
     ArcElement,

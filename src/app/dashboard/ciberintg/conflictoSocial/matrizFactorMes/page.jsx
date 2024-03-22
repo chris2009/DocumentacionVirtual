@@ -23,32 +23,32 @@ const mapearNumeroMesANombre = (numeroMes) => {
     return nombresDeMes[numeroMes - 1];
 };
 
-export default function lugarMes() {
-    const [lugarMes, setLugarMes] = useState([]);
+export default function FactorMes() {
+    const [factorMes, setFactorMes] = useState([]);
 
     useEffect(() => {
-        const getLugarMes = async () => {
+        const getFactorMes = async () => {
             try {
-                const response = await axios.get('/api/conflicto/lugarMes');
-                setLugarMes(response.data); // Asumiendo que la respuesta es un arreglo
+                const response = await axios.get('/api/conflicto/factorMes');
+                setFactorMes(response.data); // Asumiendo que la respuesta es un arreglo
             } catch (error) {
                 console.error('Error al obtener los datos:', error);
             }
         };
 
-        getLugarMes();
+        getFactorMes();
     }, []);
 
     // Acumulación de datos
-    const datosAcumulados = lugarMes.reduce((acc, { mes, lugar, cantidad }) => {
+    const datosAcumulados = factorMes.reduce((acc, { mes, factor, cantidad }) => {
         // Creamos una clave única para cada combinación de mes y riesgo
-        const clave = `${mapearNumeroMesANombre(mes)}-${lugar}`;
+        const clave = `${mapearNumeroMesANombre(mes)}-${factor}`;
         // Si ya existe, sumamos a la cantidad existente
         if (acc[clave]) {
             acc[clave].v += cantidad;
         } else {
             // Si no existe, creamos una nueva entrada
-            acc[clave] = { x: mapearNumeroMesANombre(mes), y: lugar, v: cantidad };
+            acc[clave] = { x: mapearNumeroMesANombre(mes), y: factor, v: cantidad };
         }
         return acc;
     }, {});
@@ -60,20 +60,20 @@ export default function lugarMes() {
     const data = {
         datasets: [
             {
-                label: 'Cantidad de eventos por lugar y mes',
+                label: 'Cantidad de eventos por factor y mes',
                 data: datosGrafico,
                 backgroundColor: function (context) {
                     const data = context.dataset.data[context.dataIndex];
                     if (!data) {
-                        return 'rgba(0, 0, 256, 0.5)'; // Retornar un color por defecto si no hay datos.
+                        return 'rgba(100, 256, 150, 0.5)'; // Retornar un color por defecto si no hay datos.
                     }
                     const value = data.v;
                     const alpha = Math.max(0, Math.min(1, (value - 5) / 40));
-                    return `rgba(0, 0, 256, ${alpha})`;
+                    return `rgba(100, 256, 150, ${alpha})`;
                 },
                 borderWidth: 1,
                 width: ({ chart }) => (chart.chartArea || {}).width / 12,
-                height: ({ chart }) => (chart.chartArea || {}).height / 25 // Asumiendo 25 lugares
+                height: ({ chart }) => (chart.chartArea || {}).height / 8 // Asumiendo 3 niveles de riesgo
             },
         ],
     };
@@ -93,7 +93,7 @@ export default function lugarMes() {
             },
             y: {
                 type: 'category',
-                // labels: ['Amazona', 'Ancash', 'Bajo'],
+                // labels: ['Transporte', 'Intermedio', 'Bajo'],
                 offset: true,
                 ticks: {
                     display: true
@@ -131,7 +131,7 @@ export default function lugarMes() {
     };
 
     return (
-        <div className='ml-64 mt-20'>
+        <div className='mt-4'>
             <div className='mx-6'>
                 <Chart type='matrix' data={data} options={options} />
             </div>

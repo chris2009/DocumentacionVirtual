@@ -28,10 +28,10 @@ function conflictoPage() {
     );
 
     return (
-        <div className='ml-64 pt-14'>
+        <div className='mx-2 mt-4'>
             <div className="relative px-4">
                 <div className="flex items-center my-4">
-                    <Link href="/dashboard/conflictoSocial/new">
+                    <Link href="/dashboard/ciberintg/conflictoSocial/new">
                     <button className="flex border-kaitoke-green-400 text-sm border-[1px] hover:border-kaitoke-green-600 py-2 pl-4 pr-2 rounded-[7px] text-kaitoke-green-400 mr-3">
                             Agregar <PlusIcon className='animate-bounce hover:animate-spin flex w-4 h-full' />
                         </button>
@@ -51,7 +51,7 @@ function conflictoPage() {
                         <MagnifyingGlassIcon className='w-5 h-5 text-gray-400 absolute top-1/2 transform -translate-y-1/2 right-3' />
                     </div>
                 </div>
-                <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <div className="relative overflow-x-auto shadow-md sm:rounded-[7px]">
                     <table className="w-full text-sm text-left rtl:text-right text-gray-500">
                         <thead className="text-xs text-white uppercase bg-kaitoke-green-400">
                             <tr>
