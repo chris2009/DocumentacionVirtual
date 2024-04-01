@@ -179,7 +179,7 @@ export default function tablaConflictoPage() {
     };
     const years = [2024, 2023, 2022]
     return (
-        <div className='ml-64 mt-20 w-full mx-4'>
+        <div className='w-full mx-4'>
             <div className='ml-6 flex items-center pb-4'>
                 <h1 className='text-gray-700 mr-6 font-bold text-sm bg-kaitoke-green-00 px-4 py-2 rounded-lg'>Estadística de contra Inteligencia</h1>
                 <div className="top-16 ml-3 w-28 z-10">
@@ -270,7 +270,7 @@ export default function tablaConflictoPage() {
                         <Line
                             data={dataCategorias}
                             options={options}
-                            height={60}
+                            height={50}
                         // className='w-full h-4'
                         />
                     </div>
@@ -279,7 +279,7 @@ export default function tablaConflictoPage() {
                             <Bar
                                 data={dataFactoresPorMes}
                                 options={options}
-                                height={60}
+                                height={50}
                             />
                         </div>
                         <div className='grid grid-cols-1'>

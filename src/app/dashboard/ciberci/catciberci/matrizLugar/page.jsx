@@ -132,7 +132,7 @@ export default function lugarMes() {
     };
 
     return (
-        <div className='ml-64 mt-20'>
+        <div className=''>
             <div className='mx-6'>
                 <Chart type='matrix' data={data} options={options} />
             </div>

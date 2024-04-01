@@ -64,7 +64,7 @@ export default function acNacionalPage() {
     }, []);
 
     return (
-        <div className='mt-20'>
+        <div className=''>
             <div className='mx-4'>
                 {acNacionalData.labels && <Bar data={acNacionalData} />}
             </div>

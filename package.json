@@ -17,7 +17,7 @@
     "chart.js": "^4.4.1",
     "chartjs-chart-matrix": "^2.0.1",
     "chartjs-plugin-datalabels": "^2.2.0",
-    "mysql2": "^3.9.1",
+    "mysql2": "^3.9.2",
     "next": "14.1.0",
     "next-auth": "^4.24.6",
     "react": "^18",

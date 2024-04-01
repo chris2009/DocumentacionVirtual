@@ -179,7 +179,7 @@ export default function tablaConflictoPage() {
     return (
         <div className='flex w-[calc(100%-theme(space.12))] mx-4 mt-4 '>
 
-            <div className='items-center pb-4 w-[450px]'>
+            <div className='items-center pb-4 w-[575px]'>
                 <div className='flex'>
                     <div className="top-16 ml-3 w-28 z-10">
                         <Listbox value={selectedYear} onChange={setSelectedYear}>
@@ -258,12 +258,12 @@ export default function tablaConflictoPage() {
                         </Listbox>
                     </div>
                 </div>
-                <div className='mt-4 h-[650px] w-[450px] shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4 mr-4'>
+                <div className='rounded-[7px] bg-white mt-4 h-[820px] w-[575px] shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4 mr-4'>
                     <PeruSvg selectedPlace={selectedPlace} />
                 </div>
             </div>
             <div className='grid grid-cols-1 gap-y-1 ml-4 items-baseline w-full h-[80px]'>
-                <div className='shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4'>
+                <div className='bg-white shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4'>
                     <Line
                         data={dataFactores}
                         options={options}

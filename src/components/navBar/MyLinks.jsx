@@ -26,54 +26,23 @@ export const links = [
         submenu: true,
         sublinks: [
             {
-                Head: "Topwear",
+                Head: "Activos críticos",
                 sublink: [
-                    { name: "T-shirt", link: "/" },
-                    { name: "Casual shirts", link: "/" },
-                    { name: "formal shirts", link: "/" },
-                    { name: "formal shirts", link: "/" },
-                    { name: "formal shirts", link: "/" },
+                    { name: "Tabla", link: "/dashboard/ciberci/ac/tabla" },
+                    { name: "Nacional", link: "/dashboard/ciberci/ac/nacional" },
+                    { name: "Institucional", link: "/dashboard/ciberci/ac/institucional" },
+                    { name: "Matriz ACN", link: "/dashboard/ciberci/ac/matrizACNMes" },
+                    { name: "Matriz ACI", link: "/dashboard/ciberci/ac/matrizACIMes" },
                 ],
             },
             {
-                Head: "Bottomwear",
+                Head: "Categorías",
                 sublink: [
-                    { name: "T-shirt", link: "/" },
-                    { name: "Casual shirts", link: "/" },
-                    { name: "formal shirts", link: "/" },
-                    { name: "formal shirts", link: "/" },
-                    { name: "formal shirts", link: "/" },
-                ],
-            },
-            {
-                Head: "innerwear",
-                sublink: [
-                    { name: "T-shirt", link: "/" },
-                    { name: "Casual shirts", link: "/" },
-                    { name: "formal shirts", link: "/" },
-                    { name: "formal shirts", link: "/" },
-                    { name: "formal shirts", link: "/" },
-                ],
-            },
-
-            {
-                Head: "sleepwear",
-                sublink: [
-                    { name: "T-shirt", link: "/" },
-                    { name: "Casual shirts", link: "/" },
-                    { name: "formal shirts", link: "/" },
-                    { name: "formal shirts", link: "/" },
-                    { name: "formal shirts", link: "/" },
-                ],
-            },
-            {
-                Head: "footwear",
-                sublink: [
-                    { name: "T-shirt", link: "/" },
-                    { name: "Casual shirts", link: "/" },
-                    { name: "formal shirts", link: "/" },
-                    { name: "formal shirts", link: "/" },
-                    { name: "formal shirts", link: "/" },
+                    { name: "Tabla", link: "/dashboard/ciberci/catciberci/tabla" },
+                    { name: "Estadística", link: "/dashboard/ciberci/catciberci/estadistica" },
+                    { name: "matriz categoría", link: "/dashboard/ciberci/catciberci/matrizCategoria" },
+                    { name: "matriz lugar", link: "/dashboard/ciberci/catciberci/matrizLugar" },
+                    { name: "matriz riesgo", link: "/dashboard/ciberci/catciberci/matrizRiesgo" },
                 ],
             },
         ],

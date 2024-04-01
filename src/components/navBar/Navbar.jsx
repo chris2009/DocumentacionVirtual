@@ -214,6 +214,7 @@ import Link from "next/link";
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, ArrowLeftStartOnRectangleIcon } from "@heroicons/react/24/outline";
 import NavLinks from "./NavLinks";
+import { signOut } from 'next-auth/react'
 const Navbar = ({ props }) => {
     const [open, setOpen] = useState(false);
 
@@ -226,8 +227,8 @@ const Navbar = ({ props }) => {
 
     return (
         <nav className="bg-white w-full shadow">
-            <div className="flex items-center font-medium justify-around">
-                <div className="z-50 md:w-auto w-full flex justify-between">
+            <div className="flex items-center font-medium justify-between">
+                <div className="z-50 md:w-auto w-full flex justify-between ml-6">
                     <img src="/CIAINF.png" alt="logo" className="md:cursor-pointer h-12" />
                     <div className="text-3xl md:hidden" onClick={() => setOpen(!open)}>
                         <ion-icon name={`${open ? "close" : "menu"}`}></ion-icon>
@@ -249,7 +250,7 @@ const Navbar = ({ props }) => {
                 <ul
                     className={`
         md:hidden bg-white fixed w-full top-0 overflow-y-auto bottom-0 py-24 pl-4
-        duration-500 ${open ? "left-0" : "left-[-100%]"}
+        duration-500  ${open ? "left-0" : "left-[-100%]"}
         `}
                 >
                     <li>

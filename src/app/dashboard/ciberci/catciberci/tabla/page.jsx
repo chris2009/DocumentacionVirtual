@@ -27,7 +27,7 @@ function conflictoPage() {
     );
 
     return (
-        <div className='ml-64 pt-14'>
+        <div className=''>
             <div className="relative px-4">
                 <div className="flex items-center my-4">
                     <Link href="/dashboard/contrainteligencia/new">
