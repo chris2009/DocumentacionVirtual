@@ -237,32 +237,13 @@ const Navbar = ({ props }) => {
                 </div>
                 <ul className="md:flex hidden items-center gap-8 text-gray-700 text-sm">
                     <li>
-                        <Link href="/" className="py-7 px-3 inline-block">
+                        <Link href="/" className="py-7 px-3 inline-block hover:text-kaitoke-green-500">
                             Home
                         </Link>
                     </li>
                     <NavLinks />
                 </ul>
-                {/* <div className="md:block hidden">
-                    <Button />
-                </div> */}
-                {/* Mobile nav */}
-                <ul
-                    className={`
-        md:hidden bg-white fixed w-full top-0 overflow-y-auto bottom-0 py-24 pl-4
-        duration-500  ${open ? "left-0" : "left-[-100%]"}
-        `}
-                >
-                    <li>
-                        <Link href="/" className="py-7 px-3 inline-block">
-                            Home
-                        </Link>
-                    </li>
-                    <NavLinks />
-                    {/* <div className="py-5">
-                        <Button />
-                    </div> */}
-                </ul>
+
                 <div className="absolute inset-y-0 right-0 flex items-center px-2 sm:static sm:inset-auto sm:mx-6 sm:px-0">
                     <button
                         type="button"

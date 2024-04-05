@@ -262,8 +262,8 @@ export default function tablaConflictoPage() {
                     <PeruSvg selectedPlace={selectedPlace} />
                 </div>
             </div>
-            <div className='grid grid-cols-1 gap-y-1 ml-4 items-baseline w-full h-[80px]'>
-                <div className='bg-white shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4'>
+            <div className='grid grid-cols-1 gap-y-1 mx-4 items-baseline w-full h-[80px]'>
+                <div className='bg-white rounded-[7px] shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4 min-w-[500px]'>
                     <Line
                         data={dataFactores}
                         options={options}
@@ -271,7 +271,7 @@ export default function tablaConflictoPage() {
                     />
 
                 </div>
-                <div className='shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4'>
+                <div className='bg-white rounded-[7px] shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4 my-2'>
                     <Bar
                         data={dataFactoresPorMes}
                         options={options}
@@ -279,12 +279,12 @@ export default function tablaConflictoPage() {
                     />
                 </div>
                 <div className='flex justify-evenly'>
-                    <div className='shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4 w-80 h-80 flex justify-center'>
+                    <div className='bg-white rounded-[7px] shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4 w-80 h-80 flex justify-center'>
                         <Radar
                             data={dataTipos}
                         />
                     </div>
-                    <div className='shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4 w-80 h-80 flex justify-center'>
+                    <div className='bg-white rounded-[7px] shadow-md focus:outline-none focus-visible:border-kaitoke-green-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-kaitoke-green-300 p-4 w-80 h-80 flex justify-center'>
                         <Pie
                             data={dataRiesgos}
                         />

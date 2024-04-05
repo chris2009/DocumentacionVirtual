@@ -79,7 +79,7 @@ function ConflictoTable({ conflicto }) {
                                                         className="mr-2 h-5 w-5"
                                                         aria-hidden="true"
                                                     />
-                                                    Delete
+                                                    Eliminar
                                                 </button>
                                             )}
                                         </Menu.Item>

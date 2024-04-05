@@ -96,3 +96,4 @@ function CiTable({ ci }) {
 }
 
 export default CiTable
+
